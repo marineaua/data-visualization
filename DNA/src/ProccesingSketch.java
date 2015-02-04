@@ -25,7 +25,7 @@ public class ProccesingSketch extends PApplet {
 	public void setup() {
 	    size(width,height);
 	    background(0);
-	    if(!new File("/home/alex/Desktop/DNA/filename2.txt").exists())
+	    if(!new File("C:/Users/alexm_000/Desktop/DNA/filename2.txt").exists())
 	    {
 	    	Scraper.postList();
 	    }
@@ -54,7 +54,7 @@ public class ProccesingSketch extends PApplet {
 	  	*/
 		String line = null;
 	    try {
-	    	BufferedReader br = new BufferedReader(new FileReader("/home/alex/Desktop/DNA/filename2.txt"));
+	    	BufferedReader br = new BufferedReader(new FileReader("C:/Users/alexm_000/Desktop/DNA/filename2.txt"));
 	    	
 			while ((line = br.readLine()) != null) 
 			{	

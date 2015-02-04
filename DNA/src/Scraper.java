@@ -1,4 +1,5 @@
 //java.awt.geom;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,29 +35,45 @@ public class Scraper {
 		int count = 0;
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("limit", 50);
-		List<Post> posts = client.blogPosts("superhyperhedgey.tumblr.com",params);
+		List<Post> posts = client.blogPosts("wethinkwedream.tumblr.com",params);
 		
-		// use 80 for 4000
-		for (int i= 0; i < 200; i++)
+		// use 80 for 4000 --- 800 for 40k posts
+		for (int i= 0; i < 8; i++)
 		{
 			count = count + 50;
 			params.put("offset", count);
-			posts.addAll(client.blogPosts("superhyperhedgey.tumblr.com",params));
+			posts.addAll(client.blogPosts("wethinkwedream.tumblr.com",params));
 			System.out.println("I've done this loop " + i);
 		}
 		
 		
 		try {
-			Vector<String> content = new Vector<String>(10);
+			Vector<String> contentType = new Vector<String>(10);
+			Vector<Long> contentTimestamp = new Vector<Long>(10); 
+			Vector<String> contentDate = new Vector<String>(10);
+			Vector<Long> contentId = new Vector<Long>(10);
+			Vector<String> contentPostUrl = new Vector<String>(10);
+			Vector<Long> contentNotes = new Vector<Long>(10);
+			Vector<String> contentSourceUrl = new Vector<String>(10);
+			Vector<List<String>> contentTags = new Vector<List<String>>(10);
+
 			
 			
 			for (Post post : posts) 
 			{	
-				content.addElement(post.getType());
+				contentType.addElement(post.getType());
+				contentTimestamp.addElement(post.getTimestamp());
+				contentDate.addElement(post.getDateGMT());
+				contentId.addElement(post.getId());
+				contentPostUrl.addElement(post.getPostUrl());
+				contentNotes.addElement(post.getNoteCount());
+				contentSourceUrl.addElement(post.getSourceUrl());
+				contentTags.addElement(post.getTags());
+				
 			}
 			
 
-			File file = new File("/home/alex/Desktop/DNA/filename6.txt");
+			File file = new File("C:/Users/alexm_000/Desktop/DNA/wethinkwedream3.txt");
 		
 			if (!file.exists()){
 				file.createNewFile();
@@ -64,9 +81,18 @@ public class Scraper {
 			
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
-			for (int i =0; i < content.size(); ++i)
+			for (int i =0; i < contentType.size(); ++i)
 			{
-				bw.write(content.get(i) + "\n");
+				
+				bw.write("Type: " + contentType.get(i) + "\n");
+				bw.write("Timestamp: " + contentTimestamp.get(i) + "\n");
+				bw.write("Date: " + contentDate.get(i) + "\n");
+				bw.write("Id: " + contentId.get(i) + "\n");
+				bw.write("PostUrl: " + contentPostUrl.get(i) + "\n");
+				bw.write("SourceUrl: " + contentSourceUrl.get(i) + "\n");
+				bw.write("Notes: " + contentNotes.get(i) + "\n");
+				bw.write("Tags: " + contentTags.get(i) + "\n");
+				
 			}
 			bw.close();
 			
