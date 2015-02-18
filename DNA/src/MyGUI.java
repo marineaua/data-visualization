@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
@@ -11,7 +12,8 @@ import java.awt.event.MouseEvent;
 import java.awt.CardLayout;
 
 
-public class MyGUI extends JFrame implements ActionListener
+@SuppressWarnings("serial")
+public class MyGUI extends javax.swing.JFrame implements ActionListener
 {
 	JPanel mypanel;
 	JButton mybutton;
@@ -20,14 +22,27 @@ public class MyGUI extends JFrame implements ActionListener
 	private JButton btnMosiac;
 	private JButton btnOther;
 	
+	
 	public MyGUI()
 	{
-		getContentPane().setForeground(Color.WHITE);
+		this.setSize(1200,700);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Data Vizulization");
+		this.setForeground(Color.WHITE);
+		
 		mypanel = new JPanel();
 		mylabel = new JLabel();
 		mybutton = new JButton("line");
 		mybutton.addActionListener(this);
 		mypanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		
+		//add a new proccessing sketch
+		javax.swing.JPanel sketchPanel = new javax.swing.JPanel();
+		sketchPanel.setBounds(0, 0, 1200, 700);
+		ProccesingSketch sketch = new ProccesingSketch();
+		sketchPanel.add(sketch);
+		
 		
 		btnMosiac = new JButton("mosiac");
 		btnMosiac.addMouseListener(new MouseAdapter() {
@@ -35,10 +50,15 @@ public class MyGUI extends JFrame implements ActionListener
 			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
 				mylabel.setText("my shit got clicked again");
 				panel_1.setBackground(Color.BLUE);
+				//sketchPanel.add(sketch);
 				//ProccesingSketch.setup();
+				//sketch.init();
 			}
 		});
-		getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		this.setLayout(new BorderLayout());
+		
+		
 		btnMosiac.setHorizontalAlignment(SwingConstants.LEFT);
 		mypanel.add(btnMosiac);
 		
@@ -47,22 +67,25 @@ public class MyGUI extends JFrame implements ActionListener
 		btnOther = new JButton("other");
 		mypanel.add(btnOther);
 		mypanel.add(mylabel);
-		getContentPane().add(mypanel, BorderLayout.SOUTH);
+		this.add(mypanel, BorderLayout.SOUTH);
 		
-		panel_1 = new JPanel();
-		panel_1.setBackground(Color.LIGHT_GRAY);
-		getContentPane().add(panel_1);
+		
+		//panel_1 = new JPanel();
+		//panel_1.setBackground(Color.LIGHT_GRAY);
+		//this.add(panel_1);
+		
+		//Adding Sketch to the Frame
+		this.add(sketchPanel);
+		sketch.init();
+		sketch.frame = this;
 	}
 
 
 
 public static void main(String[] args)
 {
-	MyGUI first = new MyGUI();
-	first.setTitle("Data Viz");
-	first.setSize(1200,700);;
-	first.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	first.setVisible(true);
+	new MyGUI().setVisible(true);
+	
 }
 
 public void actionPerformed(ActionEvent event)
