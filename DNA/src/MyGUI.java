@@ -21,13 +21,15 @@ public class MyGUI extends javax.swing.JFrame implements ActionListener
 	private JPanel panel_1;
 	private JButton btnMosiac;
 	private JButton btnOther;
+	private ProccesingSketch sketch;
+	private javax.swing.JPanel sketchPanel;
 	
 	
 	public MyGUI()
 	{
 		this.setSize(1200,700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("Data Vizulization");
+		this.setTitle("Data Visualization");
 		this.setForeground(Color.WHITE);
 		
 		mypanel = new JPanel();
@@ -35,13 +37,18 @@ public class MyGUI extends javax.swing.JFrame implements ActionListener
 		mybutton = new JButton("line");
 		mybutton.addActionListener(this);
 		mypanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		sketchPanel = new JPanel();
+		sketch = new ProccesingSketch();
+		sketchPanel.add(sketch);
+		//sketchPanel = new JPanel();
+		//sketchPanel.add(sketchPanel);
 		
 		
 		//add a new proccessing sketch
-		javax.swing.JPanel sketchPanel = new javax.swing.JPanel();
-		sketchPanel.setBounds(0, 0, 1200, 700);
-		ProccesingSketch sketch = new ProccesingSketch();
-		sketchPanel.add(sketch);
+		//javax.swing.JPanel sketchPanel = new javax.swing.JPanel();
+		//sketchPanel.setBounds(0, 0, 1200, 700);
+		//ProccesingSketch sketch = new ProccesingSketch();
+		//sketchPanel.add(sketch);
 		
 		
 		btnMosiac = new JButton("mosiac");
@@ -49,7 +56,10 @@ public class MyGUI extends javax.swing.JFrame implements ActionListener
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
 				mylabel.setText("my shit got clicked again");
-				panel_1.setBackground(Color.BLUE);
+				
+				//sketchPanel.add(sketch);
+				//sketchPanel.add(sketchPanel);
+				//panel_1.setBackground(Color.BLUE);
 				//sketchPanel.add(sketch);
 				//ProccesingSketch.setup();
 				//sketch.init();
