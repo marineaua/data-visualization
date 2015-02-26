@@ -1,19 +1,27 @@
+/************ example main to fill up a created Post object
+ * 
+		page=RawToArr.txtToArr(page,path);
+ */
+
+
+package pretentiousSocialMediaGarbage;
+
 /*		
  * 		String path="E:/DNATESTING/justinBieberIsLife.txt"; // path to ripped file
 		ArrayList<String[]> page = new ArrayList<String[]>(); // array list containing individual posts
 		page=RawToArr.txtToArr(page,path); // page gets return from txtToArr(a filled up array list)
  */
 
-
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import pretentiousSocialMediaGarbage.Post;
+
 public class RawToArr 
 {
-	public static ArrayList<String[]> txtToArr(ArrayList<String[]> page, String path)
+	public static ArrayList<Post> txtToArr(ArrayList<Post> page, String path)
 	{	
 		try
 		{
@@ -24,15 +32,72 @@ public class RawToArr
 				String line = null;
 				while(true)
 				{
-					String[] post = new String[9];
-					post[0]="1"; // sets first element in array to 1... this is the flag for include or ignore
-					for(int i=1; i<9; i++)
+					boolean include=true;
+					String type=null;
+					int[] date=new int[3];
+					int[] time=new int[3];
+					long id=0;
+					String postURL=null;
+					String sourceURL=null;
+					int notes=0;
+					String[] tags=new String[20];
+					
+					// set type
+					if((line = br.readLine()) != null) // line 1
 					{
-						 if((line = br.readLine()) != null)
-						 {
-							 post[i]=line;
-						 }
+						type=line;
 					}
+					
+					// move down one line without doing anything with the return
+					br.readLine(); // line 2
+					
+					// set date and time
+					if((line = br.readLine()) != null) // line 3
+					{
+						String delims = "[ \\-\\:]";
+						
+						String[] tokens = line.split(delims);
+						date[0]=Integer.parseInt(tokens[0]); // year
+						date[1]=Integer.parseInt(tokens[1]); // month
+						date[2]=Integer.parseInt(tokens[2]); // day
+						time[0]=Integer.parseInt(tokens[3]); // hours
+						time[1]=Integer.parseInt(tokens[4]); // minutes
+						time[2]=Integer.parseInt(tokens[5]); // seconds
+						
+					}
+					// set id
+					if((line = br.readLine()) != null) // line 4
+					{
+						id=Long.parseLong(line);
+					}
+					// set postURL
+					if((line = br.readLine()) != null) // line 5
+					{
+						postURL=line;
+					}
+					// set sourceURL
+					if((line = br.readLine()) != null) // line 6
+					{
+						sourceURL=line;
+					}
+					// set notes
+					if((line = br.readLine()) != null) // line 7
+					{
+						notes=Integer.parseInt(line);
+					}
+					// set tags
+					if((line = br.readLine()) != null) // line 8
+					{
+						String delims = "[ \\[\\]]+";
+						String[] tokens = line.split(delims);
+						
+						for(int i=0; i<tokens.length;i++)
+						{
+							tags[i]=tokens[i];
+						}
+					}
+
+					Post post = new Post(include, type, date, time, id, postURL, sourceURL, notes, tags);
 					page.add(post);
 					if(line==null)
 						break;
