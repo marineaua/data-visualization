@@ -22,6 +22,8 @@ public class Scraper {
 	private static String		consumer_secret		= "4zXYhAMODZDuWHm9cTUNN165JKoPohJGTdmxNCukg4mYSJyRHw";
 	private static String		oauth_token			= "d4WwWT8lAUP67r2bBXNDM708JkZtpFg9EgBHEvVXs7u2EWd17j";
 	private static String		oauth_token_secret	= "aqkfveFVuhnIVxxfLR3IohSgwgXup7jXHeMDMI2mvSeBD9qMfh";
+	public  static String		tumblrName			= "wethinkwedream";
+	public  static String 		filePath 			= new File("").getAbsolutePath();
 	
 	public Scraper()
 	{
@@ -29,20 +31,20 @@ public class Scraper {
 	}
 	public static void postList()
 	{
-		
+		String tumblrURL = tumblrName + ".tumblr.com";
 		JumblrClient client = new JumblrClient(consumer_key, consumer_secret);
 		client.setToken(oauth_token, oauth_token_secret);
 		int count = 0;
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("limit", 50);
-		List<Post> posts = client.blogPosts("wethinkwedream.tumblr.com",params);
+		List<Post> posts = client.blogPosts(tumblrURL,params);
 		
 		// use 80 for 4000 --- 800 for 40k posts
 		for (int i= 0; i < 8; i++)
 		{
 			count = count + 50;
 			params.put("offset", count);
-			posts.addAll(client.blogPosts("wethinkwedream.tumblr.com",params));
+			posts.addAll(client.blogPosts(tumblrURL,params));
 			System.out.println("I've done this loop " + i);
 		}
 		
@@ -72,8 +74,10 @@ public class Scraper {
 				
 			}
 			
-
-			File file = new File("C:/Users/alexm_000/Desktop/DNA/wethinkwedream3.txt");
+			//(".").getAbsolutePath()
+			//String filePath = new File("").getAbsolutePath();
+			System.out.println(filePath);
+			File file = new File(filePath + "/" + tumblrName + ".txt");
 		
 			if (!file.exists()){
 				file.createNewFile();
@@ -83,15 +87,22 @@ public class Scraper {
 			BufferedWriter bw = new BufferedWriter(fw);
 			for (int i =0; i < contentType.size(); ++i)
 			{
-				
-				bw.write("Type: " + contentType.get(i) + "\n");
-				bw.write("Timestamp: " + contentTimestamp.get(i) + "\n");
-				bw.write("Date: " + contentDate.get(i) + "\n");
-				bw.write("Id: " + contentId.get(i) + "\n");
-				bw.write("PostUrl: " + contentPostUrl.get(i) + "\n");
-				bw.write("SourceUrl: " + contentSourceUrl.get(i) + "\n");
-				bw.write("Notes: " + contentNotes.get(i) + "\n");
-				bw.write("Tags: " + contentTags.get(i) + "\n");
+				// Type
+				bw.write(contentType.get(i) + "\n");
+				// Timestamp
+				bw.write(contentTimestamp.get(i) + "\n");
+				// Date
+				bw.write(contentDate.get(i) + "\n");
+				// ID
+				bw.write(contentId.get(i) + "\n");
+				// Post URL
+				bw.write(contentPostUrl.get(i) + "\n");
+				// Source URL
+				bw.write(contentSourceUrl.get(i) + "\n");
+				// Notes
+				bw.write(contentNotes.get(i) + "\n");
+				// Tags
+				bw.write(contentTags.get(i) + "\n");
 				
 			}
 			bw.close();

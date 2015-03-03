@@ -21,11 +21,15 @@ public class ProccesingSketch extends PApplet {
 	private static String		oauth_token_secret	= "aqkfveFVuhnIVxxfLR3IohSgwgXup7jXHeMDMI2mvSeBD9qMfh";
 	private static int 			width				= 1200;
 	private static int			height				= 700;
+	private static String		tumblrName			= "wethinkwedream";
 	
 	public void setup() {
 	    size(width,height);
 	    background(0);
-	    if(!new File("C:/Users/alexm_000/Documents/data-visualization/DNA/filename.txt").exists())
+		//String filePath = new File("").getAbsolutePath();
+		//System.out.println(filePath);
+		File file = new File(Scraper.filePath + "/" + tumblrName + ".txt");
+	    if(!file.exists())
 	    {
 	    	Scraper.postList();
 	    }
@@ -54,7 +58,8 @@ public class ProccesingSketch extends PApplet {
 	  	*/
 		String line = null;
 	    try {
-	    	BufferedReader br = new BufferedReader(new FileReader("C:/Users/alexm_000/Documents/data-visualization/DNA/filename.txt"));
+	    	File file = new File(Scraper.filePath + "/" + tumblrName + ".txt");
+	    	BufferedReader br = new BufferedReader(new FileReader(file));
 	    	
 			while ((line = br.readLine()) != null) 
 			{	

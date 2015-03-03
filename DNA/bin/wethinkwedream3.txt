@@ -60,7 +60,7 @@ photo
 112564187205
 http://wethinkwedream.tumblr.com/post/112564187205
 http://nhodesign.tumblr.com/post/76241513392
-95316
+95179
 []
 answer
 1425340729
@@ -76,7 +76,7 @@ answer
 112554318670
 http://wethinkwedream.tumblr.com/post/112554318670/i-posted-a-picture-of-me-feeling-sexy-about
 null
-11
+10
 []
 answer
 1425340010
@@ -172,7 +172,7 @@ photo
 112186145800
 http://wethinkwedream.tumblr.com/post/112186145800/aseaofquotes-maggie-hall-the-conspiracy-of-us
 http://aseaofquotes.tumblr.com/post/112184408922/maggie-hall-the-conspiracy-of-us
-4278
+4277
 [q]
 photo
 1424995142
@@ -188,7 +188,7 @@ photo
 112175333625
 http://wethinkwedream.tumblr.com/post/112175333625/edgina-upside-down-mushroom-room-by-carsten
 null
-43801
+43799
 []
 text
 1424983347
@@ -460,7 +460,7 @@ photo
 111814398860
 http://wethinkwedream.tumblr.com/post/111814398860
 http://me-loves-cats.tumblr.com/post/98408042735
-9057
+9053
 []
 photo
 1424653714
@@ -540,7 +540,7 @@ quote
 111728700155
 http://wethinkwedream.tumblr.com/post/111728700155/just-remember-that-sometimes-the-way-you-think
 http://psych-facts.tumblr.com/post/77381896332/just-remember-that-sometimes-the-way-you-think
-292251
+292243
 [quotes, pay attention]
 photo
 1424581986
@@ -556,7 +556,7 @@ quote
 111724495580
 http://wethinkwedream.tumblr.com/post/111724495580/self-love-is-a-good-thing-but-self-awareness-is
 http://randyhaddock.tumblr.com/post/110567898200/self-love-is-a-good-thing-but-self-awareness-is
-109766
+109742
 [quotes, trueeeeeee]
 quote
 1424578797
@@ -628,7 +628,7 @@ quote
 111669846750
 http://wethinkwedream.tumblr.com/post/111669846750/be-with-those-who-help-your-being
 http://fuckyeahrumi.tumblr.com/post/51719749424/be-with-those-who-help-your-being
-19764
+19762
 [quotes]
 answer
 1424538865
@@ -1284,7 +1284,7 @@ photo
 110916066595
 http://wethinkwedream.tumblr.com/post/110916066595/gxivenchy
 http://nowadaysart.tumblr.com/post/110879682691/kanye-west-x-adidas-yeezyseasonone-amina-blue
-65340
+65338
 [is this kanye's new thing']
 answer
 1423851874
@@ -1380,7 +1380,7 @@ photo
 110824108125
 http://wethinkwedream.tumblr.com/post/110824108125
 http://jrdnnwlkr.tumblr.com/post/107628063723/shirts-that-affirm
-27023
+27011
 []
 photo
 1423763583
@@ -1460,7 +1460,7 @@ photo
 110772385810
 http://wethinkwedream.tumblr.com/post/110772385810/a-region-of-the-sky-in-the-constellation-of
 http://www.slate.com/blogs/bad_astronomy/2014/05/16/stars_beyond_counting_a_peek_into_the_mily_way_s_heart.html
-174366
+174354
 []
 photo
 1423680965
@@ -1468,7 +1468,7 @@ photo
 110738877975
 http://wethinkwedream.tumblr.com/post/110738877975
 https://www.tumblr.com/blog/private_35668338?61076030320
-320131
+320124
 []
 text
 1423677805
@@ -1492,7 +1492,7 @@ photo
 110700726885
 http://wethinkwedream.tumblr.com/post/110700726885
 http://inhabitmyworld.tumblr.com/post/109286644865/playing-in-the-rain
-67345
+67336
 []
 photo
 1423632595
@@ -1516,7 +1516,7 @@ photo
 110606935455
 http://wethinkwedream.tumblr.com/post/110606935455
 http://beouija.tumblr.com/post/56882428201
-39212
+39211
 [q]
 photo
 1423543306
@@ -1756,7 +1756,7 @@ photo
 110448990310
 http://wethinkwedream.tumblr.com/post/110448990310
 http://fhrd.tumblr.com
-61336
+61334
 []
 answer
 1423349629
@@ -1780,7 +1780,7 @@ quote
 110358633980
 http://wethinkwedream.tumblr.com/post/110358633980/be-kinder-to-yourself-and-then-let-your-kindness
 http://yeshecholwa.tumblr.com/post/105829756414/be-kinder-to-yourself-and-then-let-your-kindness
-29962
+29961
 [quotes]
 answer
 1423331270
@@ -1852,7 +1852,7 @@ photo
 110194555370
 http://wethinkwedream.tumblr.com/post/110194555370
 http://gfycat.tumblr.com/post/100536282647/fanart-does-this-count-for-queer-trans-mentally
-393320
+393316
 []
 photo
 1423175547
@@ -1900,7 +1900,7 @@ quote
 110051439835
 http://wethinkwedream.tumblr.com/post/110051439835/being-an-artist-means-forever-healing-your-own
 http://panatmansam.tumblr.com/post/76911746675/being-an-artist-means-forever-healing-your-own
-31915
+31914
 [quotes]
 answer
 1423032000
@@ -2156,7 +2156,7 @@ quote
 109799336805
 http://wethinkwedream.tumblr.com/post/109799336805/ancient-moon-priestesses-were-called-virgins
 http://ynannarising.tumblr.com/post/77166959840/ancient-moon-priestesses-were-called-virgins
-159322
+159321
 [q, quotes]
 answer
 1422812340
@@ -2292,7 +2292,7 @@ photo
 109537946710
 http://wethinkwedream.tumblr.com/post/109537946710
 http://500px.com/photo/1343955/sand-dunes-cervantes-wa-by-christian-fletcher
-49123
+49121
 []
 answer
 1422576322
@@ -2412,7 +2412,7 @@ photo
 109444350885
 http://wethinkwedream.tumblr.com/post/109444350885/impetuousss-i-origins-2014-this-movie-is-so
 null
-8302
+8301
 []
 answer
 1422495900
@@ -2716,7 +2716,7 @@ photo
 108968155295
 http://wethinkwedream.tumblr.com/post/108968155295
 http://poetryof-motion.tumblr.com/post/77455267435/do-you-not-then-hear-this-horrible-scream-all
-177309
+177307
 []
 photo
 1422067530
@@ -2836,7 +2836,7 @@ photo
 108871091140
 http://wethinkwedream.tumblr.com/post/108871091140/hungary-1980-photo-guy-le-querrec
 null
-112397
+112389
 []
 photo
 1421974294
@@ -2868,7 +2868,7 @@ quote
 108839352640
 http://wethinkwedream.tumblr.com/post/108839352640/my-grandfather-always-said-that-living-is-like
 http://wordpainting.tumblr.com/post/46069896582/my-grandfather-always-said-that-living-is-like
-35227
+35226
 [quotes, q]
 answer
 1421949600
@@ -2884,7 +2884,7 @@ quote
 108807779245
 http://wethinkwedream.tumblr.com/post/108807779245/one-heart-is-not-connected-to-another-through
 http://stellar-blue.tumblr.com/post/108247483629/one-heart-is-not-connected-to-another-through
-613
+612
 [q, quotes]
 answer
 1421905811
@@ -3348,7 +3348,7 @@ photo
 107962785325
 http://wethinkwedream.tumblr.com/post/107962785325
 http://vikhau.tumblr.com/post/104504405851/monet-22-keep-going-youll-be-fine
-86664
+86662
 []
 text
 1421123270
@@ -3580,7 +3580,7 @@ photo
 107750900200
 http://wethinkwedream.tumblr.com/post/107750900200
 http://sucrifice.tumblr.com
-218524
+218523
 []
 answer
 1420942491
