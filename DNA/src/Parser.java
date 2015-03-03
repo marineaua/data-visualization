@@ -23,7 +23,7 @@ public class Parser
 			{
 				if(types[k]==null)
 					break;
-				else if(page.get(i).getType().equals(types[k]))
+				else if(page.get(i).getType().equalsIgnoreCase(types[k]))
 				{
 					page.get(i).setInclude(false);
 					k++;
@@ -111,6 +111,32 @@ public class Parser
 	}
 	public ArrayList<Post> fbTags(ArrayList<Post> page, String[] tags)
 	{
+		int numPosts=page.size()-1;
+		
+		for(int i=0;i<numPosts;i++)
+		{
+			int j=0;
+			
+			while(true)
+			{
+				int k=0;
+				if(page.get(i).getTags()[j]==null)
+					break;
+				while(true)
+				{
+					if(tags[k]==null)
+						break;
+					else if(page.get(i).getTags()[j].equalsIgnoreCase(tags[k]))
+					{
+						page.get(i).setInclude(false);
+						k++;
+					}
+					else
+						k++;
+				}
+				j++;
+			}
+		}
 		return page;
 	}	
 	public ArrayList<Post> fbSourceURL(ArrayList<Post> page, String sourceURL)
@@ -119,10 +145,22 @@ public class Parser
 	}
 	public ArrayList<Post> includeAll(ArrayList<Post> page)
 	{
+		int numPosts=page.size()-1;
+		
+		for(int i=0;i<numPosts;i++)
+		{
+			page.get(i).setInclude(true);
+		}
 		return page;
 	}
 	public ArrayList<Post> excludeAll(ArrayList<Post> page)
 	{
+		int numPosts=page.size()-1;
+		
+		for(int i=0;i<numPosts;i++)
+		{
+			page.get(i).setInclude(false);
+		}
 		return page;
 	}
 	
