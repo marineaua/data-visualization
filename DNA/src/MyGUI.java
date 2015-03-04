@@ -221,8 +221,8 @@ public class MyGUI extends JFrame implements ActionListener
 		mosaicButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
-				sketchLabel.setText("Mosaic Sketch");
-				sketchPanel.add(sketchLabel);
+				sketch.init();
+				sketchPanel.add(sketch);
 				//sketchPanel.add(sketch);
 				//sketchPanel.add(sketchPanel);
 				//panel_1.setBackground(Color.BLUE);
@@ -287,8 +287,8 @@ public void actionPerformed(ActionEvent event)
 {
 	if(event.getSource()==lineButton)
 	{
-		sketch.init();
-		sketchPanel.add(sketch);
+		//sketch.init();
+		//sketchPanel.add(sketch);
 	}
 }
 }
