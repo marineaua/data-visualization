@@ -20,7 +20,7 @@ public class ProccesingSketch extends PApplet {
 	private static String		oauth_token			= "d4WwWT8lAUP67r2bBXNDM708JkZtpFg9EgBHEvVXs7u2EWd17j";
 	private static String		oauth_token_secret	= "aqkfveFVuhnIVxxfLR3IohSgwgXup7jXHeMDMI2mvSeBD9qMfh";
 	private static int 			width				= 1200;
-	private static int			height				= 700;
+	private static int			height				= 600;
 	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
 	//private static String		tumblrName			= "alextheleon";
 	//private static String		filePath			= new File("").getAbsolutePath();
