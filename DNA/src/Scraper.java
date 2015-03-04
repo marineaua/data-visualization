@@ -22,8 +22,9 @@ public class Scraper {
 	private static String		consumer_secret		= "4zXYhAMODZDuWHm9cTUNN165JKoPohJGTdmxNCukg4mYSJyRHw";
 	private static String		oauth_token			= "d4WwWT8lAUP67r2bBXNDM708JkZtpFg9EgBHEvVXs7u2EWd17j";
 	private static String		oauth_token_secret	= "aqkfveFVuhnIVxxfLR3IohSgwgXup7jXHeMDMI2mvSeBD9qMfh";
-	public  static String		tumblrName			= "wethinkwedream";
+	public  static String		tumblrName			= "alextheleon";
 	public  static String 		filePath 			= new File("").getAbsolutePath();
+	//public	static String		filePath2			= new File("").getResource();
 	
 	public Scraper()
 	{
@@ -38,9 +39,14 @@ public class Scraper {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("limit", 50);
 		List<Post> posts = client.blogPosts(tumblrURL,params);
+		Blog blog = client.blogInfo(tumblrURL);
+		int postCount = blog.getPostCount();
+		int iterations =  postCount/50;
+		//System.out.println(filePath);
+		System.out.println(filePath + "\\src\\files\\" + tumblrName + ".txt");
 		
 		// use 80 for 4000 --- 800 for 40k posts
-		for (int i= 0; i < 8; i++)
+		for (int i= 0; i < iterations; i++)
 		{
 			count = count + 50;
 			params.put("offset", count);
@@ -76,8 +82,8 @@ public class Scraper {
 			
 			//(".").getAbsolutePath()
 			//String filePath = new File("").getAbsolutePath();
-			System.out.println(filePath);
-			File file = new File(filePath + "/" + tumblrName + ".txt");
+			
+			File file = new File(filePath + "\\src\\files\\" + tumblrName + ".txt");
 		
 			if (!file.exists()){
 				file.createNewFile();
@@ -113,7 +119,42 @@ public class Scraper {
 	
 	}
 	
+	public static int getBlogPostCount()
+	{
+		String tumblrURL = tumblrName + ".tumblr.com";
+		JumblrClient client = new JumblrClient(consumer_key, consumer_secret);
+		client.setToken(oauth_token, oauth_token_secret);
+		
+		Blog blog = client.blogInfo(tumblrURL);
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("limit", 50);
+		int postCount = blog.getPostCount();
+		
+		return postCount;
+	}
 	
+	public static int getDateDifference()
+	{
+		String tumblrURL = tumblrName + ".tumblr.com";
+		JumblrClient client = new JumblrClient(consumer_key, consumer_secret);
+		client.setToken(oauth_token, oauth_token_secret);
+		Blog blog = client.blogInfo(tumblrURL); 
+		int postCount = blog.getPostCount();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("limit", 50);
+		List<Post> posts = client.blogPosts(tumblrURL,params);
+		
+		
+		return postCount;
+	}
+	
+	public static String getFilePath()
+	{
+		String file = new File("").getAbsolutePath();
+		return file;
+	}
+	/*
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		postList();
@@ -148,9 +189,9 @@ public class Scraper {
 		//System.out.println(user.getName());
 		//System.out.println(blog.getPostCount());
 		
-		*/
+		
 	
 		
 	}
-	
+*/	
 }

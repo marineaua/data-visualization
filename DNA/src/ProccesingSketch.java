@@ -21,14 +21,17 @@ public class ProccesingSketch extends PApplet {
 	private static String		oauth_token_secret	= "aqkfveFVuhnIVxxfLR3IohSgwgXup7jXHeMDMI2mvSeBD9qMfh";
 	private static int 			width				= 1200;
 	private static int			height				= 700;
-	private static String		tumblrName			= "wethinkwedream";
+	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
+	//private static String		tumblrName			= "alextheleon";
+	//private static String		filePath			= new File("").getAbsolutePath();
 	
 	public void setup() {
 	    size(width,height);
 	    background(0);
-		//String filePath = new File("").getAbsolutePath();
-		//System.out.println(filePath);
-		File file = new File(Scraper.filePath + "/" + tumblrName + ".txt");
+	    //File file = new File(Scraper.tumblrName + ".txt").getAbsoluteFile();
+	    //String newFilePath = Scraper.filePath.substring(0, Scraper.filePath.length()-4);
+	    System.out.println(newFilePath);
+	    File file = new File("C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt");
 	    if(!file.exists())
 	    {
 	    	Scraper.postList();
@@ -39,8 +42,8 @@ public class ProccesingSketch extends PApplet {
 		noLoop();
 	    noStroke();
 		
-		int count3 = 10;
-		int count4 = 10;
+		int count3 = 200;
+		int count4 = 200;
 		int opac = 180;
 		int size = 10;
 		fill(0,0,0,0);
@@ -57,84 +60,106 @@ public class ProccesingSketch extends PApplet {
 	    }
 	  	*/
 		String line = null;
+		String line2 = null;
 	    try {
-	    	File file = new File(Scraper.filePath + "/" + tumblrName + ".txt");
-	    	BufferedReader br = new BufferedReader(new FileReader(file));
+	    	
+	    	int i = 0;
+	    	int j = 0;
+	    	
+	    	//File file = new File(Scraper.filePath + Scraper.tumblrName + ".txt");
+	    	File file = new File("C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt");
+	    	BufferedReader br = new BufferedReader(new FileReader(file));	
+	    	int postCount = Scraper.getBlogPostCount();
+	
+	    	
+	    	
+	    	translate(width/2, height/2);
 	    	
 			while ((line = br.readLine()) != null) 
 			{	
-				//int count = 120;
-				//float s = map(count, 120, 0, 0, TWO_PI*2);
-				switch(line)
-				{
-				case "photo" :
-					//stroke(255,255,255,opac);
-					//arc(count3,count4, 20, 20, s, s + PI);
-					ellipse(count3,count4,20,20);
-					//white 255,255,255
-					fill(255,255,255,opac);
-					break;
-				case "text" :
-					//stroke(0,128,0,opac);
-					//arc(count3,count4, 20, 20, s, s + PI);
-					ellipse(count3,count4,20,20);
-					//green 0 128 0
-					fill(0,128,0,opac);
-					break;
-				case "audio" :
-					//stroke(123,90,205,opac);
-					//arc(count3,count4, 20, 20, s, s + PI);
-					ellipse(count3,count4,20,20);
-					// 123,90,205
-					fill(123,90,205,opac);
-					break;
-				case "video" :
-					//stroke(196,255,0,opac);
-					//arc(count3,count4, 20, 20, s, s + PI);
-					ellipse(count3,count4,20,20);
-					//black 0,0,0 yellow
-					fill(196,255,0,opac);
-					break;
-				case "answer" :
-					//stroke(255,0,0,opac);
-					//arc(count3,count4, 20, 20, s, s + PI);
-					ellipse(count3,count4,20,20);
-					// red
-					fill(255,0,0,opac);
-					break;
-				case "quote" :
-					//stroke(220,70,70,opac);
-					//arc(count3,count4, 20, 20, s, s + PI);
-					//pink i think
-					ellipse(count3,count4,20,20);
-					fill(220,70,70,opac);
-					break;
-				case "chat" :
-					//stroke(36,31,182,opac);
-					//arc(count3,count4, 20, 20, s, s + PI);
-					ellipse(count3,count4,20,20);
-					//70,30,180 blue
-					fill(36,31,182,opac);
-					break;
+				
+				if(i == 0){
+					
+						rotate(PI/360);
+					//int count = 120;
+					//float s = map(count, 120, 0, 0, TWO_PI*2);
+					switch(line)
+					{
+					case "photo" :
+						//stroke(255,255,255,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(count3,count4,size,size);
+						//white 255,255,255
+						fill(255,255,255,opac);
+						break;
+					case "text" :
+						//stroke(0,128,0,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(170,170,size,size);
+						//green 0 128 0
+						fill(0,128,0,opac);
+						break;
+					case "audio" :
+						//stroke(123,90,205,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(140,140,size,size);
+						// 123,90,205
+						fill(123,90,205,opac);
+						break;
+					case "video" :
+						//stroke(196,255,0,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(110,110,size,size);
+						//black 0,0,0 yellow
+						fill(196,255,0,opac);
+						break;
+					case "answer" :
+						//stroke(255,0,0,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(80,80,size,size);
+						// red
+						fill(255,0,0,opac);
+						break;
+					case "quote" :
+						//stroke(220,70,70,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						//pink i think
+						ellipse(50,0,size,size);
+						fill(220,70,70,opac);
+						break;
+					case "chat" :
+						//stroke(36,31,182,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(20,20,size,size);
+						//70,30,180 blue
+						fill(36,31,182,opac);
+						break;
+					
+					}
+					
+					//count--;
+					/*
+					10
+					10
+					10
+					interesting 
+					*/
+					/*
+					count3 = count3 + 20;
+					if (count3 >= width)
+					{
+						count3 = 10;
+						count4 = count4 + 5;
+					}
+					System.out.println(line);
+					*/
 				
 				}
-				//count--;
-				/*
-				10
-				10
-				10
-				interesting 
-				*/
-				
-				count3 = count3 + 20;
-				if (count3 >= width)
+				i++;
+				if(i == 8)
 				{
-					count3 = 10;
-					count4 = count4 + 5;
+					i = 0;
 				}
-				System.out.println(line);
-				
-				
 			}
 			br.close();
 		} catch (IOException e) {
