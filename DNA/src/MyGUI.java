@@ -17,6 +17,7 @@ import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.CardLayout;
+import java.awt.Component;
 
 
 @SuppressWarnings("serial")
@@ -55,7 +56,7 @@ public class MyGUI extends JFrame implements ActionListener
 		setPreferredSize(new Dimension(1200, 700));
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		
 		//this.setTitle("Data Visualization");
 		//this.setForeground(Color.WHITE);
@@ -78,7 +79,6 @@ public class MyGUI extends JFrame implements ActionListener
 		mainPanel.setSize(1200, 700);
 		mainPanel.setBackground(new Color(45, 45, 48));
 	    mainPanel.setBorder(BorderFactory.createMatteBorder(5,5,5,5, new Color(20, 20, 40, 200)));
-	    mainPanel.setLayout(new GridBagLayout());
 		
 		//-------------------------
 		// LABELS
@@ -94,13 +94,14 @@ public class MyGUI extends JFrame implements ActionListener
 		
 		lineButton = new JButton("line");
 		lineButton.addActionListener(this);
-		
+		lineButton.setPreferredSize(new Dimension(250,40));		
 		mosaicButton = new JButton("mosaic");
-		mosaicButton.setHorizontalAlignment(SwingConstants.LEFT);
-		
+		mosaicButton.setPreferredSize(new Dimension(250,40));
 		pieButton = new JButton("Pie");
+		pieButton.setPreferredSize(new Dimension(250,40));
 		
 		otherButton = new JButton("other");
+		otherButton.setPreferredSize(new Dimension(250,40));
 		
 		maxButton = new JButton();
 	    maxButton.setIcon(new ImageIcon("media/max-icon34.png"));
@@ -109,6 +110,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    maxButton.setBorderPainted(false);
 	    maxButton.setContentAreaFilled(false);
 	    maxButton.setRolloverEnabled(true);
+	    
 	    
 	    miniButton 		= new JButton();
 	    miniButton.setIcon(new ImageIcon("media/min-icon34.png"));
@@ -125,34 +127,31 @@ public class MyGUI extends JFrame implements ActionListener
 	    exitButton.setBorderPainted(false);
 	    exitButton.setContentAreaFilled(false);
 	    exitButton.setRolloverEnabled(true);
-	    
-		buttonPanel.setLayout(new GridBagLayout());
-		buttonPanel.add(mosaicButton);
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		buttonPanel.add(mosaicButton);		
 		buttonPanel.add(lineButton);
 		buttonPanel.add(otherButton);
-		GridBagConstraints a = new GridBagConstraints();
+		buttonPanel.add(pieButton);
+		/*GridBagConstraints a = new GridBagConstraints();
 	    a.gridx 	= 0;
 	    a.gridy 	= 0;
 	    a.weightx 	= 1.0;
-	    a.fill  	= GridBagConstraints.BOTH;
 	    buttonPanel.add(mosaicButton, a);
+	    GridBagConstraints a1 = new GridBagConstraints();
 	    a.gridx 	= 1;
 	    a.gridy 	= 0;
 	    a.weightx 	= 1.0;
-	    a.fill  	= GridBagConstraints.BOTH;
-	    buttonPanel.add(lineButton, a);
+	    buttonPanel.add(lineButton, a1);
+	    GridBagConstraints a2 = new GridBagConstraints();
 	    a.gridx 	= 2;
 	    a.gridy 	= 0;
 	    a.weightx	= 1.0;
-	    //a.weighty  = 1.0;
-	    a.fill  	= GridBagConstraints.BOTH;
-	    buttonPanel.add(pieButton, a);
+	    buttonPanel.add(pieButton, a2);
+	    GridBagConstraints a3 = new GridBagConstraints();
 	    a.gridx 	= 3;
 	    a.gridy 	= 0;
-	    a.weightx	= 1.0;
-	    a.weighty  = 1.0;
-	    a.fill  	= GridBagConstraints.BOTH;
-	    buttonPanel.add(otherButton, a);
+	    a.weightx	= 1.0; */
+	    //buttonPanel.add(otherButton, a3);
 		
 		//-------------------------
 		//SKETCH
@@ -160,6 +159,7 @@ public class MyGUI extends JFrame implements ActionListener
 		
 		sketch = new ProccesingSketch();
 		sketchPanel.setSize(1200, 700);
+		sketchPanel.setLayout(new BorderLayout(0, 0));
 		sketchPanel.add(sketch);
 		
 		//-------------------------
@@ -195,20 +195,24 @@ public class MyGUI extends JFrame implements ActionListener
 	    tc.weightx = 1.0;
 	    tc.insets = new Insets(5, 10, 0, 0);
 	    titlePanel.add(titleLabel, tc);
+	    GridBagConstraints tc1 = new GridBagConstraints();
 	    tc.gridx = 2;
 	    tc.gridy = 0;
 	    tc.weightx = 0.0;
-	    titlePanel.add(new JLabel(""), tc);
+	    titlePanel.add(new JLabel(""), tc1);
+	    GridBagConstraints tc2 = new GridBagConstraints();
 	    tc.gridx = 3;
 	    tc.gridy = 0;
 	    tc.weightx = 0.0;
-	    titlePanel.add(miniButton, tc);
+	    titlePanel.add(miniButton, tc2);
+	    GridBagConstraints tc3 = new GridBagConstraints();
 	    tc.gridx = 4;
 	    tc.gridy = 0;
-	    titlePanel.add(maxButton, tc);
+	    titlePanel.add(maxButton, tc3);
+	    GridBagConstraints tc4 = new GridBagConstraints();
 	    tc.gridx = 5;
 	    tc.gridy = 0;
-	    titlePanel.add(exitButton, tc);
+	    titlePanel.add(exitButton, tc4);
 		
 		//--------------------------
 		// MOUSE LISTENERS
@@ -237,7 +241,7 @@ public class MyGUI extends JFrame implements ActionListener
 			
 		//Adding other things to Frame
 		
-		GridBagConstraints c = new GridBagConstraints();
+		/*GridBagConstraints c = new GridBagConstraints();
 	    c.gridx 	= 0;
 	    c.gridy 	= 0;
 	    c.weightx 	= 1.0;
@@ -250,18 +254,21 @@ public class MyGUI extends JFrame implements ActionListener
 	    c1.fill  	= GridBagConstraints.BOTH;
 	    mainPanel.add(sketchPanel, c1);
 	    GridBagConstraints c2 = new GridBagConstraints();
+	    c2.anchor = GridBagConstraints.SOUTH;
 	    c2.gridx 	= 0;
 	    c2.gridy 	= 2;
 	    c2.weightx	= 1.0;
 	    c2.weighty  = 2.0;
 	    c2.fill  	= GridBagConstraints.HORIZONTAL;
-	    mainPanel.add(buttonPanel, c2);
-		
+	    */mainPanel.setLayout(new BorderLayout(0, 0));
+mainPanel.add(buttonPanel, BorderLayout.SOUTH); 
+	    mainPanel.add(titlePanel, BorderLayout.NORTH);
+	    mainPanel.add(sketchPanel, BorderLayout.CENTER);
 		//Adding Sketch to the Frame
 		
 		//this.add(sketchPanel);
-		sketch.init();
-		sketch.frame = this;
+		/*sketch.init();
+		sketch.frame = this;*/
 		
 		this.setContentPane(mainPanel);
 		pack();
@@ -280,7 +287,8 @@ public void actionPerformed(ActionEvent event)
 {
 	if(event.getSource()==lineButton)
 	{
-		sketchLabel.setText("line button got clicked");
+		sketch.init();
+		sketchPanel.add(sketch);
 	}
 }
 }

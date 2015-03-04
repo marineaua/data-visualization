@@ -23,8 +23,6 @@
  */
 
 
-package pretentiousSocialMediaGarbage;
-
 public class Post 
 {
 	boolean include=true;

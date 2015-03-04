@@ -4,11 +4,7 @@
 		page=parse.runFilter(page, types, notes, sourceURL, lowDate, highDate, lowTime, highTime, tags);
  */
 
-package pretentiousSocialMediaGarbage;
-
 import java.util.ArrayList;
-
-import pretentiousSocialMediaGarbage.Post;
 
 public class Parser 
 {

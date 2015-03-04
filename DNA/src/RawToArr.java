@@ -3,9 +3,6 @@
 		page=RawToArr.txtToArr(page,path);
  */
 
-
-package pretentiousSocialMediaGarbage;
-
 /*		
  * 		String path="E:/DNATESTING/justinBieberIsLife.txt"; // path to ripped file
 		ArrayList<String[]> page = new ArrayList<String[]>(); // array list containing individual posts
@@ -16,8 +13,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import pretentiousSocialMediaGarbage.Post;
 
 public class RawToArr 
 {
