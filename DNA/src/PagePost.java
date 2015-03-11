@@ -2,6 +2,7 @@ public class PagePost
 {
 	boolean include=true;
 	String type=null;
+	int timestamp=0;
 	int[] date=new int[3];
 	int[] time=new int[3];
 	long id=0;
@@ -10,10 +11,11 @@ public class PagePost
 	int notes=0;
 	String[] tags=null;
 	
-	public PagePost(boolean _include, String _type, int[] _date, int[] _time, long _id, String _postURL, String _sourceURL, int _notes, String[] _tags)
+	public PagePost(boolean _include, String _type,int _timestamp, int[] _date, int[] _time, long _id, String _postURL, String _sourceURL, int _notes, String[] _tags)
 	{	
 		include=_include;
 		type=_type;
+		timestamp=_timestamp;
 		date=_date;
 		time=_time;
 		id=_id;
@@ -29,6 +31,10 @@ public class PagePost
 	public String getType()
 	{
 		return type;
+	}
+	public int getTimestamp()
+	{
+		return timestamp;
 	}
 	public int[] getDate()
 	{
@@ -66,6 +72,10 @@ public class PagePost
 	public void setType(String _type)
 	{
 		type=_type;
+	}
+	public void setTimestamp(int _timestamp)
+	{
+		timestamp=_timestamp;
 	}
 	public void setDate(int[] _date)
 	{

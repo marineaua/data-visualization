@@ -18,6 +18,7 @@ public class RawToArr
 				{
 					boolean include=true;
 					String type=null;
+					int timestamp=0;
 					int[] date=new int[3];
 					int[] time=new int[3];
 					long id=0;
@@ -33,7 +34,10 @@ public class RawToArr
 					}
 					
 					// move down one line without doing anything with the return
-					br.readLine(); // line 2
+					if((line = br.readLine()) != null) // line 2
+					{
+						timestamp=Integer.parseInt(line);
+					}
 					
 					// set date and time
 					if((line = br.readLine()) != null) // line 3
@@ -82,7 +86,7 @@ public class RawToArr
 						tags[0]=tags[1];
 					}
 
-					PagePost post = new PagePost(include, type, date, time, id, postURL, sourceURL, notes, tags);
+					PagePost post = new PagePost(include, type, timestamp, date, time, id, postURL, sourceURL, notes, tags);
 					page.add(post);
 					if(line==null)
 						break;
