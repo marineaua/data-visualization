@@ -21,8 +21,8 @@ public class ProccesingSketch extends PApplet {
 	private static String		consumer_secret		= "4zXYhAMODZDuWHm9cTUNN165JKoPohJGTdmxNCukg4mYSJyRHw";
 	private static String		oauth_token			= "d4WwWT8lAUP67r2bBXNDM708JkZtpFg9EgBHEvVXs7u2EWd17j";
 	private static String		oauth_token_secret	= "aqkfveFVuhnIVxxfLR3IohSgwgXup7jXHeMDMI2mvSeBD9qMfh";
-	private static int 			width				= 1800;
-	private static int			height				= 900;
+	private static int 			width				= 1200;
+	private static int			height				= 600;
 	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
 	private static String		thePath				= "C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
 	//private static String		tumblrName			= "alextheleon";
@@ -93,42 +93,42 @@ public class ProccesingSketch extends PApplet {
 			{
 			case "photo" :
 				stroke(255,255,255,opac);
-				or = 400; 
-				ir = 390;
-				break;
-			case "text" :
-				stroke(0,128,0,opac);
-				or = 380; 
-				ir = 370;
-				break;
-			case "audio" :
-				stroke(123,90,205,opac);
-				or = 360;
-				ir = 350;
-				break;
-			case "video" :
-				stroke(196,255,0,opac);
-				or = 340; 
-				ir = 330;
-				break;
-			case "answer" :
-				stroke(255,0,0,opac);
-				or = 320; 
-				ir = 310;
-				break;
-			case "quote" :
-				stroke(220,70,70,opac);
 				or = 300; 
 				ir = 290;
 				break;
-			case "chat" :
-				stroke(36,31,182,opac);
+			case "text" :
+				stroke(0,128,0,opac);
 				or = 280; 
 				ir = 270;
+				break;
+			case "audio" :
+				stroke(123,90,205,opac);
+				or = 260;
+				ir = 250;
+				break;
+			case "video" :
+				stroke(196,255,0,opac);
+				or = 240; 
+				ir = 230;
+				break;
+			case "answer" :
+				stroke(255,0,0,opac);
+				or = 220; 
+				ir = 210;
+				break;
+			case "quote" :
+				stroke(220,70,70,opac);
+				or = 200; 
+				ir = 190;
+				break;
+			case "chat" :
+				stroke(36,31,182,opac);
+				or = 180; 
+				ir = 170;
 			case "link" :
 				stroke(255,255,255,opac);
-				or = 260; 
-				ir = 250;
+				or = 160; 
+				ir = 150;
 				break;
 				
 			
