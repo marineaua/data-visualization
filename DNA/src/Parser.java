@@ -1,14 +1,8 @@
-/********* how to call in main
- * 
- * 		Parser parse = new Parser();
-		page=parse.runFilter(page, types, notes, sourceURL, lowDate, highDate, lowTime, highTime, tags);
- */
-
 import java.util.ArrayList;
 
 public class Parser 
 {
-	public ArrayList<Post> fbType(ArrayList<Post> page, String[] types)
+	public ArrayList<PagePost> fbType(ArrayList<PagePost> page, String[] types)
 	{
 		int numPosts=page.size()-1;
 		
@@ -21,7 +15,7 @@ public class Parser
 					break;
 				else if(page.get(i).getType().equalsIgnoreCase(types[k]))
 				{
-					page.get(i).setInclude(false);
+					page.get(i).setInclude(true);
 					k++;
 				}
 				else
@@ -31,7 +25,7 @@ public class Parser
 		
 		return page;
 	}
-	public ArrayList<Post> fbTime(ArrayList<Post> page, int[] lowDate, int[] highDate, int[] lowTime, int[] highTime)
+	public ArrayList<PagePost> fbTime(ArrayList<PagePost> page, int[] lowDate, int[] highDate, int[] lowTime, int[] highTime)
 	{
 		int numPosts=page.size()-1;
 		boolean noLow=false;
@@ -46,28 +40,28 @@ public class Parser
 			/**************  low date    ****************/
 			// >=year
 			if(page.get(i).getDate()[0]>=lowDate[0]&&noLow==false)
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			// >=month
 			if(lowDate[1]==-1){}
 			else if(page.get(i).getDate()[1]>=lowDate[1]&&noLow==false)
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			// >=day
 			if(lowDate[2]==-1){}
 			else if(page.get(i).getDate()[2]>=lowDate[2]&&noLow==false)
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			/**************  low time    ****************/
 			// >=hour
 			if(lowTime[0]==-1){}
 			if(page.get(i).getTime()[0]>=lowTime[0]&&noLow==false)
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			// >=minute
 			if(lowTime[1]==-1){}
 			else if(page.get(i).getTime()[1]>=lowTime[1]&&noLow==false)
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			// >=second
 			if(lowTime[2]==-1){}
 			else if(page.get(i).getTime()[2]>=lowTime[2]&&noLow==false)
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			
 
 			/**************  high date    ****************/
@@ -76,36 +70,43 @@ public class Parser
 			
 			// <year
 			if(page.get(i).getDate()[0]<highDate[0])
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			// <month
 			if(lowDate[1]==-1){}
 			else if(page.get(i).getDate()[1]<highDate[1])
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			// <day
 			if(lowDate[2]==-1){}
 			else if(page.get(i).getDate()[2]<highDate[2])
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			/**************  high time    ****************/
 			// <hour
 			if(lowTime[0]==-1){}
 			else if(page.get(i).getTime()[0]<highTime[0])
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			// <minute
 			if(lowTime[1]==-1){}
 			else if(page.get(i).getTime()[1]<highTime[1])
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 			// <second
 			if(lowTime[2]==-1){}
 			else if(page.get(i).getTime()[2]<highTime[2])
-				page.get(i).setInclude(false);
+				page.get(i).setInclude(true);
 		}
 		return page;
 	}
-	public ArrayList<Post> fbNotes(ArrayList<Post> page, int notes)
+	public ArrayList<PagePost> fbNotes(ArrayList<PagePost> page, int notes)
 	{
+		int numPosts=page.size()-1;
+		
+		for(int i=0;i<numPosts;i++)
+		{
+			if(page.get(i).getNotes()>=notes)
+				page.get(i).setInclude(true);
+		}
 		return page;
 	}
-	public ArrayList<Post> fbTags(ArrayList<Post> page, String[] tags)
+	public ArrayList<PagePost> fbTags(ArrayList<PagePost> page, String tags)
 	{
 		int numPosts=page.size()-1;
 		
@@ -115,31 +116,32 @@ public class Parser
 			
 			while(true)
 			{
-				int k=0;
 				if(page.get(i).getTags()[j]==null)
 					break;
-				while(true)
+				else if(tags.contains(page.get(i).getTags()[j]))
 				{
-					if(tags[k]==null)
-						break;
-					else if(page.get(i).getTags()[j].equalsIgnoreCase(tags[k]))
-					{
-						page.get(i).setInclude(false);
-						k++;
-					}
-					else
-						k++;
+					page.get(i).setInclude(true);
+					j++;
 				}
-				j++;
+				else
+					j++;
+				
 			}
 		}
 		return page;
 	}	
-	public ArrayList<Post> fbSourceURL(ArrayList<Post> page, String sourceURL)
+	public ArrayList<PagePost> fbSourceURL(ArrayList<PagePost> page, String sourceURL)
 	{
+		int numPosts=page.size()-1;
+		
+		for(int i=0;i<numPosts;i++)
+		{
+			if(page.get(i).getSourceURL().contains(sourceURL))
+				page.get(i).setInclude(true);
+		}
 		return page;
 	}
-	public ArrayList<Post> includeAll(ArrayList<Post> page)
+	public ArrayList<PagePost> includeAll(ArrayList<PagePost> page)
 	{
 		int numPosts=page.size()-1;
 		
@@ -149,7 +151,7 @@ public class Parser
 		}
 		return page;
 	}
-	public ArrayList<Post> excludeAll(ArrayList<Post> page)
+	public ArrayList<PagePost> excludeAll(ArrayList<PagePost> page)
 	{
 		int numPosts=page.size()-1;
 		
@@ -160,8 +162,9 @@ public class Parser
 		return page;
 	}
 	
-	public ArrayList<Post> runFilter(ArrayList<Post> page, String[] types, int notes, String sourceURL, int[] lowDate, int[] highDate, int[] lowTime, int[] highTime, String[] tags)
+	public ArrayList<PagePost> runFilter(ArrayList<PagePost> page, String[] types, int notes, String sourceURL, int[] lowDate, int[] highDate, int[] lowTime, int[] highTime, String tags)
 	{
+		page=excludeAll(page);
 		if(types[0]!=null)
 		{
 			page=fbType(page, types);
@@ -172,15 +175,15 @@ public class Parser
 		}
 		if(notes>=0)
 		{
-			fbNotes(page, notes);
+			page=fbNotes(page, notes);
 		}
-		if(tags[0]!=null)
+		if(tags!=null)
 		{
-			fbTags(page, tags);
+			page=fbTags(page, tags);
 		}
 		if(sourceURL!=null)
 		{
-			fbSourceURL(page, sourceURL);
+			page=fbSourceURL(page, sourceURL);
 		}
 		return page;
 	}

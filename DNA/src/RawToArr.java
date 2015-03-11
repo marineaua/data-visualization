@@ -1,14 +1,3 @@
-/************ example main to fill up a created Post object
- * 
-		page=RawToArr.txtToArr(page,path);
- */
-
-/*		
- * 		String path="E:/DNATESTING/justinBieberIsLife.txt"; // path to ripped file
-		ArrayList<String[]> page = new ArrayList<String[]>(); // array list containing individual posts
-		page=RawToArr.txtToArr(page,path); // page gets return from txtToArr(a filled up array list)
- */
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,7 +5,7 @@ import java.util.ArrayList;
 
 public class RawToArr 
 {
-	public static ArrayList<Post> txtToArr(ArrayList<Post> page, String path)
+	public static ArrayList<PagePost> txtToArr(ArrayList<PagePost> page, String path)
 	{	
 		try
 		{
@@ -35,7 +24,7 @@ public class RawToArr
 					String postURL=null;
 					String sourceURL=null;
 					int notes=0;
-					String[] tags=new String[20];
+					String[] tags=new String[10];
 					
 					// set type
 					if((line = br.readLine()) != null) // line 1
@@ -90,9 +79,10 @@ public class RawToArr
 						{
 							tags[i]=tokens[i];
 						}
+						tags[0]=tags[1];
 					}
 
-					Post post = new Post(include, type, date, time, id, postURL, sourceURL, notes, tags);
+					PagePost post = new PagePost(include, type, date, time, id, postURL, sourceURL, notes, tags);
 					page.add(post);
 					if(line==null)
 						break;
@@ -108,5 +98,4 @@ public class RawToArr
 	
 		return page;
 	}
-	
 }

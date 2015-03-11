@@ -1,29 +1,4 @@
-/**************** example of main code to create an empty page ready to be filled by calling RawToArr.txtToArr(page,path);
- * 
- * 		int notes=-1;
-		String sourceURL=null;
-		int lowDate[]=new int[3];
-		int highDate[]=new int[3];
-		int lowTime[]=new int[3];
-		int highTime[]=new int[3];
-		String[] types=new String[8];
-		String[] tags=new String[10]; // is there a hashtag limit?
-		
-		for(int i=0;i<=2;i++)
-		{
-			lowDate[i]=-1;
-			highDate[i]=-1;
-			lowTime[i]=-1;
-			highTime[i]=-1;
-		}
- * 
- * 
- * 		String path="E:/DNATESTING/testing123.txt";
-		ArrayList<Post> page = new ArrayList<Post>();
- */
-
-
-public class Post 
+public class PagePost 
 {
 	boolean include=true;
 	String type=null;
@@ -35,7 +10,7 @@ public class Post
 	int notes=0;
 	String[] tags=null;
 	
-	public Post(boolean _include, String _type, int[] _date, int[] _time, long _id, String _postURL, String _sourceURL, int _notes, String[] _tags)
+	public PagePost(boolean _include, String _type, int[] _date, int[] _time, long _id, String _postURL, String _sourceURL, int _notes, String[] _tags)
 	{	
 		include=_include;
 		type=_type;
@@ -120,5 +95,4 @@ public class Post
 	{
 		tags=_tags;
 	}
-	
 }
