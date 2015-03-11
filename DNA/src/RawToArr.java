@@ -25,7 +25,7 @@ public class RawToArr
 					String postURL=null;
 					String sourceURL=null;
 					int notes=0;
-					String[] tags=new String[10];
+					String[] tags=new String[300];
 					
 					// set type
 					if((line = br.readLine()) != null) // line 1
@@ -77,7 +77,8 @@ public class RawToArr
 					if((line = br.readLine()) != null) // line 8
 					{
 						String delims = "[ \\[\\]]+";
-						String[] tokens = line.split(delims);
+						String[] tokens;
+						tokens = line.split(delims);
 						
 						for(int i=0; i<tokens.length;i++)
 						{

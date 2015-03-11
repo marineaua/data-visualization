@@ -1,5 +1,6 @@
 import processing.core.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,15 +14,17 @@ import com.tumblr.jumblr.types.Blog;
 import com.tumblr.jumblr.types.Post;
 import com.tumblr.jumblr.types.User;
 
+
 public class ProccesingSketch extends PApplet {
 	
 	private static String		consumer_key		= "0bItUSuxTNYvg3aeMv9lXTVnOYME5kGRrzdGn0ba5ktWMTLLgL";
 	private static String		consumer_secret		= "4zXYhAMODZDuWHm9cTUNN165JKoPohJGTdmxNCukg4mYSJyRHw";
 	private static String		oauth_token			= "d4WwWT8lAUP67r2bBXNDM708JkZtpFg9EgBHEvVXs7u2EWd17j";
 	private static String		oauth_token_secret	= "aqkfveFVuhnIVxxfLR3IohSgwgXup7jXHeMDMI2mvSeBD9qMfh";
-	private static int 			width				= 1200;
-	private static int			height				= 600;
+	private static int 			width				= 1800;
+	private static int			height				= 900;
 	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
+	private static String		thePath				= "C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
 	//private static String		tumblrName			= "alextheleon";
 	//private static String		filePath			= new File("").getAbsolutePath();
 	
@@ -31,22 +34,135 @@ public class ProccesingSketch extends PApplet {
 	    //File file = new File(Scraper.tumblrName + ".txt").getAbsoluteFile();
 	    //String newFilePath = Scraper.filePath.substring(0, Scraper.filePath.length()-4);
 	    System.out.println(newFilePath);
-	    File file = new File("C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt");
+	    File file = new File(thePath);
 	    if(!file.exists())
 	    {
 	    	Scraper.postList();
 	    }
+	    
 	   }
 
 	public void draw() {
 		noLoop();
-	    noStroke();
 		
+	    drawFromArray();
+		//drawFromBR();
+	}
+	
+	public void drawFromArray()
+	{
+		//-----------------------
+		//ARRAY CREATION
+		//-----------------------
+		ArrayList<PagePost> page = new ArrayList<PagePost>(); 	// array list containing individual posts
+		page = RawToArr.txtToArr(page,thePath);					// page gets return from txtToArr(a filled up array list)
+		//-----------------------
+		//VARIABLES
+		//-----------------------
+		int finishTime		= page.get(0).getTimestamp();
+		int startTime 		= page.get(page.size() - 2).getTimestamp();
+		int currentTime		= 0;
+		int opac		 	= 180;
+		float ir 		 	= random(25) + 250;
+		float or 		 	= 300;
+		float thetaDate  	= 0;
+		PVector cp 			= new PVector(width/2,height/2);
+		strokeWeight(1);
+		strokeCap(SQUARE);
+		
+		//-----------------------
+		//ARRAY ITERATION
+		//-----------------------
+		
+		int count = 0; //test code
+		for(int i=0; i < page.size() - 1;i++)
+		{
+			String type = page.get(i).getType();
+			
+			if(type == null)
+			{
+				System.out.println(type);
+				System.out.println(count);
+			}
+			else
+			{
+				count++;
+			}
+			
+			switch(type)
+			{
+			case "photo" :
+				stroke(255,255,255,opac);
+				or = 400; 
+				ir = 390;
+				break;
+			case "text" :
+				stroke(0,128,0,opac);
+				or = 380; 
+				ir = 370;
+				break;
+			case "audio" :
+				stroke(123,90,205,opac);
+				or = 360;
+				ir = 350;
+				break;
+			case "video" :
+				stroke(196,255,0,opac);
+				or = 340; 
+				ir = 330;
+				break;
+			case "answer" :
+				stroke(255,0,0,opac);
+				or = 320; 
+				ir = 310;
+				break;
+			case "quote" :
+				stroke(220,70,70,opac);
+				or = 300; 
+				ir = 290;
+				break;
+			case "chat" :
+				stroke(36,31,182,opac);
+				or = 280; 
+				ir = 270;
+			case "link" :
+				stroke(255,255,255,opac);
+				or = 260; 
+				ir = 250;
+				break;
+				
+			
+			}
+			
+			currentTime = page.get(i).getTimestamp();
+			thetaDate = map(currentTime, startTime, finishTime, 0, 2 * PI);
+			
+			renderCirc(cp, or, ir, thetaDate);
+		}
+		System.out.println("done");
+	}
+	/*
+	 * renderCirc() is a utility function for drawing a circle with given points in a circle 
+	 */
+	void renderCirc(PVector cp, float or, float ir, float thetaDate)
+	{
+		
+		float x = (sin(thetaDate) * or) + cp.x;	//sets x value of the outer radius
+		float y = (cos(thetaDate) * or) + cp.y;	//sets y calue of the outer radius
+		float xx = (sin(thetaDate) * ir) + cp.x; //sets x value of the inner radius
+		float yy = (cos(thetaDate) * ir) + cp.y; //sets the y value of the inner radius
+		
+		line(xx,yy,x,y);	//draws the line from the outer radius point to the inner radius point
+	}
+	
+	public void drawFromBR()
+	{
 		int count3 = 200;
 		int count4 = 200;
 		int opac = 180;
 		int size = 10;
 		fill(0,0,0,0);
+		
 		//stroke(255, 180);
 		
 		/*
@@ -69,7 +185,7 @@ public class ProccesingSketch extends PApplet {
 	    	//File file = new File(Scraper.filePath + Scraper.tumblrName + ".txt");
 	    	File file = new File("C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt");
 	    	BufferedReader br = new BufferedReader(new FileReader(file));	
-	    	int postCount = Scraper.getBlogPostCount();
+	    	
 	
 	    	
 	    	
