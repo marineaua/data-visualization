@@ -27,16 +27,16 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class MyGUI extends JFrame implements ActionListener
 {
-	ArrayList<PagePost> page = new ArrayList<PagePost>(); 
-	private ProccesingSketch sketch;
-	int notes=-1;
-	String sourceURL=null;
-	int lowDate[]=new int[3];
-	int highDate[]=new int[3];
-	int lowTime[]=new int[3];
-	int highTime[]=new int[3];
-	String[] types=new String[8];
-	String tags=null;
+	private static ArrayList<PagePost> page = new ArrayList<PagePost>(); 
+	private  ProccesingSketch sketch;
+	private static int notes=-1;
+	private static String sourceURL=null;
+	private static int lowDate[]=new int[3];
+	private static int highDate[]=new int[3];
+	private static int lowTime[]=new int[3];
+	private static int highTime[]=new int[3];
+	private static String[] types=new String[8];
+	private static String tags=null;
 	
 	private javax.swing.JPanel sketchPanel;
 	private JPanel buttonPanel;
@@ -70,7 +70,14 @@ public class MyGUI extends JFrame implements ActionListener
 	
 	public MyGUI()
 	{ 
-		String path="C:/Users/SwodeG/Desktop/DNA/src/files/alextheleon.txt";
+		for(int i=0;i<=2;i++)
+		{
+			lowDate[i]=-1;
+			highDate[i]=-1;
+			lowTime[i]=-1;
+			highTime[i]=-1;
+		}
+		String path="C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/alextheleon.txt";
 		page=RawToArr.txtToArr(page,path);
 		
 		setUndecorated(true);
@@ -150,11 +157,11 @@ public class MyGUI extends JFrame implements ActionListener
 		//-------------------------
 		//SKETCH
 		//-------------------------
-		
 		sketch = new ProccesingSketch();
 		sketchPanel.setSize(1200, 700);
 		sketchPanel.setLayout(new BorderLayout(0, 0));
 		sketchPanel.add(sketch);
+		
 	    GridBagLayout gbl_titlePanel = new GridBagLayout();
 	    gbl_titlePanel.columnWidths = new int[]{412, 62, 542, 0, 0, 26, 27, -104, 0};
 	    gbl_titlePanel.rowHeights = new int[]{12, 12, 0};
@@ -344,8 +351,9 @@ public class MyGUI extends JFrame implements ActionListener
 	    		    		}
 	    				   
 	    				   if(Type.isSelected() == true)
-	    		    		{ int i=0;
-	    					   String[] types = new String[5];
+	    		    		{ 
+	    					   int i=0;
+	    					   
 	    		    			if(Text.isSelected()==true)
 	    		    			{
 	    		    				types[i] = "text";
@@ -374,7 +382,11 @@ public class MyGUI extends JFrame implements ActionListener
 	    		    		}
 	    				   Parser parse = new Parser();
 	    				  page = parse.runFilter(page, types, notes, sourceURL, lowDate, highDate, lowTime, highTime, tags);
-	    				   addf.dispose();
+	    				  
+	    				  for(int i=0;i<page.size()-1;i++)
+	    						System.out.println(page.get(i).getInclude());
+	    				  
+	    				  addf.dispose();
 	    			   }
 	    			});
 //Stuck here
@@ -547,8 +559,10 @@ public class MyGUI extends JFrame implements ActionListener
 		mosaicButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
-				sketch.draw(page);
+				sketch.init();
+				sketch.start();
 				sketchPanel.add(sketch);
+
 				//sketchPanel.add(sketch);
 				//sketchPanel.add(sketchPanel);
 				//panel_1.setBackground(Color.BLUE);
@@ -580,7 +594,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    c2.weighty  = 2.0;
 	    c2.fill  	= GridBagConstraints.HORIZONTAL;
 	    */mainPanel.setLayout(new BorderLayout(0, 0));
-mainPanel.add(buttonPanel, BorderLayout.SOUTH); 
+	    mainPanel.add(buttonPanel, BorderLayout.SOUTH); 
 	    mainPanel.add(titlePanel, BorderLayout.NORTH);
 	    GridBagConstraints tc1 = new GridBagConstraints();
 	    tc1.anchor = GridBagConstraints.NORTHWEST;
@@ -601,20 +615,25 @@ mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
 
 
-public static void main(String[] args)
-{
-	new MyGUI().setVisible(true);
-	
-}
-
-public void actionPerformed(ActionEvent event)
-{
-	if(event.getSource()==lineButton)
+	public static void main(String[] args)
 	{
-		//sketch.init();
-		//sketchPanel.add(sketch);
+		new MyGUI().setVisible(true);
+		
 	}
-}
+	
+	public void actionPerformed(ActionEvent event)
+	{
+		if(event.getSource()==lineButton)
+		{
+			//sketch.init();
+			//sketchPanel.add(sketch);
+		}
+	}
+
+	public ArrayList<PagePost> getPage()
+	{
+		return page;
+	}
 	
 	
 }

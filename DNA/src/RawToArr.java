@@ -16,7 +16,7 @@ public class RawToArr
 				String line = null;
 				while(true)
 				{
-					boolean include=true;
+					boolean include=false;
 					String type=null;
 					int timestamp=0;
 					int[] date=new int[3];

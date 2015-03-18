@@ -54,8 +54,11 @@ public class ProccesingSketch extends PApplet {
 		//-----------------------
 		//ARRAY CREATION
 		//-----------------------
-		ArrayList<PagePost> page = new ArrayList<PagePost>(); 	// array list containing individual posts
-		page = RawToArr.txtToArr(page,thePath);					// page gets return from txtToArr(a filled up array list)
+		MyGUI mG = new MyGUI();
+		ArrayList<PagePost> page = new ArrayList<PagePost>();
+		page = mG.getPage();
+															// array list containing individual posts
+		//page = RawToArr.txtToArr(page,thePath);					// page gets return from txtToArr(a filled up array list)
 		//-----------------------
 		//VARIABLES
 		//-----------------------
@@ -75,8 +78,13 @@ public class ProccesingSketch extends PApplet {
 		//-----------------------
 		
 		int count = 0; //test code
+		
+		
 		for(int i=0; i < page.size() - 1;i++)
 		{
+			if(page.get(i).getInclude() == true)
+			{	
+			
 			String type = page.get(i).getType();
 			
 			if(type == null)
@@ -138,6 +146,7 @@ public class ProccesingSketch extends PApplet {
 			thetaDate = map(currentTime, startTime, finishTime, 0, 2 * PI);
 			
 			renderCirc(cp, or, ir, thetaDate);
+			}
 		}
 		System.out.println("done");
 	}
