@@ -77,7 +77,7 @@ public class MyGUI extends JFrame implements ActionListener
 			lowTime[i]=-1;
 			highTime[i]=-1;
 		}
-		String path="C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/alextheleon.txt";
+		String path="E:/javaworkspace/DNA/DNA/src/files/alextheleon.txt";
 		page=RawToArr.txtToArr(page,path);
 		
 		setUndecorated(true);
@@ -325,6 +325,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		sourcep.add(Source);
 	    		sourcep.add(sourcelabel);
 	    		sourcep.add(sourcet);
+	    		final JLabel errorlabel = new JLabel();
 	    		sourcep.add(sourcetail);
 	    		
 	    		JButton Filter = new JButton("Filter");
@@ -332,7 +333,13 @@ public class MyGUI extends JFrame implements ActionListener
 
 	    		Filter.addActionListener(new ActionListener(){
 	    			   public void actionPerformed(ActionEvent ae){
-	    				   
+	    				   if (Notes.isSelected() == false && Tags.isSelected() == false && Source.isSelected() == false && Type.isSelected() == false)
+	   						{
+	   							errorlabel.setText("NO CHECK BOX SELECTED");
+	   						}
+	   					    
+	   						else 
+	   						{   				   
 	    				   if(Notes.isSelected() == true)
 	    		    		{
 	    		    			notes = Integer.parseInt(notef.getText());
@@ -384,10 +391,10 @@ public class MyGUI extends JFrame implements ActionListener
 	    				  page = parse.runFilter(page, types, notes, sourceURL, lowDate, highDate, lowTime, highTime, tags);
 	    				  
 	    				  for(int i=0;i<page.size()-1;i++)
-	    						System.out.println(page.get(i).getInclude());
+	    						System.out.println(page.get(i).getInclude()+String.valueOf(i));
 	    				  
 	    				  addf.dispose();
-	    			   }
+	    			   }}
 	    			});
 //Stuck here
 	    		
@@ -397,6 +404,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		maincont.add(notep);
 	    		maincont.add(sourcep);
 	    		maincont.add(Filter);
+	    		maincont.add(errorlabel);
 	    		addf.setVisible(true);	    		
 	    		
 	    	}
@@ -630,8 +638,10 @@ public class MyGUI extends JFrame implements ActionListener
 		}
 	}
 
-	public ArrayList<PagePost> getPage()
+	static public ArrayList<PagePost> getPage()
 	{
+		  for(int i=0;i<page.size()-1;i++)
+				System.err.println(page.get(i).getInclude()+String.valueOf(i));
 		return page;
 	}
 	

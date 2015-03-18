@@ -24,7 +24,7 @@ public class ProccesingSketch extends PApplet {
 	private static int 			width				= 1200;
 	private static int			height				= 600;
 	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
-	private static String		thePath				= "C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
+	private static String		thePath				= "E:/javaworkspace/DNA/DNA/src/files/" + Scraper.tumblrName + ".txt";
 	//private static String		tumblrName			= "alextheleon";
 	//private static String		filePath			= new File("").getAbsolutePath();
 	
@@ -54,9 +54,12 @@ public class ProccesingSketch extends PApplet {
 		//-----------------------
 		//ARRAY CREATION
 		//-----------------------
-		MyGUI mG = new MyGUI();
+		
+		//MyGUI mG = new MyGUI();
 		ArrayList<PagePost> page = new ArrayList<PagePost>();
-		page = mG.getPage();
+		page = MyGUI.getPage();
+		//page = mG.getPage();
+		
 															// array list containing individual posts
 		//page = RawToArr.txtToArr(page,thePath);					// page gets return from txtToArr(a filled up array list)
 		//-----------------------
@@ -79,10 +82,11 @@ public class ProccesingSketch extends PApplet {
 		
 		int count = 0; //test code
 		
-		
+		  for(int i=0;i<page.size()-1;i++)
+				System.out.println(page.get(i).getInclude()+String.valueOf(i));
 		for(int i=0; i < page.size() - 1;i++)
 		{
-			if(page.get(i).getInclude() == true)
+			if(page.get(i).getInclude() == true && page.get(i).getType()!=null)
 			{	
 			
 			String type = page.get(i).getType();
@@ -96,7 +100,6 @@ public class ProccesingSketch extends PApplet {
 			{
 				count++;
 			}
-			
 			switch(type)
 			{
 			case "photo" :
@@ -147,6 +150,7 @@ public class ProccesingSketch extends PApplet {
 			
 			renderCirc(cp, or, ir, thetaDate);
 			}
+			
 		}
 		System.out.println("done");
 	}
