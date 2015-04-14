@@ -47,7 +47,11 @@ public class ProccesingSketch extends PApplet {
 		//noStroke();
 	    //drawFromArray();
 		//drawFromBR();
-	    drawPieGraph();
+		background(0,0,0);
+		if(MyGUI.getDrawingType() == 0)
+			drawFromArray();
+		else if(MyGUI.getDrawingType() == 1)
+			drawPieGraph();
 	}
 	
 	public void drawFromArray()

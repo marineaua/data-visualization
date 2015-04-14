@@ -28,6 +28,7 @@ import java.util.ArrayList;
 public class MyGUI extends JFrame implements ActionListener
 {
 	private static ArrayList<PagePost> page = new ArrayList<PagePost>(); 
+	private static int drawingType;
 	private  ProccesingSketch sketch;
 	private static int notes=-1;
 	private static String sourceURL=null;
@@ -570,6 +571,24 @@ public class MyGUI extends JFrame implements ActionListener
 		mosaicButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
+				drawingType = 0;
+				sketch.init();
+				sketch.start();
+				sketchPanel.add(sketch);
+
+				//sketchPanel.add(sketch);
+				//sketchPanel.add(sketchPanel);
+				//panel_1.setBackground(Color.BLUE);
+				//sketchPanel.add(sketch);
+				//ProccesingSketch.setup();
+				//sketch.init();
+			}
+		});
+		
+		pieButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
+				drawingType = 1;
 				sketch.init();
 				sketch.start();
 				sketchPanel.add(sketch);
@@ -646,6 +665,11 @@ public class MyGUI extends JFrame implements ActionListener
 		  for(int i=0;i<page.size()-1;i++)
 				System.err.println(page.get(i).getInclude()+String.valueOf(i));
 		return page;
+	}
+	
+	static public int getDrawingType()
+	{
+		return drawingType;
 	}
 	
 	
