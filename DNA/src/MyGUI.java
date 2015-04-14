@@ -77,7 +77,7 @@ public class MyGUI extends JFrame implements ActionListener
 			lowTime[i]=-1;
 			highTime[i]=-1;
 		}
-		String path="E:/javaworkspace/DNA/DNA/src/files/alextheleon.txt";
+		String path="C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/alextheleon.txt";
 		page=RawToArr.txtToArr(page,path);
 		
 		setUndecorated(true);
@@ -187,6 +187,7 @@ public class MyGUI extends JFrame implements ActionListener
 		titlePanel.add(menuBar, gbc_menuBar);
 	    
 	    mnFile = new JMenu("File");
+	    mnFile.getPopupMenu().setLightWeightPopupEnabled(false);
 	    mnFile.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 	    menuBar.add(mnFile);
 	    mnFile.setHorizontalAlignment(SwingConstants.LEFT);
@@ -230,6 +231,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    menuBar.add(horizontalStrut);
 	    
 	    mnFilter = new JMenu("Filter");
+	    mnFilter.getPopupMenu().setLightWeightPopupEnabled(false);
 	    mnFilter.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 	    menuBar.add(mnFilter);
 	    mnFilter.setForeground(Color.WHITE);
@@ -424,6 +426,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    menuBar.add(horizontalStrut_1);
 	    
 	    mnHelp = new JMenu("Help");
+	    mnHelp.getPopupMenu().setLightWeightPopupEnabled(false);
 	    mnHelp.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 	    menuBar.add(mnHelp);
 	    mnHelp.setForeground(Color.WHITE);

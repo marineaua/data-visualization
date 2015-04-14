@@ -24,7 +24,7 @@ public class ProccesingSketch extends PApplet {
 	private static int 			width				= 1200;
 	private static int			height				= 600;
 	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
-	private static String		thePath				= "E:/javaworkspace/DNA/DNA/src/files/" + Scraper.tumblrName + ".txt";
+	private static String		thePath				= "C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
 	//private static String		tumblrName			= "alextheleon";
 	//private static String		filePath			= new File("").getAbsolutePath();
 	
@@ -40,13 +40,14 @@ public class ProccesingSketch extends PApplet {
 	    	Scraper.postList();
 	    }
 	    
-	   }
+	   } 
 
 	public void draw() {
 		noLoop();
-		
-	    drawFromArray();
+		//noStroke();
+	    //drawFromArray();
 		//drawFromBR();
+	    drawPieGraph();
 	}
 	
 	public void drawFromArray()
@@ -157,6 +158,123 @@ public class ProccesingSketch extends PApplet {
 	/*
 	 * renderCirc() is a utility function for drawing a circle with given points in a circle 
 	 */
+	
+	public void drawPieGraph()
+	{
+		//-----------------------
+		//ARRAY CREATION
+		//-----------------------
+		
+		//MyGUI mG = new MyGUI();
+		ArrayList<PagePost> page = new ArrayList<PagePost>();
+		page = MyGUI.getPage();
+		//page = mG.getPage();
+		
+															// array list containing individual posts
+		//page = RawToArr.txtToArr(page,thePath);					// page gets return from txtToArr(a filled up array list)
+		//-----------------------
+		//VARIABLES
+		//-----------------------
+		
+		//int finishTime		= page.get(0).getTimestamp();
+		//int startTime 		= page.get(page.size() - 2).getTimestamp();
+		//int currentTime		= 0;
+		int opac		 	= 180;
+		//float ir 		 	= random(25) + 250;
+		//float or 		 	= 300;
+		int photo			= 0;
+		int text			= 0;
+		int audio			= 0;
+		int video			= 0;
+		int answer			= 0;
+		int quote			= 0;
+		int chat			= 0;
+		int link			= 0;
+		noStroke();
+		//float thetaDate  	= 0;
+		//PVector cp 			= new PVector(width/2,height/2);
+		//strokeWeight(1);
+		//strokeCap(SQUARE);
+		
+		//-----------------------
+		//ARRAY ITERATION
+		//-----------------------
+		
+		int count = 0; //test code
+		
+		for(int i=0;i<page.size()-1;i++)
+			System.out.println(page.get(i).getInclude()+String.valueOf(i));
+		
+		for(int i=0; i < page.size() - 1;i++)
+		{
+			if(page.get(i).getInclude() == true && page.get(i).getType()!=null)
+			{	
+				
+				String type = page.get(i).getType();
+				
+				if(type == null)
+				{
+					System.out.println(type);
+					System.out.println(count);
+				}
+				else
+				{
+					count++;
+				}
+				switch(type)
+				{
+					case "photo" :
+						stroke(255,255,255,opac);
+						photo++;
+						break;
+					case "text" :
+						stroke(0,128,0,opac);
+						text++;
+						break;
+					case "audio" :
+						stroke(123,90,205,opac);
+						audio++;
+						break;
+					case "video" :
+						stroke(196,255,0,opac);
+						video++;
+						break;
+					case "answer" :
+						stroke(255,0,0,opac);
+						answer++;
+						break;
+					case "quote" :
+						stroke(220,70,70,opac);
+						quote++;
+						break;
+					case "chat" :
+						stroke(36,31,182,opac);
+						chat++;
+					case "link" :
+						stroke(255,255,255,opac);
+						link++;
+						break;
+					
+				}
+				
+				//currentTime = page.get(i).getTimestamp();
+				//thetaDate = map(currentTime, startTime, finishTime, 0, 2 * PI);
+				
+				//renderCirc(cp, or, ir, thetaDate);
+			}
+			
+		}
+		
+		int[] angles = { photo, text, audio, video, answer, quote, chat, link};
+		for(int i=0; i < angles.length;i++)
+		{
+			System.out.println(angles[i]);
+		}
+		pieChart(600, 550, angles, page.size()-1);
+		
+		System.out.println("done");
+	}
+	
 	void renderCirc(PVector cp, float or, float ir, float thetaDate)
 	{
 		
@@ -166,6 +284,50 @@ public class ProccesingSketch extends PApplet {
 		float yy = (cos(thetaDate) * ir) + cp.y; //sets the y value of the inner radius
 		
 		line(xx,yy,x,y);	//draws the line from the outer radius point to the inner radius point
+	}
+	
+	void pieChart(float outerDiameter, float innerDiameter, int data[],int size)
+	{
+		int opac = 255;
+		float lastAngle = 0;
+		for (int i = 0; i < data.length; i++) 
+		{
+			float angle = map(data[i], 0, size, 0, 2 * PI );
+			System.out.println(angle);
+			//float gray = map(i, 0, data.length, 0, 255);
+			//fill(gray);
+			switch(i)
+			{
+				case 0 :
+					fill(255,255,255,opac);
+					break;
+				case 1 :
+					fill(0,128,0,opac);
+					break;
+				case 2 :
+					fill(123,90,205,opac);
+					break;
+				case 3 :
+					fill(196,255,0,opac);
+					break;
+				case 4 :
+					fill(255,0,0,opac);
+					break;
+				case 5 :
+					fill(220,70,70,opac);
+					break;
+				case 6 :
+					fill(36,31,182,opac);
+				case 7 :
+					fill(244,16,255,opac);
+					break;
+				
+			}
+			arc(width/2, height/2, outerDiameter, outerDiameter, lastAngle, lastAngle + angle);
+			lastAngle += angle;
+		}
+		fill(0,0,0);
+		ellipse(width/2, height/2, innerDiameter, innerDiameter);
 	}
 	
 	public void drawFromBR()
