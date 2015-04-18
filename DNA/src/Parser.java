@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser 
 {
@@ -116,16 +118,24 @@ public class Parser
 			
 			while(true)
 			{
-				if(page.get(i).getTags()[j]==null)
-					break;
-				else if(tags.contains(page.get(i).getTags()[j]))
+				if(j<(page.get(i).getTags().size()))
 				{
-					page.get(i).setInclude(true);
-					j++;
+					if(page.get(i).getTags().get(j)==null)
+						break;
+					else
+					{
+						String word=("(\\b"+page.get(i).getTags().get(j)+"\\b)");
+						if(tags.matches(word))
+						{
+							page.get(i).setInclude(true);
+							break;
+						}
+						else
+							j++;
+					}
 				}
 				else
-					j++;
-				
+					break;
 			}
 		}
 		return page;

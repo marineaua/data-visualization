@@ -24,7 +24,7 @@ public class ProccesingSketch extends PApplet {
 	private static int 			width				= 1200;
 	private static int			height				= 600;
 	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
-	private static String		thePath				= "C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
+	private static String		thePath				= "E:/Users/PYKen_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
 	//private static String		tumblrName			= "alextheleon";
 	//private static String		filePath			= new File("").getAbsolutePath();
 	
@@ -87,8 +87,6 @@ public class ProccesingSketch extends PApplet {
 		
 		int count = 0; //test code
 		
-		  for(int i=0;i<page.size()-1;i++)
-				System.out.println(page.get(i).getInclude()+String.valueOf(i));
 		for(int i=0; i < page.size() - 1;i++)
 		{
 			if(page.get(i).getInclude() == true && page.get(i).getType()!=null)

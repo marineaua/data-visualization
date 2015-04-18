@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class PagePost 
 {
 	boolean include=true;
@@ -9,9 +11,9 @@ public class PagePost
 	String postURL=null;
 	String sourceURL=null;
 	int notes=0;
-	String[] tags=null;
+	ArrayList tags=new ArrayList();
 	
-	public PagePost(boolean _include, String _type,int _timestamp, int[] _date, int[] _time, long _id, String _postURL, String _sourceURL, int _notes, String[] _tags)
+	public PagePost(boolean _include, String _type,int _timestamp, int[] _date, int[] _time, long _id, String _postURL, String _sourceURL, int _notes, ArrayList _tags)
 	{	
 		include=_include;
 		type=_type;
@@ -60,7 +62,7 @@ public class PagePost
 	{
 		return notes;
 	}
-	public String[] getTags()
+	public ArrayList getTags()
 	{
 		return tags;
 	}
@@ -101,7 +103,7 @@ public class PagePost
 	{
 		notes=_notes;
 	}
-	public void setTags(String[] _tags)
+	public void setTags(ArrayList _tags)
 	{
 		tags=_tags;
 	}

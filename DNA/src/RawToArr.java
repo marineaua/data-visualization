@@ -25,7 +25,8 @@ public class RawToArr
 					String postURL=null;
 					String sourceURL=null;
 					int notes=0;
-					String[] tags=new String[300];
+					//String[] tags=new String[300];
+					ArrayList tags=new ArrayList();
 					
 					// set type
 					if((line = br.readLine()) != null) // line 1
@@ -76,15 +77,15 @@ public class RawToArr
 					// set tags
 					if((line = br.readLine()) != null) // line 8
 					{
-						String delims = "[ \\[\\]]+";
+						String delims = "[,(:) +]";
 						String[] tokens;
+						line = line.substring(1, line.length() - 1);
 						tokens = line.split(delims);
 						
 						for(int i=0; i<tokens.length;i++)
 						{
-							tags[i]=tokens[i];
+							tags.add(tokens[i]);
 						}
-						tags[0]=tags[1];
 					}
 
 					PagePost post = new PagePost(include, type, timestamp, date, time, id, postURL, sourceURL, notes, tags);

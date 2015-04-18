@@ -78,7 +78,7 @@ public class MyGUI extends JFrame implements ActionListener
 			lowTime[i]=-1;
 			highTime[i]=-1;
 		}
-		String path="C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/alextheleon.txt";
+		String path="E:/Users/PYKen_000/Documents/data-visualization/DNA/src/files/alextheleon.txt";
 		page=RawToArr.txtToArr(page,path);
 		
 		setUndecorated(true);
@@ -393,9 +393,6 @@ public class MyGUI extends JFrame implements ActionListener
 	    				   Parser parse = new Parser();
 	    				  page = parse.runFilter(page, types, notes, sourceURL, lowDate, highDate, lowTime, highTime, tags);
 	    				  
-	    				  for(int i=0;i<page.size()-1;i++)
-	    						System.out.println(page.get(i).getInclude()+String.valueOf(i));
-	    				  
 	    				  addf.dispose();
 	    			   }}
 	    			});
@@ -662,8 +659,6 @@ public class MyGUI extends JFrame implements ActionListener
 
 	static public ArrayList<PagePost> getPage()
 	{
-		  for(int i=0;i<page.size()-1;i++)
-				System.err.println(page.get(i).getInclude()+String.valueOf(i));
 		return page;
 	}
 	
