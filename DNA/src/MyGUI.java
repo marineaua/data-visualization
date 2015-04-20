@@ -78,7 +78,7 @@ public class MyGUI extends JFrame implements ActionListener
 			lowTime[i]=-1;
 			highTime[i]=-1;
 		}
-		String path="E:/Users/PYKen_000/Documents/data-visualization/DNA/src/files/alextheleon.txt";
+		String path="C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/alextheleon.txt";
 		page=RawToArr.txtToArr(page,path);
 		
 		setUndecorated(true);
@@ -586,6 +586,23 @@ public class MyGUI extends JFrame implements ActionListener
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
 				drawingType = 1;
+				sketch.init();
+				sketch.start();
+				sketchPanel.add(sketch);
+
+				//sketchPanel.add(sketch);
+				//sketchPanel.add(sketchPanel);
+				//panel_1.setBackground(Color.BLUE);
+				//sketchPanel.add(sketch);
+				//ProccesingSketch.setup();
+				//sketch.init();
+			}
+		});
+		
+		barButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
+				drawingType = 2;
 				sketch.init();
 				sketch.start();
 				sketchPanel.add(sketch);

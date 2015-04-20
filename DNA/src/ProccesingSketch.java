@@ -24,7 +24,7 @@ public class ProccesingSketch extends PApplet {
 	private static int 			width				= 1200;
 	private static int			height				= 600;
 	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
-	private static String		thePath				= "E:/Users/PYKen_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
+	private static String		thePath				= "C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
 	//private static String		tumblrName			= "alextheleon";
 	//private static String		filePath			= new File("").getAbsolutePath();
 	
@@ -52,6 +52,8 @@ public class ProccesingSketch extends PApplet {
 			drawFromArray();
 		else if(MyGUI.getDrawingType() == 1)
 			drawPieGraph();
+		else if(MyGUI.getDrawingType() == 2)
+			drawBarGraph();
 	}
 	
 	public void drawFromArray()
@@ -156,6 +158,189 @@ public class ProccesingSketch extends PApplet {
 			
 		}
 		System.out.println("done");
+	}
+	
+	public void drawBarGraph()
+	{
+		//-----------------------
+		//ARRAY CREATION
+		//-----------------------
+		
+		//MyGUI mG = new MyGUI();
+		ArrayList<PagePost> page = new ArrayList<PagePost>();
+		page = MyGUI.getPage();
+		//page = mG.getPage();
+		
+															// array list containing individual posts
+		//page = RawToArr.txtToArr(page,thePath);					// page gets return from txtToArr(a filled up array list)
+		//-----------------------
+		//VARIABLES
+		//-----------------------
+		
+		//int finishTime		= page.get(0).getTimestamp();
+		//int startTime 		= page.get(page.size() - 2).getTimestamp();
+		//int currentTime		= 0;
+		int opac		 	= 180;
+		//float ir 		 	= random(25) + 250;
+		//float or 		 	= 300;
+		int photo			= 0;
+		int text			= 0;
+		int audio			= 0;
+		int video			= 0;
+		int answer			= 0;
+		int quote			= 0;
+		int chat			= 0;
+		int link			= 0;
+		noStroke();
+		//float thetaDate  	= 0;
+		//PVector cp 			= new PVector(width/2,height/2);
+		//strokeWeight(1);
+		//strokeCap(SQUARE);
+		
+		//-----------------------
+		//ARRAY ITERATION
+		//-----------------------
+		
+		int count = 0; //test code
+		
+		for(int i=0;i<page.size()-1;i++)
+			System.out.println(page.get(i).getInclude()+String.valueOf(i));
+		
+		for(int i=0; i < page.size() - 1;i++)
+		{
+			if(page.get(i).getInclude() == true && page.get(i).getType()!=null)
+			{	
+				
+				String type = page.get(i).getType();
+				
+				if(type == null)
+				{
+					System.out.println(type);
+					System.out.println(count);
+				}
+				else
+				{
+					count++;
+				}
+				switch(type)
+				{
+					case "photo" :
+						stroke(255,255,255,opac);
+						photo++;
+						break;
+					case "text" :
+						stroke(0,128,0,opac);
+						text++;
+						break;
+					case "audio" :
+						stroke(123,90,205,opac);
+						audio++;
+						break;
+					case "video" :
+						stroke(196,255,0,opac);
+						video++;
+						break;
+					case "answer" :
+						stroke(255,0,0,opac);
+						answer++;
+						break;
+					case "quote" :
+						stroke(220,70,70,opac);
+						quote++;
+						break;
+					case "chat" :
+						stroke(36,31,182,opac);
+						chat++;
+						break;
+					case "link" :
+						stroke(255,255,255,opac);
+						link++;
+						break;
+					
+				}
+				
+				//currentTime = page.get(i).getTimestamp();
+				//thetaDate = map(currentTime, startTime, finishTime, 0, 2 * PI);
+				
+				//renderCirc(cp, or, ir, thetaDate);
+			}
+			
+		}
+		
+		//int[] angles = { photo, text, audio, video, answer, quote, chat, link};
+		//for(int i=0; i < angles.length;i++)
+		//{
+		//	System.out.println(angles[i]);
+		//}
+		//pieChart(600, 550, angles, page.size()-1);
+		int size = 75;
+		int size2 = 0;
+		
+		drawBar(size2, size, photo, "photo");
+		size2 = size2 + size;
+		
+		drawBar(size2, size, text, "text");
+		size2 = size2 + size;
+		
+		drawBar(size2, size, audio, "audio");
+		size2 = size2 + size;
+		
+		drawBar(size2, size, video, "video");
+		size2 = size2 + size;
+		
+		drawBar(size2, size, answer, "answer");
+		size2 = size2 + size;
+		
+		drawBar(size2, size, quote, "quote");
+		size2 = size2 + size;
+		
+		drawBar(size2, size, chat, "chat");
+		size2 = size2 + size;
+		
+		drawBar(size2, size, link, "link");
+		size2 = size2 + size;
+		
+		System.out.println("done");
+	}
+	
+	void drawBar(float leftCorner,float width, float height, String color)
+	{
+		int opac = 255;
+		switch(color)
+		{
+			case "photo" :
+				fill(255,255,255,opac);
+				break;
+			case "text" :
+				fill(0,128,0,opac);
+				break;
+			case "audio" :
+				fill(123,90,205,opac);
+				break;
+			case "video" :
+				fill(196,255,0,opac);
+				break;
+			case "answer" :
+				fill(255,0,0,opac);
+				break;
+			case "quote" :
+				fill(220,70,70,opac);
+				break;
+			case "chat" :
+				fill(36,31,182,opac);
+				break;
+			case "link" :
+				fill(255,255,255,opac);
+				break;
+			
+		}
+		System.out.println(height);
+		float downScale = height/ 3;
+		//float leftCorner2 = leftCorner - leftCorner/2;
+		rect(10, leftCorner, downScale, width);
+		fill(255,255,255,opac);
+		textSize(26);
+		text("" + height + "", downScale + 25, (float) (leftCorner + width/1.6)); 
 	}
 	/*
 	 * renderCirc() is a utility function for drawing a circle with given points in a circle 
