@@ -248,6 +248,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		
 	    		addf.add(maincont);
 	    		addp.add(Type);
+	    		addp.add(horizontalStrut);
 	    		maincont.add(addp);
 	    		maincont.setPreferredSize(new Dimension(350,300));
 	    		
@@ -261,12 +262,20 @@ public class MyGUI extends JFrame implements ActionListener
 	            //name2.setActionCommand(name2);
 	            final JRadioButton Audio = new JRadioButton("Audio");
 	            //name2.setActionCommand(name2);
+	            final JRadioButton Link = new JRadioButton("Link");
+	            final JRadioButton Chat = new JRadioButton("Chat");
+	            final JRadioButton Answer = new JRadioButton("Answer");
 	            
 	            addp.add(Text);
 	            addp.add(Photo);
 	            addp.add(Quotes);
 	            addp.add(Video);
 	            addp.add(Audio);
+	            addp.add(Link);
+	            addp.add(Chat);
+	            addp.add(Answer);
+	            
+	            
 	            
 	           // JPanel radioPanel = new JPanel(new GridLayout(0, 1));
 	            JPanel radioPanel = new JPanel();
