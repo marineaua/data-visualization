@@ -1,28 +1,22 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.*;
-
-import processing.core.PApplet;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Insets;
-import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
-
+import java.io.File;
 
 @SuppressWarnings("serial")
 public class MyGUI extends JFrame implements ActionListener
@@ -38,6 +32,7 @@ public class MyGUI extends JFrame implements ActionListener
 	private static int highTime[]=new int[3];
 	private static String[] types=new String[8];
 	private static String tags=null;
+	private static String path=null;
 	
 	private javax.swing.JPanel sketchPanel;
 	private JPanel buttonPanel;
@@ -78,8 +73,7 @@ public class MyGUI extends JFrame implements ActionListener
 			lowTime[i]=-1;
 			highTime[i]=-1;
 		}
-		String path="C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/alextheleon.txt";
-		page=RawToArr.txtToArr(page,path);
+		//page=RawToArr.txtToArr(page,path);
 		
 		setUndecorated(true);
 		setSize(1200,700);
@@ -198,9 +192,20 @@ public class MyGUI extends JFrame implements ActionListener
 	    mntmNewRip.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {//same as LOAD
 	    		JFrame ripf = new JFrame();
-	    		JPanel ripp = new JPanel();
+	    		JPanel ripp = new JPanel(); 
+	    		JLabel pathlabell = new JLabel();
+	    		String pathlabel = null;
+	    		JFileChooser chooser = new JFileChooser();
+	    		    int returnVal = chooser.showOpenDialog(ripf);
+	    		    if(returnVal == JFileChooser.APPROVE_OPTION) {
+	    		       pathlabel= chooser.getSelectedFile().getPath();
+	    		    }
+	    		pathlabell.setText(pathlabel);
+	    		ripf.setPreferredSize(new Dimension(300,300));	
 	    		ripf.add(ripp);
+	    		ripp.add(pathlabell);
 	    		ripp.setPreferredSize(new Dimension(300,300));
+	    		
 	    		ripf.pack();
 	    		ripf.setVisible(true);
 	    	}
@@ -213,13 +218,22 @@ public class MyGUI extends JFrame implements ActionListener
 	    	public void actionPerformed(ActionEvent arg0) { //trying to make a new window that takes a path to a file to load
 	    		JFrame loadf = new JFrame();
 	    		JPanel loadp = new JPanel();
-	    		JTextField loadtf = new JTextField("Path",20);
-	    		
+	    		JTextField loadtf = new JTextField("Path",40);
+	    		String pathname=null;
+	    		JFileChooser chooser = new JFileChooser();
+    		    int returnVal = chooser.showOpenDialog(loadp);
+    		    if(returnVal == JFileChooser.APPROVE_OPTION) {
+    		       pathname= chooser.getSelectedFile().getPath();
+    		    }
+    		loadtf.setText(pathname);
+	    	path=pathname;	
+	    	page=RawToArr.txtToArr(page,path);
+    		
 	    		loadtf.setBackground(Color.WHITE);
 	    		loadp.setBackground(Color.BLACK);
 	    		loadf.add(loadp);
 	    		loadp.add(loadtf);
-	    		loadp.setPreferredSize(new Dimension(300,300));	    		
+	    		loadp.setPreferredSize(new Dimension(500,300));	    		
 	    		loadf.pack();
 	    		loadf.setVisible(true);	    		
 	    		
@@ -423,7 +437,10 @@ public class MyGUI extends JFrame implements ActionListener
 	    
 	    mntmClearFilter = new JMenuItem("Clear Filter");
 	    mntmClearFilter.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent arg0) { //same as others, not sure what this does, so i left blank
+	    	public void actionPerformed(ActionEvent arg0) { 
+	    		Parser parse = new Parser();
+	    		parse.includeAll(page);
+	    		//same as others, not sure what this does, so i left blank
 	    	}
 	    });
 	    mntmClearFilter.setFont(new Font("Segoe UI", Font.PLAIN, 17));
@@ -672,6 +689,8 @@ public class MyGUI extends JFrame implements ActionListener
 	{
 		new MyGUI().setVisible(true);
 		
+		
+		
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -692,6 +711,9 @@ public class MyGUI extends JFrame implements ActionListener
 	{
 		return drawingType;
 	}
-	
+	static public String getPath()
+	{
+		return path;
+	}
 	
 }

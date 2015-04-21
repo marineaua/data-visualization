@@ -33,13 +33,14 @@ public class ProccesingSketch extends PApplet {
 	    background(0);
 	    //File file = new File(Scraper.tumblrName + ".txt").getAbsoluteFile();
 	    //String newFilePath = Scraper.filePath.substring(0, Scraper.filePath.length()-4);
-	    System.out.println(newFilePath);
-	    File file = new File(thePath);
+	    //System.out.println(newFilePath);
+	    //File file = new File(thePath);
+	    /*
 	    if(!file.exists())
 	    {
 	    	Scraper.postList();
 	    }
-	    
+	    */
 	   } 
 
 	public void draw() {
