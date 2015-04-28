@@ -10,6 +10,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.FlowLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -49,6 +50,7 @@ public class MyGUI extends JFrame implements ActionListener
 	private JButton maxButton;
 	private JButton	miniButton;
 	private JButton exitButton;
+	private JButton mosaic2;
 	
 	private JMenuBar menuBar;
 	private JMenu mnFile;
@@ -61,6 +63,12 @@ public class MyGUI extends JFrame implements ActionListener
 	private JMenuItem mntmAbout;
 	private Component horizontalStrut;
 	private Component horizontalStrut_1;
+	private Component horizontalStrut_3;
+	private Component horizontalStrut_4;
+	private Component horizontalStrut_5;
+	private Component horizontalStrut_6;
+	private Component horizontalStrut_7;
+	
 	//private Form1 form1;
 	
 	
@@ -112,22 +120,28 @@ public class MyGUI extends JFrame implements ActionListener
 		lineButton = new JButton("Line");
 		lineButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lineButton.addActionListener(this);
-		lineButton.setPreferredSize(new Dimension(250,40));		
+		lineButton.setPreferredSize(new Dimension(220,40));		
 		mosaicButton = new JButton("Mosaic");
 		mosaicButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		mosaicButton.setPreferredSize(new Dimension(250,40));
+		mosaicButton.setPreferredSize(new Dimension(220,40));
 		pieButton = new JButton("Pie");
 		pieButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pieButton.setPreferredSize(new Dimension(250,40));
+		pieButton.setPreferredSize(new Dimension(220,40));
 		
 		barButton = new JButton("Bar");
 		barButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		barButton.setPreferredSize(new Dimension(250,40));
+		barButton.setPreferredSize(new Dimension(220,40));
+		
+		mosaic2 = new JButton("Mosaic 2.0");
+		mosaic2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		mosaic2.setPreferredSize(new Dimension(220,40));
+		
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		buttonPanel.add(mosaicButton);		
 		buttonPanel.add(lineButton);
 		buttonPanel.add(barButton);
 		buttonPanel.add(pieButton);
+		buttonPanel.add(mosaic2);
 		/*GridBagConstraints a = new GridBagConstraints();
 	    a.gridx 	= 0;
 	    a.gridy 	= 0;
@@ -202,7 +216,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		    }
 	    		pathlabell.setText(pathlabel);
 	    		ripf.setPreferredSize(new Dimension(300,300));	
-	    		ripf.add(ripp);
+	    		ripf.getContentPane().add(ripp);
 	    		ripp.add(pathlabell);
 	    		ripp.setPreferredSize(new Dimension(300,300));
 	    		
@@ -231,7 +245,7 @@ public class MyGUI extends JFrame implements ActionListener
     		
 	    		loadtf.setBackground(Color.WHITE);
 	    		loadp.setBackground(Color.BLACK);
-	    		loadf.add(loadp);
+	    		loadf.getContentPane().add(loadp);
 	    		loadp.add(loadtf);
 	    		loadp.setPreferredSize(new Dimension(500,300));	    		
 	    		loadf.pack();
@@ -256,32 +270,30 @@ public class MyGUI extends JFrame implements ActionListener
 	    	public void actionPerformed(ActionEvent arg0) { // Same as others
 	    		final JFrame addf = new JFrame();
 	    		JPanel addp = new JPanel();
-	    		JPanel maincont = new JPanel();//main container
+	    		JPanel maincont = new JPanel(new FlowLayout(FlowLayout.LEFT));//main container
 	    		FlowLayout flow = new FlowLayout();
+	    		GridLayout grid = new GridLayout(2,4);
 	    		final JCheckBox Type = new JCheckBox("Type");	    		
 	    		
-	    		addf.add(maincont);
+	    		addf.getContentPane().add(maincont);
+	    		addp.setAlignmentY(JComponent.LEFT_ALIGNMENT);
 	    		addp.add(Type);
 	    		addp.add(horizontalStrut);
 	    		maincont.add(addp);
-	    		maincont.setPreferredSize(new Dimension(350,300));
+	    		maincont.setPreferredSize(new Dimension(375,250));
 	    		
 	    		final JRadioButton Text = new JRadioButton("Text");
-	           // name1.setSelected(true);	     
-	            final JRadioButton Photo = new JRadioButton("Photo");
-	            //name2.setActionCommand(name2);	    		
+	            final JRadioButton Photo = new JRadioButton("Photo");	
 	            final JRadioButton Quotes = new JRadioButton("Quotes");
-	            //name2.setActionCommand(name2);
 	            final JRadioButton Video = new JRadioButton("Video");
-	            //name2.setActionCommand(name2);
 	            final JRadioButton Audio = new JRadioButton("Audio");
-	            //name2.setActionCommand(name2);
 	            final JRadioButton Link = new JRadioButton("Link");
 	            final JRadioButton Chat = new JRadioButton("Chat");
 	            final JRadioButton Answer = new JRadioButton("Answer");
 	            
 	            addp.add(Text);
 	            addp.add(Photo);
+	           // addp.add(horizontalStrut);
 	            addp.add(Quotes);
 	            addp.add(Video);
 	            addp.add(Audio);
@@ -293,18 +305,21 @@ public class MyGUI extends JFrame implements ActionListener
 	            
 	           // JPanel radioPanel = new JPanel(new GridLayout(0, 1));
 	            JPanel radioPanel = new JPanel();
-	            radioPanel.setLayout(flow);
+	            radioPanel.setLayout(grid);
 	            radioPanel.add(Text);
 	            radioPanel.add(Photo);
 	            radioPanel.add(Quotes);
 	            radioPanel.add(Video);
 	            radioPanel.add(Audio);
-	     
+	            radioPanel.add(Link);
+	            radioPanel.add(Chat);
+	            radioPanel.add(Answer);
+	            
 	            maincont.add(radioPanel, BorderLayout.LINE_START);
 	           // addp.add(radioPanel);
 	           // addp.add(new JSeparator());
 	    		
-	    		addf.add(new JSeparator(),
+	    		addf.getContentPane().add(new JSeparator(),
 	    		          BorderLayout.LINE_START);
 	    		addf.pack();
 	    		addf.setResizable(false);
@@ -317,8 +332,10 @@ public class MyGUI extends JFrame implements ActionListener
 	    		
 	    		JPanel sourcep = new JPanel();
 	    		//sourcep.setBackground(Color.BLUE);
+	    		JPanel buttonp = new JPanel();
+	    		JPanel labelp = new JPanel();
 	    		
-	    		JLabel tagslabel = new JLabel("Tags:");
+	    		JLabel tagslabel = new JLabel("Tags:",  SwingConstants.LEFT);
 	    		final JLabel noteslabel = new JLabel("At least");
 	    		JLabel notestail = new JLabel("notes.");
 	    		JLabel sourcelabel = new JLabel("http://");
@@ -327,28 +344,35 @@ public class MyGUI extends JFrame implements ActionListener
 	    		
 	    		final JCheckBox Tags = new JCheckBox("Tags");
 	    		final JCheckBox Notes = new JCheckBox("Notes");
-	    		final JCheckBox Source = new JCheckBox("Source URL");
+	    		final JCheckBox Source = new JCheckBox("Source");
 	    		
 	    		final JTextField say = new JTextField("whatever",20);
 	    		final JTextField notef = new JTextField("notes",5);
 	    		final JTextField sourcet = new JTextField("source url",13);
 	    		
 	    		typep.setLayout(flow);
+	    		typep.setAlignmentY(JComponent.LEFT_ALIGNMENT);
 	    		notep.setLayout(flow);
+	    		notep.setAlignmentY(JComponent.LEFT_ALIGNMENT);
 	    		sourcep.setLayout(flow);
 	    		
 	    		
+	    		horizontalStrut_3 = Box.createHorizontalStrut(27);
+	    		horizontalStrut_4 = Box.createHorizontalStrut(23);
+	    		horizontalStrut_5 = Box.createHorizontalStrut(15);
 	    		typep.add(Tags);
+	    		typep.add(horizontalStrut_3);
 	    		typep.add(tagslabel);
 	    		typep.add(say);
 	    		
 	    		notep.add(Notes);
-	    		notep.add(horizontalStrut);
+	    		notep.add(horizontalStrut_4);
 	    		notep.add(noteslabel);
 	    		notep.add(notef);
 	    		notep.add(notestail);
 	    		
 	    		sourcep.add(Source);
+	    		sourcep.add(horizontalStrut_5);
 	    		sourcep.add(sourcelabel);
 	    		sourcep.add(sourcet);
 	    		final JLabel errorlabel = new JLabel();
@@ -361,7 +385,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    			   public void actionPerformed(ActionEvent ae){
 	    				   if (Notes.isSelected() == false && Tags.isSelected() == false && Source.isSelected() == false && Type.isSelected() == false)
 	   						{
-	   							errorlabel.setText("NO CHECK BOX SELECTED");
+	   							errorlabel.setText("***NO CHECK BOX SELECTED***");
 	   						}
 	   					    
 	   						else 
@@ -421,13 +445,19 @@ public class MyGUI extends JFrame implements ActionListener
 	    			});
 //Stuck here
 	    		
+	    		horizontalStrut_6 = Box.createHorizontalStrut(145);
+	    		buttonp.add(horizontalStrut_6);
+	    		buttonp.add(Filter);
 	    		
+	    		horizontalStrut_7 = Box.createHorizontalStrut(90);
+	    		labelp.add(horizontalStrut_7);
+	    		labelp.add(errorlabel);
 	    		
 	    		maincont.add(typep);
 	    		maincont.add(notep);
 	    		maincont.add(sourcep);
-	    		maincont.add(Filter);
-	    		maincont.add(errorlabel);
+	    		maincont.add(buttonp);
+	    		maincont.add(labelp);
 	    		addf.setVisible(true);	    		
 	    		
 	    	}
@@ -462,7 +492,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		JFrame about = new JFrame();
 	    		JPanel aboutp = new JPanel();	    		
 	    		JLabel aboutmes = new JLabel("About this, what it does, the end");
-	    		about.add(aboutp);
+	    		about.getContentPane().add(aboutp);
 	    		aboutp.add(aboutmes);
 	    		aboutp.setPreferredSize(new Dimension(300,300));
 	    		about.pack();
@@ -664,7 +694,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    c2.weighty  = 2.0;
 	    c2.fill  	= GridBagConstraints.HORIZONTAL;
 	    */mainPanel.setLayout(new BorderLayout(0, 0));
-	    mainPanel.add(buttonPanel, BorderLayout.SOUTH); 
+	    mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 	    mainPanel.add(titlePanel, BorderLayout.NORTH);
 	    GridBagConstraints tc1 = new GridBagConstraints();
 	    tc1.anchor = GridBagConstraints.NORTHWEST;
