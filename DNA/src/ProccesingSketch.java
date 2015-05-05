@@ -25,7 +25,6 @@ public class ProccesingSketch extends PApplet {
 	private static int			height				= 600;
 	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
 	private static String		thePath				= "C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
-	private 	   HScrollbar 	hs1;
 	int 		   centerX 							= 0;
 	int 		   centerY 							= 0;
 	int 		   offsetX 							= 0;
@@ -82,7 +81,6 @@ public class ProccesingSketch extends PApplet {
 		else if(MyGUI.getDrawingType() == 3)
 		{
 			drawLineGraph();
-			hs1 = new HScrollbar(0, height/2-8, width, 16, 16);
 		}
 	}
 	
