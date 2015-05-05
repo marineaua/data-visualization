@@ -1,110 +1,134 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class PagePost 
 {
 	boolean include=true;
 	String type=null;
 	int timestamp=0;
-	int[] date=new int[3];
-	int[] time=new int[3];
 	long id=0;
 	String postURL=null;
 	String sourceURL=null;
 	int notes=0;
 	ArrayList tags=new ArrayList();
 	
-	public PagePost(boolean _include, String _type,int _timestamp, int[] _date, int[] _time, long _id, String _postURL, String _sourceURL, int _notes, ArrayList _tags)
+	Calendar calendar=null;
+	
+	int year=0;
+	int month=0;
+	int dayOfMonth=0;
+	int dayOfWeek=0;
+	int weekOfYear=0;
+	int weekOfMonth=0;
+ 
+	int hour=0;
+	int hourOfDay=0;
+	int minute=0;
+	int second=0;
+	
+	public PagePost(boolean include, String type,int timestamp,int year,int month,int dayOfMonth,
+					int dayOfWeek,int weekOfYear,int weekOfMonth,int hour,int hourOfDay,int minute,
+					int second, long id, String postURL, String sourceURL, int notes, ArrayList tags, Calendar calendar)
 	{	
-		include=_include;
-		type=_type;
-		timestamp=_timestamp;
-		date=_date;
-		time=_time;
-		id=_id;
-		postURL=_postURL;
-		sourceURL=_sourceURL;
-		notes=_notes;
-		tags=_tags;
+		this.include=include;
+		this.type=type;
+		this.timestamp=timestamp;
+		this.year=year;
+		this.month=month;
+		this.dayOfMonth=dayOfMonth;
+		this.dayOfWeek=dayOfWeek;
+		this.weekOfYear=weekOfYear;
+		this.weekOfMonth=weekOfMonth;
+		this.hour=hour;
+		this.hourOfDay=hourOfDay;
+		this.minute=minute;
+		this.second=second;
+		this.id=id;
+		this.postURL=postURL;
+		this.sourceURL=sourceURL;
+		this.notes=notes;
+		this.tags=tags;
+		this.calendar=calendar;
 	}
 	public boolean getInclude()
 	{
-		return include;
+		return this.include;
 	}
 	public String getType()
 	{
-		return type;
+		return this.type;
 	}
 	public int getTimestamp()
 	{
-		return timestamp;
+		return this.timestamp;
 	}
-	public int[] getDate()
+	public int getYear()
 	{
-		return date;
+		return this.year;
 	}
-	public int[] getTime()
+	public int getMonth()
 	{
-		return time;
+		return this.month;
+	}
+	public int getDayOfMonth()
+	{
+		return this.dayOfMonth;
+	}
+	public int getDayOfWeek()
+	{
+		return this.dayOfWeek;
+	}
+	public int getWeekOfYear()
+	{
+		return this.weekOfYear;
+	}
+	public int getWeekOfMonth()
+	{
+		return this.weekOfMonth;
+	}
+	public int getHour()
+	{
+		return this.hour;
+	}
+	public int getHourOfDay()
+	{
+		return this.hourOfDay;
+	}
+	public int getMinute()
+	{
+		return this.minute;
+	}
+	public int getSecond()
+	{
+		return this.second;
 	}
 	public long getID()
 	{
-		return id;
+		return this.id;
 	}
 	public String getPostURL()
 	{
-		return postURL;
+		return this.postURL;
 	}
 	public String getSourceURL()
 	{
-		return sourceURL;
+		return this.sourceURL;
 	}
 	public int getNotes()
 	{
-		return notes;
+		return this.notes;
 	}
 	public ArrayList getTags()
 	{
-		return tags;
+		return this.tags;
+	}
+	public Calendar getCalendar()
+	{
+		return this.calendar;
 	}
 	
-	public void setInclude(boolean _include)
+	public void setInclude(boolean include)
 	{
-		include=_include;
-	}
-	public void setType(String _type)
-	{
-		type=_type;
-	}
-	public void setTimestamp(int _timestamp)
-	{
-		timestamp=_timestamp;
-	}
-	public void setDate(int[] _date)
-	{
-		date=_date;
-	}
-	public void setTime(int[] _time)
-	{
-		time=_time;
-	}
-	public void setID(long _id)
-	{
-		id=_id;
-	}
-	public void setPostURL(String _postURL)
-	{
-		postURL=_postURL;
-	}
-	public void setSourceURL(String _sourceURL)
-	{
-		sourceURL=_sourceURL;
-	}
-	public void setNotes(int _notes)
-	{
-		notes=_notes;
-	}
-	public void setTags(ArrayList _tags)
-	{
-		tags=_tags;
+		this.include=include;
 	}
 }

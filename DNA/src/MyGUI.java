@@ -27,10 +27,7 @@ public class MyGUI extends JFrame implements ActionListener
 	private  ProccesingSketch sketch;
 	private static int notes=-1;
 	private static String sourceURL=null;
-	private static int lowDate[]=new int[3];
-	private static int highDate[]=new int[3];
-	private static int lowTime[]=new int[3];
-	private static int highTime[]=new int[3];
+	private static String timeParams=null;
 	private static String[] types=new String[8];
 	private static String tags=null;
 	private static String path=null;
@@ -74,13 +71,6 @@ public class MyGUI extends JFrame implements ActionListener
 	
 	public MyGUI()
 	{ 
-		for(int i=0;i<=2;i++)
-		{
-			lowDate[i]=-1;
-			highDate[i]=-1;
-			lowTime[i]=-1;
-			highTime[i]=-1;
-		}
 		//page=RawToArr.txtToArr(page,path);
 		
 		setUndecorated(true);
@@ -438,7 +428,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		    			}
 	    		    		}
 	    				   Parser parse = new Parser();
-	    				  page = parse.runFilter(page, types, notes, sourceURL, lowDate, highDate, lowTime, highTime, tags);
+	    				  page = parse.runFilter(page, types, notes, sourceURL, timeParams, tags);
 	    				  
 	    				  addf.dispose();
 	    			   }}
