@@ -62,7 +62,6 @@ public class ProccesingSketch extends PApplet {
 			centerX = mouseX-offsetX;
 			centerY = mouseY-offsetY;
 		}
-		
 		translate(centerX,centerY);
 		scale(zoom);
 		
