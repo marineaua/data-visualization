@@ -270,7 +270,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		addp.add(Type);
 	    		addp.add(horizontalStrut);
 	    		maincont.add(addp);
-	    		maincont.setPreferredSize(new Dimension(375,250));
+	    		maincont.setPreferredSize(new Dimension(375,300));
 	    		
 	    		final JRadioButton Text = new JRadioButton("Text");
 	            final JRadioButton Photo = new JRadioButton("Photo");	
@@ -320,6 +320,8 @@ public class MyGUI extends JFrame implements ActionListener
 	    		JPanel notep = new JPanel();
 	    		//notep.setBackground(Color.RED);
 	    		
+	    		JPanel timep = new JPanel();
+	    		
 	    		JPanel sourcep = new JPanel();
 	    		//sourcep.setBackground(Color.BLUE);
 	    		JPanel buttonp = new JPanel();
@@ -335,21 +337,27 @@ public class MyGUI extends JFrame implements ActionListener
 	    		final JCheckBox Tags = new JCheckBox("Tags");
 	    		final JCheckBox Notes = new JCheckBox("Notes");
 	    		final JCheckBox Source = new JCheckBox("Source");
+	    		final JCheckBox Time = new JCheckBox("Time");
 	    		
 	    		final JTextField say = new JTextField("whatever",20);
 	    		final JTextField notef = new JTextField("notes",5);
 	    		final JTextField sourcet = new JTextField("source url",13);
+	    		final JTextField timef = new JTextField("Time",25);
 	    		
 	    		typep.setLayout(flow);
 	    		typep.setAlignmentY(JComponent.LEFT_ALIGNMENT);
 	    		notep.setLayout(flow);
 	    		notep.setAlignmentY(JComponent.LEFT_ALIGNMENT);
+	    		timep.setLayout(flow);
+	    		timep.setAlignmentY(JComponent.LEFT_ALIGNMENT);
 	    		sourcep.setLayout(flow);
 	    		
 	    		
 	    		horizontalStrut_3 = Box.createHorizontalStrut(27);
 	    		horizontalStrut_4 = Box.createHorizontalStrut(23);
 	    		horizontalStrut_5 = Box.createHorizontalStrut(15);
+	    		horizontalStrut_6 = Box.createHorizontalStrut(23);
+	    		
 	    		typep.add(Tags);
 	    		typep.add(horizontalStrut_3);
 	    		typep.add(tagslabel);
@@ -360,6 +368,12 @@ public class MyGUI extends JFrame implements ActionListener
 	    		notep.add(noteslabel);
 	    		notep.add(notef);
 	    		notep.add(notestail);
+	    		
+	    		timep.add(Time);
+	    		timep.add(horizontalStrut_6);
+	    		//timep.add(noteslabel);
+	    		timep.add(timef);
+	    		//timep.add(notestail);
 	    		
 	    		sourcep.add(Source);
 	    		sourcep.add(horizontalStrut_5);
@@ -373,7 +387,7 @@ public class MyGUI extends JFrame implements ActionListener
 
 	    		Filter.addActionListener(new ActionListener(){
 	    			   public void actionPerformed(ActionEvent ae){
-	    				   if (Notes.isSelected() == false && Tags.isSelected() == false && Source.isSelected() == false && Type.isSelected() == false)
+	    				   if (Notes.isSelected() == false && Time.isSelected() == false && Tags.isSelected() == false && Source.isSelected() == false && Type.isSelected() == false)
 	   						{
 	   							errorlabel.setText("***NO CHECK BOX SELECTED***");
 	   						}
@@ -383,6 +397,11 @@ public class MyGUI extends JFrame implements ActionListener
 	    				   if(Notes.isSelected() == true)
 	    		    		{
 	    		    			notes = Integer.parseInt(notef.getText());
+	    		    			
+	    		    		}
+	    				   if(Time.isSelected() == true)
+	    		    		{
+	    		    			timeParams = timef.getText();
 	    		    			
 	    		    		}
 	    				   
@@ -445,6 +464,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		
 	    		maincont.add(typep);
 	    		maincont.add(notep);
+	    		maincont.add(timep);
 	    		maincont.add(sourcep);
 	    		maincont.add(buttonp);
 	    		maincont.add(labelp);
