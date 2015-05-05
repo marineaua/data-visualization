@@ -628,13 +628,6 @@ public class MyGUI extends JFrame implements ActionListener
 				sketch.init();
 				sketch.start();
 				sketchPanel.add(sketch);
-
-				//sketchPanel.add(sketch);
-				//sketchPanel.add(sketchPanel);
-				//panel_1.setBackground(Color.BLUE);
-				//sketchPanel.add(sketch);
-				//ProccesingSketch.setup();
-				//sketch.init();
 			}
 		});
 		
@@ -645,13 +638,6 @@ public class MyGUI extends JFrame implements ActionListener
 				sketch.init();
 				sketch.start();
 				sketchPanel.add(sketch);
-
-				//sketchPanel.add(sketch);
-				//sketchPanel.add(sketchPanel);
-				//panel_1.setBackground(Color.BLUE);
-				//sketchPanel.add(sketch);
-				//ProccesingSketch.setup();
-				//sketch.init();
 			}
 		});
 		
@@ -662,13 +648,16 @@ public class MyGUI extends JFrame implements ActionListener
 				sketch.init();
 				sketch.start();
 				sketchPanel.add(sketch);
-
-				//sketchPanel.add(sketch);
-				//sketchPanel.add(sketchPanel);
-				//panel_1.setBackground(Color.BLUE);
-				//sketchPanel.add(sketch);
-				//ProccesingSketch.setup();
-				//sketch.init();
+			}
+		});
+		
+		lineButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
+				drawingType = 3;
+				sketch.init();
+				sketch.start();
+				sketchPanel.add(sketch);
 			}
 		});
 			

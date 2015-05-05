@@ -25,12 +25,22 @@ public class ProccesingSketch extends PApplet {
 	private static int			height				= 600;
 	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
 	private static String		thePath				= "C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
+	private 	   HScrollbar 	hs1;
+	int 		   centerX 							= 0;
+	int 		   centerY 							= 0;
+	int 		   offsetX 							= 0;
+	int 		   offsetY 							= 0;
+	float 		   zoom 							= (float) 1.5;
 	//private static String		tumblrName			= "alextheleon";
 	//private static String		filePath			= new File("").getAbsolutePath();
 	
 	public void setup() {
 	    size(width,height);
 	    background(0);
+	    centerX = 0;
+	    centerY = 0;
+	    cursor(HAND);
+	    smooth();
 	    //File file = new File(Scraper.tumblrName + ".txt").getAbsoluteFile();
 	    //String newFilePath = Scraper.filePath.substring(0, Scraper.filePath.length()-4);
 	    //System.out.println(newFilePath);
@@ -44,17 +54,47 @@ public class ProccesingSketch extends PApplet {
 	   } 
 
 	public void draw() {
-		noLoop();
+		//noLoop();
 		//noStroke();
 	    //drawFromArray();
 		//drawFromBR();
 		background(0,0,0);
+		if (mousePressed == true) {
+			centerX = mouseX-offsetX;
+			centerY = mouseY-offsetY;
+		}
+		
+		translate(centerX,centerY);
+		scale(zoom);
+		
 		if(MyGUI.getDrawingType() == 0)
+		{
 			drawFromArray();
+		}
 		else if(MyGUI.getDrawingType() == 1)
+		{
 			drawPieGraph();
+		}
 		else if(MyGUI.getDrawingType() == 2)
+		{
 			drawBarGraph();
+		}
+		else if(MyGUI.getDrawingType() == 3)
+		{
+			drawLineGraph();
+			hs1 = new HScrollbar(0, height/2-8, width, 16, 16);
+		}
+	}
+	
+	public void mousePressed(){
+		offsetX = mouseX-centerX;
+		offsetY = mouseY-centerY;
+	}
+	
+	public void keyPressed() {
+		// zoom
+		if (keyCode == UP) zoom += 0.05;
+		if (keyCode == DOWN) zoom -= 0.05;  
 	}
 	
 	public void drawFromArray()
@@ -157,6 +197,88 @@ public class ProccesingSketch extends PApplet {
 			renderCirc(cp, or, ir, thetaDate);
 			}
 			
+		}
+		System.out.println("done");
+	}
+	
+	public void drawLineGraph()
+	{
+		//-----------------------
+		//ARRAY CREATION
+		//-----------------------
+		
+		ArrayList<PagePost> page = new ArrayList<PagePost>();
+		page = MyGUI.getPage();
+		
+		//-----------------------
+		//VARIABLES
+		//-----------------------
+		int opac		 	= 180;
+		PVector startPoint 			= new PVector(0,0);
+		PVector endPoint 			= new PVector(0,0);
+		int x 				= 0;
+		int y				= 0;
+		int noteCap			= 0;
+		strokeWeight(1);
+		strokeCap(SQUARE);
+		
+		//-----------------------
+		//ARRAY ITERATION
+		//-----------------------
+		for(int i=0; i < page.size() -1; i++)
+		{
+			int notes = page.get(i).getNotes();
+			if(notes > noteCap)
+			{
+				noteCap = notes;
+			}
+		}
+		
+		for(int i=0; i < page.size() - 1;i++)
+		{
+			if(page.get(i).getInclude() == true && page.get(i).getType()!=null)
+			{	
+			
+				String type = page.get(i).getType();
+				int notes = page.get(i).getNotes();
+				
+				switch(type)
+				{
+				case "photo" :
+					stroke(255,255,255,opac);
+					break;
+				case "text" :
+					stroke(0,128,0,opac);
+					break;
+				case "audio" :
+					stroke(123,90,205,opac);
+					break;
+				case "video" :
+					stroke(196,255,0,opac);
+					break;
+				case "answer" :
+					stroke(255,0,0,opac);
+					break;
+				case "quote" :
+					stroke(220,70,70,opac);
+					break;
+				case "chat" :
+					stroke(36,31,182,opac);
+				case "link" :
+					stroke(255,255,255,opac);
+					break;
+					
+				}
+				
+				x = (int) map(i, 0, page.size() - 1, 0 , width);
+				y = (int) map(notes, 0, noteCap,height, 0);
+				endPoint.x = x;
+				endPoint.y = y;
+				line(startPoint.x,startPoint.y,endPoint.x,endPoint.y);
+				startPoint.x = x;
+				startPoint.y = y;
+				
+			}	
 		}
 		System.out.println("done");
 	}
