@@ -72,9 +72,9 @@ public class MyGUI extends JFrame implements ActionListener
 	public MyGUI()
 	{ 
 		//page=RawToArr.txtToArr(page,path);
-		
+		setLocation(350,150);
 		setUndecorated(true);
-		setSize(1200,700);
+		setSize(1200,900);
 		setPreferredSize(new Dimension(1200, 700));
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +98,7 @@ public class MyGUI extends JFrame implements ActionListener
 		titlePanel.setBackground(null);
 		
 		mainPanel = new JPanel();
-		mainPanel.setSize(1200, 700);
+		//mainPanel.setSize(1200, 700);
 		mainPanel.setBackground(new Color(45, 45, 48));
 	    mainPanel.setBorder(BorderFactory.createMatteBorder(5,5,5,5, new Color(20, 20, 40, 200)));
 		sketchLabel = new JLabel();
@@ -556,11 +556,13 @@ public class MyGUI extends JFrame implements ActionListener
 	    tc.gridx = 5;
 	    tc.gridy = 0;
 	    
-	    
-	    miniButton 		= new JButton();
+	    Icon icon = new ImageIcon(getClass().getResource("min-icon34.png"));
+	    Icon icon2 = new ImageIcon(getClass().getResource("min-icon34H.png"));
+	    //JButton button = new JButton(icon);
+	    miniButton 		= new JButton(icon);
 	    miniButton.setHorizontalAlignment(SwingConstants.RIGHT);
-	    miniButton.setIcon(new ImageIcon("media/min-icon34.png"));
-	    miniButton.setRolloverIcon(new ImageIcon("media/min-icon34H.png"));
+	    //miniButton.setIcon(new ImageIcon("media/min-icon34.png"));
+	    miniButton.setRolloverIcon(icon2);
 	    miniButton.setBorder(null);
 	    miniButton.setBorderPainted(false);
 	    miniButton.setContentAreaFilled(false);
@@ -579,10 +581,12 @@ public class MyGUI extends JFrame implements ActionListener
 	    gbc_miniButton.gridy = 0;
 	    titlePanel.add(miniButton, gbc_miniButton);
 	    
-	    maxButton = new JButton();
+	    Icon icon3 = new ImageIcon(getClass().getResource("max-icon34.png"));
+	    Icon icon4 = new ImageIcon(getClass().getResource("max-icon34H.png"));
+	    maxButton = new JButton(icon3);
 	    maxButton.setHorizontalAlignment(SwingConstants.RIGHT);
-	    maxButton.setIcon(new ImageIcon("media/max-icon34.png"));
-	    maxButton.setRolloverIcon(new ImageIcon("media/max-icon34H.png"));
+	    //maxButton.setIcon(new ImageIcon("media/max-icon34.PNG"));
+	    maxButton.setRolloverIcon(icon4);
 	    maxButton.setBorder(null);
 	    maxButton.setBorderPainted(false);
 	    maxButton.setContentAreaFilled(false);
@@ -600,10 +604,13 @@ public class MyGUI extends JFrame implements ActionListener
 	    gbc_maxButton.gridy = 0;
 	    titlePanel.add(maxButton, gbc_maxButton);
 	    
-	    exitButton 		= new JButton();
+	    
+	    Icon icon5 = new ImageIcon(getClass().getResource("exit-icon34.png"));
+	    Icon icon6 = new ImageIcon(getClass().getResource("exit-icon34H.png"));
+	    exitButton 		= new JButton(icon5);
 	    exitButton.setHorizontalAlignment(SwingConstants.RIGHT);
-	    exitButton.setIcon(new ImageIcon("media/exit-icon34.png"));
-	    exitButton.setRolloverIcon(new ImageIcon("media/exit-icon34H.png"));
+	   // exitButton.setIcon(new ImageIcon("media/exit-icon34.png"));
+	    exitButton.setRolloverIcon(icon6);
 	    exitButton.setBorder(null);
 	    exitButton.setBorderPainted(false);
 	    exitButton.setContentAreaFilled(false);
