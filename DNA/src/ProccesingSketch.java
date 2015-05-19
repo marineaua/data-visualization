@@ -1,4 +1,5 @@
 import processing.core.*;
+import processing.event.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,21 +18,13 @@ import com.tumblr.jumblr.types.User;
 
 public class ProccesingSketch extends PApplet {
 	
-	private static String		consumer_key		= "0bItUSuxTNYvg3aeMv9lXTVnOYME5kGRrzdGn0ba5ktWMTLLgL";
-	private static String		consumer_secret		= "4zXYhAMODZDuWHm9cTUNN165JKoPohJGTdmxNCukg4mYSJyRHw";
-	private static String		oauth_token			= "d4WwWT8lAUP67r2bBXNDM708JkZtpFg9EgBHEvVXs7u2EWd17j";
-	private static String		oauth_token_secret	= "aqkfveFVuhnIVxxfLR3IohSgwgXup7jXHeMDMI2mvSeBD9qMfh";
 	private static int 			width				= 1200;
 	private static int			height				= 600;
-	private static String		newFilePath 		= Scraper.filePath.substring(0, Scraper.filePath.length()-4);
-	private static String		thePath				= "C:/Users/alexm_000/Documents/data-visualization/DNA/src/files/" + Scraper.tumblrName + ".txt";
 	int 		   centerX 							= 0;
 	int 		   centerY 							= 0;
 	int 		   offsetX 							= 0;
 	int 		   offsetY 							= 0;
-	float 		   zoom 							= (float) 1.5;
-	//private static String		tumblrName			= "alextheleon";
-	//private static String		filePath			= new File("").getAbsolutePath();
+	float 		   zoom 							= (float) 1.0;
 	
 	public void setup() {
 	    size(width,height);
@@ -40,23 +33,9 @@ public class ProccesingSketch extends PApplet {
 	    centerY = 0;
 	    cursor(HAND);
 	    smooth();
-	    //File file = new File(Scraper.tumblrName + ".txt").getAbsoluteFile();
-	    //String newFilePath = Scraper.filePath.substring(0, Scraper.filePath.length()-4);
-	    //System.out.println(newFilePath);
-	    //File file = new File(thePath);
-	    /*
-	    if(!file.exists())
-	    {
-	    	Scraper.postList();
-	    }
-	    */
 	   } 
 
 	public void draw() {
-		//noLoop();
-		//noStroke();
-	    //drawFromArray();
-		//drawFromBR();
 		background(0,0,0);
 		if (mousePressed == true) {
 			centerX = mouseX-offsetX;
@@ -81,17 +60,52 @@ public class ProccesingSketch extends PApplet {
 		{
 			drawLineGraph();
 		}
+		else if(MyGUI.getDrawingType() == 4)
+		{
+			drawMosaic();
+		}
 	}
 	
 	public void mousePressed(){
+		loop();
 		offsetX = mouseX-centerX;
 		offsetY = mouseY-centerY;
+		//loop();
+	}
+	
+	public void mouseReleased() {
+		  //noLoop();  // Releasing the mouse stops looping draw()
+		noLoop();
 	}
 	
 	public void keyPressed() {
 		// zoom
-		if (keyCode == UP) zoom += 0.05;
-		if (keyCode == DOWN) zoom -= 0.05;  
+		loop();
+		if (keyCode == UP) centerY -= 5;
+		if (keyCode == DOWN) centerY += 5;
+		if (keyCode == LEFT) centerX -= 5;
+		if (keyCode == RIGHT) centerX += 5;
+	}
+	
+	public void mouseWheel(MouseEvent event)
+	{
+		float e = event.getCount();
+		int i = 0;
+		e = e/20;
+		zoom -= e;
+		System.out.println(zoom);
+		redraw();
+	}
+	
+	
+	private void elseif(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void keyReleased() {
+		// zoom
+		noLoop();
 	}
 	
 	public void drawFromArray()
@@ -637,6 +651,117 @@ public class ProccesingSketch extends PApplet {
 		ellipse(width/2, height/2, innerDiameter, innerDiameter);
 	}
 	
+	public void drawMosaic()
+	{
+		//-----------------------
+		//ARRAY CREATION
+		//-----------------------
+		
+		ArrayList<PagePost> page = new ArrayList<PagePost>();
+		page = MyGUI.getPage();
+		
+		//-----------------------
+		//VARIABLES
+		//-----------------------
+		int opac = 180;
+		int count3 = 200;
+		int count4 = 200;
+		int size = 20;
+		fill(0,0,0,0);
+		strokeWeight(1);
+		noStroke();
+		
+		//-----------------------
+		//ARRAY ITERATION
+		//-----------------------
+		
+		int count = 0; //test code
+		
+		for(int i=0; i < page.size() - 1;i++)
+		{
+			if(page.get(i).getInclude() == true && page.get(i).getType()!=null)
+			{	
+			
+				String type = page.get(i).getType();
+				
+				if(type == null)
+				{
+					System.out.println(type);
+					System.out.println(count);
+				}
+				else
+				{
+					count++;
+				}
+				
+					
+				//rotate(PI/360);
+				switch(type)
+				{
+					case "photo" :
+						//stroke(255,255,255,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(count3,count4,size,size);
+						//white 255,255,255
+						fill(255,255,255,opac);
+						break;
+					case "text" :
+						//stroke(0,128,0,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(170,170,size,size);
+						//green 0 128 0
+						fill(0,128,0,opac);
+						break;
+					case "audio" :
+						//stroke(123,90,205,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(140,140,size,size);
+						// 123,90,205
+						fill(123,90,205,opac);
+						break;
+					case "video" :
+						//stroke(196,255,0,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(110,110,size,size);
+						//black 0,0,0 yellow
+						fill(196,255,0,opac);
+						break;
+					case "answer" :
+						//stroke(255,0,0,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(80,80,size,size);
+						// red
+						fill(255,0,0,opac);
+						break;
+					case "quote" :
+						//stroke(220,70,70,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						//pink i think
+						ellipse(50,0,size,size);
+						fill(220,70,70,opac);
+						break;
+					case "chat" :
+						//stroke(36,31,182,opac);
+						//arc(count3,count4, 20, 20, s, s + PI);
+						ellipse(20,20,size,size);
+						//70,30,180 blue
+						fill(36,31,182,opac);
+						break;		
+				}
+				
+				count3 = count3 + 20;
+				if (count3 >= width)
+				{
+					count3 = 10;
+					count4 = count4 + 5;
+				}
+			}
+		}
+		System.out.println("done");
+	}
+	
+	// LEGACY CODE
+	
 	public void drawFromBR()
 	{
 		int count3 = 200;
@@ -734,6 +859,8 @@ public class ProccesingSketch extends PApplet {
 						break;
 					
 					}
+					
+					
 					
 					//count--;
 					/*

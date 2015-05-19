@@ -677,6 +677,16 @@ public class MyGUI extends JFrame implements ActionListener
 				sketchPanel.add(sketch);
 			}
 		});
+		
+		mosaic2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
+				drawingType = 4;
+				sketch.init();
+				sketch.start();
+				sketchPanel.add(sketch);
+			}
+		});
 			
 		//Adding other things to Frame
 		
