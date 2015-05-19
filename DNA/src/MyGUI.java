@@ -196,19 +196,33 @@ public class MyGUI extends JFrame implements ActionListener
 	    mntmNewRip.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {//same as LOAD
 	    		JFrame ripf = new JFrame();
-	    		JPanel ripp = new JPanel(); 
-	    		JLabel pathlabell = new JLabel();
-	    		String pathlabel = null;
-	    		JFileChooser chooser = new JFileChooser();
-	    		    int returnVal = chooser.showOpenDialog(ripf);
-	    		    if(returnVal == JFileChooser.APPROVE_OPTION) {
-	    		       pathlabel= chooser.getSelectedFile().getPath();
-	    		    }
-	    		pathlabell.setText(pathlabel);
-	    		ripf.setPreferredSize(new Dimension(300,300));	
-	    		ripf.getContentPane().add(ripp);
+	    		ripf.setPreferredSize(new Dimension(400,150));
+	    		ripf.setLocation(750,400);
+	    		ripf.setResizable(false);
+	    		JPanel ripp = new JPanel();
+	    		ripp.setPreferredSize(new Dimension(200,100));
+	    		JLabel pathlabell = new JLabel("Enter the URL of the tumbler page in the area below");
+	    		final JTextField  riptf = new JTextField("",30);
+	    		
+	    		
+	    		//String pathlabel = "Enter the URL of the tumbler page in the area below";
+	    		//pathlabell.setText(pathlabel);
+	    		JButton oK = new JButton("Proceed");	
+	    		oK.addActionListener(new ActionListener() {
+	    	    	public void actionPerformed(ActionEvent arg0) { 
+	    	    		Scraper scrap = new Scraper();
+	    	    		scrap.postList(riptf.getText());
+	    	    	}});
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		ripf.add(ripp);
 	    		ripp.add(pathlabell);
-	    		ripp.setPreferredSize(new Dimension(300,300));
+	    		ripp.add(riptf);
+	    		ripp.add(oK);
+	    		
 	    		
 	    		ripf.pack();
 	    		ripf.setVisible(true);
@@ -221,25 +235,16 @@ public class MyGUI extends JFrame implements ActionListener
 	    mntmLoadRip.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) { //trying to make a new window that takes a path to a file to load
 	    		JFrame loadf = new JFrame();
-	    		JPanel loadp = new JPanel();
-	    		JTextField loadtf = new JTextField("Path",40);
 	    		String pathname=null;
 	    		JFileChooser chooser = new JFileChooser();
-    		    int returnVal = chooser.showOpenDialog(loadp);
+    		    int returnVal = chooser.showOpenDialog(loadf);
     		    if(returnVal == JFileChooser.APPROVE_OPTION) {
     		       pathname= chooser.getSelectedFile().getPath();
     		    }
-    		loadtf.setText(pathname);
 	    	path=pathname;	
-	    	page=RawToArr.txtToArr(page,path);
-    		
-	    		loadtf.setBackground(Color.WHITE);
-	    		loadp.setBackground(Color.BLACK);
-	    		loadf.getContentPane().add(loadp);
-	    		loadp.add(loadtf);
-	    		loadp.setPreferredSize(new Dimension(500,300));	    		
+	    	page=RawToArr.txtToArr(page,path);    		
 	    		loadf.pack();
-	    		loadf.setVisible(true);	    		
+	    		loadf.setVisible(false);	    		
 	    		
 	    	}
 	    });
@@ -260,6 +265,9 @@ public class MyGUI extends JFrame implements ActionListener
 	    	public void actionPerformed(ActionEvent arg0) { // Same as others
 	    		final JFrame addf = new JFrame();
 	    		JPanel addp = new JPanel();
+	    		addf.setLocation(700,300);
+	    		//addf.setUndecorated(true);
+	    		addf.setResizable(false);
 	    		JPanel maincont = new JPanel(new FlowLayout(FlowLayout.LEFT));//main container
 	    		FlowLayout flow = new FlowLayout();
 	    		GridLayout grid = new GridLayout(2,4);
@@ -500,11 +508,22 @@ public class MyGUI extends JFrame implements ActionListener
 	    	
 	    	public void actionPerformed(ActionEvent arg0) { //Add event for clicking
 	    		JFrame about = new JFrame();
-	    		JPanel aboutp = new JPanel();	    		
-	    		JLabel aboutmes = new JLabel("About this, what it does, the end");
-	    		about.getContentPane().add(aboutp);
+	    		about.setResizable(false);
+	    		about.setPreferredSize(new Dimension(500,300));
+	    		about.setLocation(700,300);
+	    		//about.setUndecorated(true);
+	    		JPanel aboutp = new JPanel();
+	    		
+	    		String[] blurb = {"asd,asd,asd","fart much?"};
+	    		JScrollPane scroll = new JScrollPane(aboutp);
+	    		JLabel aboutmes = new JLabel("About this, what it does, the end\n" + '\n' + "Now you can scroll!");
+	    		about.getContentPane().add(scroll);
+	    		String Verbage;
+	    		Verbage = "blah blah\n" + "bleh bleh\n" + "Bluh bluh";
+	    		//fluff.add(Verbage);
 	    		aboutp.add(aboutmes);
-	    		aboutp.setPreferredSize(new Dimension(300,300));
+	    		//aboutp.add(scroll);
+	    		aboutp.setPreferredSize(new Dimension(300,500));
 	    		about.pack();
 	    		about.setVisible(true);
 	    		
