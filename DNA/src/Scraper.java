@@ -30,8 +30,10 @@ public class Scraper {
 	{
 		//postList();
 	}
-	public static void postList()
+	public static void postList(String nameo)
 	{
+		System.out.println(nameo);
+		tumblrName=nameo;
 		String tumblrURL = tumblrName + ".tumblr.com";
 		JumblrClient client = new JumblrClient(consumer_key, consumer_secret);
 		client.setToken(oauth_token, oauth_token_secret);
