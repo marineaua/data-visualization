@@ -73,7 +73,7 @@ public class MyGUI extends JFrame implements ActionListener
 	{ 
 		//page=RawToArr.txtToArr(page,path);
 		setLocation(350,150);
-		setUndecorated(true);
+		//setUndecorated(true);
 		setSize(1200,900);
 		setPreferredSize(new Dimension(1200, 700));
 		setResizable(true);
@@ -211,7 +211,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		oK.addActionListener(new ActionListener() {
 	    	    	public void actionPerformed(ActionEvent arg0) { 
 	    	    		Scraper scrap = new Scraper();
-	    	    		scrap.postList(riptf.getText());
+	    	    		Scraper.postList(riptf.getText());
 	    	    	}});
 	    		
 	    		
