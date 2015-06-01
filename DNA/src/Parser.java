@@ -36,7 +36,7 @@ public class Parser
 
 		return time;
 	}
-	public String getChunkRoot(ArrayList<String> chunk)
+	public String getChunkRoot(ArrayList<String> chunk) throws BadFormatException, BadRootException
 	{
 		String chunkRoot=null;
 		
@@ -46,11 +46,18 @@ public class Parser
 			chunkRoot="since";
 		else if(!chunk.isEmpty()&&(chunk.get(0).equals("until")))
 			chunkRoot="until";
+		else if(!chunk.isEmpty()&&(chunk.get(0).equals("all")||chunk.get(0).equals("every")||chunk.get(0).equals("only")))
+			chunkRoot="all/every/only";
 		else
-			return null;
+		{
+			String s = "";
+			for(int i=0;i<chunk.size();i++)
+				s = s + chunk.get(i)+" ";
+			throw new BadRootException("invalid root word in chunk: \n"+s);
+		}
 		return chunkRoot;
 	}
-	public ArrayList<PagePost> callRoot(ArrayList<PagePost> page, ArrayList<String> chunk, boolean inverseFlag, String chunkRoot)
+	public ArrayList<PagePost> callRoot(ArrayList<PagePost> page, ArrayList<String> chunk, boolean inverseFlag, String chunkRoot) throws BadFormatException, BadRootException
 	{
 		RootWords roots = new RootWords();
 		
@@ -63,10 +70,21 @@ public class Parser
 				break;
 			case "since":
 				page=roots.Since(page,chunk,inverseFlag);
+				break;
 			case "until":
 				page=roots.Until(page, chunk, inverseFlag);
+				break;
+			case "all/every/only":
+				boolean continuation = false;
+				page=roots.AllEveryOnly(page, chunk, inverseFlag, continuation);
+				break;
 			default:
-				return page;
+			{
+				String s = "";
+				for(int i=0;i<chunk.size();i++)
+					s = s + chunk.get(i)+" ";
+				throw new BadRootException("invalid root word in chunk: \n"+s);
+			}
 			}
 		}
 		else
@@ -97,13 +115,13 @@ public class Parser
 		return page;
 	}
 
-	public ArrayList<PagePost> fbTime(ArrayList<PagePost> page, String timeParams)
+	public ArrayList<PagePost> fbTime(ArrayList<PagePost> page, String timeParams) throws BadFormatException, BadRootException
 	{
 		timeParams=timeParams.toLowerCase();
-		String s=timeParams.replace(";", " ;");
+		timeParams=timeParams.replace(",","");
 		String chunkRoot=null;
 		String delims="[, +]";
-		String[] tokenParams=s.split(delims);
+		String[] tokenParams=timeParams.split(delims);
 		ArrayList<String> chunk=new ArrayList<String>();
 		chunk.clear();
 		
@@ -111,24 +129,20 @@ public class Parser
 		int a=0,b=0,c=0;
 		ApplyTimes apply = new ApplyTimes();
 		
+		
 		while(true)
 		{
 			inverseFlag=false;
-			apply.clearBools();
+			apply.trueBools();
 			chunk.clear();
 			chunkRoot=null;
 			b=0;
 			//fill chunk to be analyzed
 			for(int i=a;i<tokenParams.length;i++)
 			{
+				a=i;
 				chunk.add(b,tokenParams[i]);
 				
-				if(chunk.get(b).equals(";"))
-				{
-					a=i+1;
-					b++;
-					break;
-				}
 				if(chunk.get(b).equals("am")||chunk.get(b).equals("pm"))
 				{
 					chunk.set((b-1),(fixTime(chunk.get(b-1),chunk.get(b))));
@@ -144,7 +158,10 @@ public class Parser
 
 			chunkRoot = getChunkRoot(chunk);
 			if(chunkRoot==null)
+			{
+				System.out.println("breakout");
 				return page;
+			}
 			page=callRoot(page,chunk,inverseFlag,chunkRoot);
 		}
 		
@@ -218,7 +235,7 @@ public class Parser
 		return page;
 	}
 	
-	public ArrayList<PagePost> runFilter(ArrayList<PagePost> page, String[] types, int notes, String sourceURL, String timeParams, String tags)
+	public ArrayList<PagePost> runFilter(ArrayList<PagePost> page, String[] types, int notes, String sourceURL, String timeParams, String tags) throws BadFormatException, BadRootException
 	{
 		page=excludeAll(page);
 		if(types[0]!=null)
@@ -234,4 +251,3 @@ public class Parser
 		return page;
 	}
 }
-

@@ -455,7 +455,16 @@ public class MyGUI extends JFrame implements ActionListener
 	    		    			}
 	    		    		}
 	    				   Parser parse = new Parser();
-	    				  page = parse.runFilter(page, types, notes, sourceURL, timeParams, tags);
+	    				  try {
+							page = parse.runFilter(page, types, notes, sourceURL, timeParams, tags);
+						} catch (BadFormatException | BadRootException e) {
+							// DO THINGS HERE
+							///
+							////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+							//
+							
+							e.printStackTrace();
+						}
 	    				  
 	    				  addf.dispose();
 	    			   }}
