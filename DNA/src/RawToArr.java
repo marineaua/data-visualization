@@ -104,7 +104,12 @@ public class RawToArr
 					// set notes
 					if((line = br.readLine()) != null) // line 7
 					{
-						notes=Integer.parseInt(line);
+						try{
+							notes=Integer.parseInt(line);
+						} catch (NumberFormatException e) {
+							System.out.println("got here boys");
+							notes = 0;
+						}
 					}
 					// set tags
 					if((line = br.readLine()) != null) // line 8
