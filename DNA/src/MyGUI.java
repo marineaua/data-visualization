@@ -75,7 +75,9 @@ public class MyGUI extends JFrame implements ActionListener
 		setLocation(350,150);
 		//setUndecorated(true);
 		setSize(1200,900);
-		setPreferredSize(new Dimension(1200, 700));
+		setMinimumSize(new Dimension(1200,600));
+		setPreferredSize(new Dimension(1300, 800));
+		setTitle("Data Visualization");
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
@@ -111,7 +113,7 @@ public class MyGUI extends JFrame implements ActionListener
 		lineButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lineButton.addActionListener(this);
 		lineButton.setPreferredSize(new Dimension(220,40));		
-		mosaicButton = new JButton("Mosaic");
+		mosaicButton = new JButton("Clockface");
 		mosaicButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		mosaicButton.setPreferredSize(new Dimension(220,40));
 		pieButton = new JButton("Pie");
@@ -122,7 +124,7 @@ public class MyGUI extends JFrame implements ActionListener
 		barButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		barButton.setPreferredSize(new Dimension(220,40));
 		
-		mosaic2 = new JButton("Mosaic 2.0");
+		mosaic2 = new JButton("Mosaic");
 		mosaic2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		mosaic2.setPreferredSize(new Dimension(220,40));
 		
@@ -176,7 +178,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    
 	    menuBar.setOpaque(true);
 	    menuBar.setBorder(null);
-	    menuBar.setBackground(new Color(0,0,0,0));
+	    menuBar.setBackground(null);
 		GridBagConstraints gbc_menuBar = new GridBagConstraints();
 		gbc_menuBar.fill = GridBagConstraints.BOTH;
 		gbc_menuBar.insets = new Insets(0, 0, 0, 5);
@@ -455,16 +457,19 @@ public class MyGUI extends JFrame implements ActionListener
 	    		    			}
 	    		    		}
 	    				   Parser parse = new Parser();
+	    				     				  
 	    				  try {
-							page = parse.runFilter(page, types, notes, sourceURL, timeParams, tags);
-						} catch (BadFormatException | BadRootException e) {
-							// DO THINGS HERE
-							///
-							////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-							//
-							
-							e.printStackTrace();
-						}
+	    					   page=parse.runFilter(page, types, notes, sourceURL, timeParams, tags);
+	    					  } catch (BadFormatException e) {
+	    						  JOptionPane pane = new JOptionPane();
+	  							JOptionPane.showMessageDialog(pane, e.getError());
+	    					   //System.out.println(e.getError());
+	    					  } catch (BadRootException e) {
+	    						  JOptionPane pane = new JOptionPane();
+	  							JOptionPane.showMessageDialog(pane, e.getError());
+	    					  // System.out.println(e.getError());
+	    					  }
+	    				  
 	    				  
 	    				  addf.dispose();
 	    			   }}
@@ -518,21 +523,21 @@ public class MyGUI extends JFrame implements ActionListener
 	    	public void actionPerformed(ActionEvent arg0) { //Add event for clicking
 	    		JFrame about = new JFrame();
 	    		about.setResizable(false);
-	    		about.setPreferredSize(new Dimension(500,300));
-	    		about.setLocation(700,300);
+	    		about.setPreferredSize(new Dimension(300,75));
+	    		about.setLocation(850,450);
 	    		//about.setUndecorated(true);
 	    		JPanel aboutp = new JPanel();
 	    		
 	    		String[] blurb = {"asd,asd,asd","fart much?"};
 	    		JScrollPane scroll = new JScrollPane(aboutp);
-	    		JLabel aboutmes = new JLabel("About this, what it does, the end\n" + '\n' + "Now you can scroll!");
+	    		JLabel aboutmes = new JLabel("Read the Read me");
 	    		about.getContentPane().add(scroll);
 	    		String Verbage;
 	    		Verbage = "blah blah\n" + "bleh bleh\n" + "Bluh bluh";
 	    		//fluff.add(Verbage);
 	    		aboutp.add(aboutmes);
 	    		//aboutp.add(scroll);
-	    		aboutp.setPreferredSize(new Dimension(300,500));
+	    		//aboutp.setPreferredSize(new Dimension(300,500));
 	    		about.pack();
 	    		about.setVisible(true);
 	    		
@@ -546,7 +551,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    // LABELS
 	    //-------------------------
 	    
-	    titleLabel = new JLabel("Data Visulalization");
+	    /*titleLabel = new JLabel("Data Visulalization");
 	    titleLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	    titleLabel.setForeground(new Color(220,220,220));
 	    
@@ -661,7 +666,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		System.exit(0);
 	    	}
 	    });
-		
+		*/
 		//--------------------------
 		// MOUSE LISTENERS
 		//--------------------------
@@ -680,6 +685,7 @@ public class MyGUI extends JFrame implements ActionListener
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
 				drawingType = 1;
+				//sketch.clear();
 				sketch.init();
 				sketch.start();
 				sketchPanel.add(sketch);
@@ -761,10 +767,7 @@ public class MyGUI extends JFrame implements ActionListener
 
 	public static void main(String[] args)
 	{
-		new MyGUI().setVisible(true);
-		
-		
-		
+		new MyGUI().setVisible(true);		
 	}
 	
 	public void actionPerformed(ActionEvent event)
