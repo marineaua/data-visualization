@@ -197,7 +197,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    mntmNewRip = new JMenuItem("New Rip");
 	    mntmNewRip.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {//same as LOAD
-	    		JFrame ripf = new JFrame();
+	    		 final JFrame ripf = new JFrame();
 	    		ripf.setPreferredSize(new Dimension(400,150));
 	    		ripf.setLocation(750,400);
 	    		ripf.setResizable(false);
@@ -214,7 +214,10 @@ public class MyGUI extends JFrame implements ActionListener
 	    	    	public void actionPerformed(ActionEvent arg0) { 
 	    	    		Scraper scrap = new Scraper();
 	    	    		Scraper.postList(riptf.getText());
-	    	    	}});
+	    	    		titleLabel.setText("tumblr: " + scrap.gettumblrName());
+	    	    		ripf.dispose();
+	    	    	} 
+	    	    	});
 	    		
 	    		
 	    		
@@ -242,9 +245,10 @@ public class MyGUI extends JFrame implements ActionListener
     		    int returnVal = chooser.showOpenDialog(loadf);
     		    if(returnVal == JFileChooser.APPROVE_OPTION) {
     		       pathname= chooser.getSelectedFile().getPath();
+    		       titleLabel.setText("tumblr: " + chooser.getName(chooser.getSelectedFile()));
     		    }
 	    	path=pathname;	
-	    	page=RawToArr.txtToArr(page,path);    		
+	    	page=RawToArr.txtToArr(page,path); 
 	    		loadf.pack();
 	    		loadf.setVisible(false);	    		
 	    		
@@ -551,9 +555,10 @@ public class MyGUI extends JFrame implements ActionListener
 	    // LABELS
 	    //-------------------------
 	    
-	    /*titleLabel = new JLabel("Data Visulalization");
+	    titleLabel = new JLabel("Data Visulalization");
 	    titleLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	    titleLabel.setForeground(new Color(220,220,220));
+	    titleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 	    
 	    //--------------------------
 	    // TOP PANEL ADJUSTMENTS
@@ -571,7 +576,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    tc.weightx = 1.0;
 	    tc.insets = new Insets(0, 0, 0, 5);
 	    GridBagConstraints gbc_titleLabel = new GridBagConstraints();
-	    gbc_titleLabel.anchor = GridBagConstraints.WEST;
+	    gbc_titleLabel.anchor = GridBagConstraints.EAST;
 	    gbc_titleLabel.gridheight = 2;
 	    gbc_titleLabel.fill = GridBagConstraints.VERTICAL;
 	    gbc_titleLabel.gridx = 2;
@@ -588,7 +593,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    tc.gridy = 0;
 	    tc.gridx = 5;
 	    tc.gridy = 0;
-	    
+	    /*
 	    Icon icon = new ImageIcon(getClass().getResource("min-icon34.png"));
 	    Icon icon2 = new ImageIcon(getClass().getResource("min-icon34H.png"));
 	    //JButton button = new JButton(icon);
