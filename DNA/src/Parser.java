@@ -50,6 +50,8 @@ public class Parser
 			chunkRoot="all/every/only";
 		else
 		{
+			if(chunk.size()<2)
+				return null;
 			String s = "";
 			for(int i=0;i<chunk.size();i++)
 				s = s + chunk.get(i)+" ";
@@ -80,6 +82,8 @@ public class Parser
 				break;
 			default:
 			{
+				if(chunk.size()<2)
+					return page;
 				String s = "";
 				for(int i=0;i<chunk.size();i++)
 					s = s + chunk.get(i)+" ";
