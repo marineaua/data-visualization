@@ -195,5 +195,9 @@ public class Scraper {
 	
 		
 	}
-*/	
+*/
+	public String gettumblrName() {
+		
+		return tumblrName;
+	}	
 }
