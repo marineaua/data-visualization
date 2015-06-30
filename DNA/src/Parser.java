@@ -95,28 +95,30 @@ public class Parser
 			return page;
 		return page;
 	}
-	public ArrayList<PagePost> fbType(ArrayList<PagePost> page, String[] types)
+	public boolean fbType(ArrayList<PagePost> page, String[] types, int i)
 	{
-		int numPosts=page.size()-1;
-		
-		for(int i=0;i<numPosts;i++)
+		boolean include=true;
+		if(types[0]!=null)
 		{
 			int k=0;
 			while(true)
 			{
 				if(types[k]==null)
-					break;
+					return include;
 				else if(page.get(i).getType().equalsIgnoreCase(types[k]))
 				{
-					page.get(i).setInclude(true);
+					include=true;
 					k++;
 				}
 				else
+				{
+					include=false;
 					k++;
+				}	
 			}
 		}
-		
-		return page;
+		else
+			return include;
 	}
 
 	public ArrayList<PagePost> fbTime(ArrayList<PagePost> page, String timeParams) throws BadFormatException, BadRootException
@@ -159,7 +161,8 @@ public class Parser
 				}
 				b++;
 			}
-
+			if(chunk.size()<2)
+				return page;
 			chunkRoot = getChunkRoot(chunk);
 			if(chunkRoot==null)
 			{
@@ -172,20 +175,21 @@ public class Parser
 	
 		//return page;
 	}
-	public ArrayList<PagePost> fbNotes(ArrayList<PagePost> page, int notes)
+	public boolean fbNotes(ArrayList<PagePost> page, int notes, int i)
 	{
-		int numPosts=page.size()-1;
-		
-		for(int i=0;i<numPosts;i++)
+		if(notes>=0)
+		{
 			if(page.get(i).getNotes()>=notes)
-				page.get(i).setInclude(true);
-		return page;
+				return true;
+			else
+				return false;
+		}
+		else
+			return true;
 	}
-	public ArrayList<PagePost> fbTags(ArrayList<PagePost> page, String tags)
+	public boolean fbTags(ArrayList<PagePost> page, String tags, int i)
 	{
-		int numPosts=page.size()-1;
-		
-		for(int i=0;i<numPosts;i++)
+		if(tags!=null)
 		{
 			int j=0;
 			
@@ -194,33 +198,34 @@ public class Parser
 				if(j<(page.get(i).getTags().size()))
 				{
 					if(page.get(i).getTags().get(j)==null)
-						break;
+						return false;
 					else
 					{
 						String word=("(\\b"+page.get(i).getTags().get(j)+"\\b)");
 						if(tags.matches(word))
-						{
-							page.get(i).setInclude(true);
-							break;
-						}
+							return true;
 						else
 							j++;
 					}
 				}
 				else
-					break;
+					return false;
 			}
 		}
-		return page;
+		else
+			return true;
 	}	
-	public ArrayList<PagePost> fbSourceURL(ArrayList<PagePost> page, String sourceURL)
+	public boolean fbSourceURL(ArrayList<PagePost> page, String sourceURL, int i)
 	{
-		int numPosts=page.size()-1;
-		
-		for(int i=0;i<numPosts;i++)
+		if(sourceURL!=null)
+		{
 			if(page.get(i).getSourceURL().contains(sourceURL))
-				page.get(i).setInclude(true);
-		return page;
+				return true;
+			else
+				return false;
+		}
+		else
+			return true;
 	}
 	public ArrayList<PagePost> includeAll(ArrayList<PagePost> page)
 	{
@@ -241,17 +246,35 @@ public class Parser
 	
 	public ArrayList<PagePost> runFilter(ArrayList<PagePost> page, String[] types, int notes, String sourceURL, String timeParams, String tags) throws BadFormatException, BadRootException
 	{
+		int numPosts=page.size()-1;
 		page=excludeAll(page);
-		if(types[0]!=null)
-			page=fbType(page, types);
 		if(timeParams!=null)
 			page=fbTime(page, timeParams);
-		if(notes>=0)
-			page=fbNotes(page, notes);
-		if(tags!=null)
-			page=fbTags(page, tags);
-		if(sourceURL!=null)
-			page=fbSourceURL(page, sourceURL);
+		
+		for(int i=0;i<numPosts;i++)
+		{
+			if(timeParams!=null)
+			{
+				if(page.get(i).getInclude())
+				{
+					if(fbType(page,types,i)&&fbNotes(page,notes,i)&&fbTags(page,tags,i)&&fbSourceURL(page,sourceURL,i))
+						page.get(i).setInclude(true);
+					else
+						page.get(i).setInclude(false);
+				}
+				else
+					page.get(i).setInclude(false);
+			}
+			else
+			{
+				if(fbType(page,types,i)&&fbNotes(page,notes,i)&&fbTags(page,tags,i)&&fbSourceURL(page,sourceURL,i))
+					page.get(i).setInclude(true);
+				else
+					page.get(i).setInclude(false);
+			}
+				
+		}
+
 		return page;
 	}
 }
