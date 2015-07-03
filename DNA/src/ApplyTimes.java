@@ -1,3 +1,5 @@
+// Written by Peter Kennedy
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -6,9 +8,9 @@ public class ApplyTimes
 {
 	// lowest year
 	static int year1=0, month1=0, day1=0, hour1=0, minute1=0;
-	// lower mid year, usually used for "except" filter
+	// not used but keeping just in case, and due to numbering scheme already in place
 	static int year2=0, month2=0, day2=0, hour2=0, minute2=0;
-	// upper mid year, usually used for "except" filter
+	// not used but keeping just in case, and due to numbering scheme already in place
 	static int year3=0, month3=0, day3=0, hour3=0, minute3=0;
 	// highest year
 	static int year4=0, month4=0, day4=0, hour4=0, minute4=0;
@@ -23,20 +25,17 @@ public class ApplyTimes
 	static boolean[] woy = new boolean[52];
 	
 	// EXCLUDE = TRUE; flags for WEEK of the month (1-5)
-	static boolean[] wom = new boolean[5];
+	static boolean[] wom = new boolean[6];
 	
 	// EXCLUDE = TRUE; flags for MONTH of YEAR (1-12)
 	static boolean[] moy = new boolean[12];
 	
+	// sets all bools to true
 	public void trueBools()
 	{
-		// lowest year
 		year1=0; month1=0; day1=0; hour1=0; minute1=0;
-		// lower mid year, usually used for "except" filter // not used but to afraid to delete it
 		year2=0; month2=0; day2=0; hour2=0; minute2=0;
-		// upper mid year, usually used for "except" filter // not used but to afraid to delete it
 		year3=0; month3=0; day3=0; hour3=0; minute3=0;
-		// highest year
 		year4=0; month4=0; day4=0; hour4=0; minute4=0;
 		
 		for(int i=0;i<dom.length;i++)
@@ -76,6 +75,7 @@ public class ApplyTimes
 		for(int i=0;i<moy.length;i++)
 			moy[i]=false;
 	}
+	// depending on which bools were set to true or false, sets the PagePosts include to true or false
 	public ArrayList<PagePost> setIncludes(ArrayList<PagePost> page, int i, boolean inverseFlag)
 	{
 		if(page.get(i).getMonth()>0)
@@ -89,6 +89,7 @@ public class ApplyTimes
 		}
 		return page;
 	}
+	// if rootword is all/every/only
 	public ArrayList<PagePost> AllEveryOnly(ArrayList<PagePost> page, boolean inverseFlag)
 	{
 		int numPosts=page.size()-1;
@@ -99,6 +100,7 @@ public class ApplyTimes
 		
 		return page;
 	}
+	// if rootword is until and parameters is date
 	public ArrayList<PagePost> untilDate(ArrayList<PagePost> page, boolean inverseFlag, String highDate, String lowTime, String highTime, boolean timeRange)
 	{
 		String delims="[/ \\-\\:]";
@@ -123,6 +125,7 @@ public class ApplyTimes
 		
 		return page;
 	}
+	// if rootword is until and parameters is time and date
 	public ArrayList<PagePost> untilTimeDate(ArrayList<PagePost> page, boolean inverseFlag, String highTime, String highDate, String lowTime, String rangeHighTime, boolean timeRange)
 	{
 		String delims = "[/ \\-\\:]";
@@ -151,6 +154,7 @@ public class ApplyTimes
 		
 		return page;
 	}
+	// if rootword is since and parameters is date
 	public ArrayList<PagePost> sinceDate(ArrayList<PagePost> page, boolean inverseFlag, String lowDate, String lowTime, String highTime, boolean timeRange)
 	{
 		String delims="[/ \\-\\:]";
@@ -175,6 +179,7 @@ public class ApplyTimes
 		
 		return page;
 	}
+	// if rootword is since and parameters is time and date
 	public ArrayList<PagePost> sinceTimeDate(ArrayList<PagePost> page, boolean inverseFlag, String lowTime, String lowDate, String rangeLowTime, String highTime, boolean timeRange)
 	{
 		String delims = "[/ \\-\\:]";
@@ -203,6 +208,7 @@ public class ApplyTimes
 		
 		return page;
 	}
+	// if we are also filtering by a time of day range
 	public ArrayList<PagePost> timeRange(ArrayList<PagePost> page, boolean inverseFlag, String lowTime, String highTime, int i)
 	{
 		String delims="[/ \\-\\:]";
@@ -224,6 +230,7 @@ public class ApplyTimes
 			}
 		return page;
 	}
+	// if rootword is between/from and parameters is time and time
 	public ArrayList<PagePost> betweenTimeXandY(ArrayList<PagePost> page, boolean inverseFlag, String lowTime, String highTime)
 	{		
 		int numPosts=page.size()-1;
@@ -234,6 +241,7 @@ public class ApplyTimes
 		
 		return page;
 	}
+	// if rootword is between/from and parameters is time date and time date
 	public ArrayList<PagePost> betweenFullTimeDateXandY(ArrayList<PagePost> page, boolean inverseFlag, String lowTime, String lowDate, String highTime, String highDate, boolean timeRange)
 	{
 		String delims = "[/ \\-\\:]";
@@ -273,6 +281,7 @@ public class ApplyTimes
 		
 		return page;
 	}
+	// if rootword is between/from and parameters is date and date
 	public ArrayList<PagePost> betweenFullDateXandY(ArrayList<PagePost> page, boolean inverseFlag, String lowDate, String highDate, String lowTime, String highTime, boolean timeRange)
 	{
 		String delims = "[/ \\-\\:]";

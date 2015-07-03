@@ -1,3 +1,5 @@
+// Written by Peter Kennedy
+
 public class BadFormatException extends Exception
 {
 	String message;

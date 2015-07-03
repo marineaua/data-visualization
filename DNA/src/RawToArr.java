@@ -1,3 +1,5 @@
+// Written by Peter Kennedy
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,6 +21,7 @@ public class RawToArr
 				String line = null;
 				while(true)
 				{
+					// variables to load into PagePost object
 					boolean include=true;
 					String type=null;
 					int timestamp=0;
@@ -26,6 +29,7 @@ public class RawToArr
 					String postURL=null;
 					String sourceURL=null;
 					int notes=0;
+					ArrayList tags=new ArrayList();
 
 					Calendar calendar = null;
 					
@@ -40,10 +44,7 @@ public class RawToArr
 					int hourOfDay=0;
 					int minute=0;
 					int second=0;
-					
-					//String[] tags=new String[300];
-					ArrayList tags=new ArrayList();
-					
+
 					// set type
 					if((line = br.readLine()) != null) // line 1
 					{
@@ -62,14 +63,8 @@ public class RawToArr
 						String delims = "[ \\-\\:]";
 						
 						String[] tokens = line.split(delims);
-						/* date[0]=Integer.parseInt(tokens[0]); // year
-						date[1]=Integer.parseInt(tokens[1]); // month
-						date[2]=Integer.parseInt(tokens[2]); // day
-						time[0]=Integer.parseInt(tokens[3]); // hours
-						time[1]=Integer.parseInt(tokens[4]); // minutes
-						time[2]=Integer.parseInt(tokens[5]); // seconds */
 
-						//SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");	// keep this 
+						// build calendar object from year, month, day, hours, minutes, and seconds of each post
 						calendar = new GregorianCalendar(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),
 																	Integer.parseInt(tokens[3]),Integer.parseInt(tokens[4]),Integer.parseInt(tokens[5]));
 					 
@@ -84,7 +79,6 @@ public class RawToArr
 						hourOfDay  = calendar.get(Calendar.HOUR_OF_DAY); // 24 hour clock
 						minute     = calendar.get(Calendar.MINUTE);
 						second     = calendar.get(Calendar.SECOND);
-						// year, month, dayOfMonth, dayOfWeek, weekOfYear, weekOfMonth, hour, hourOfDay, minute, second
 					}
 					// set id
 					if((line = br.readLine()) != null) // line 4
@@ -107,7 +101,6 @@ public class RawToArr
 						try{
 							notes=Integer.parseInt(line);
 						} catch (NumberFormatException e) {
-							System.out.println("got here boys");
 							notes = 0;
 						}
 					}
@@ -124,14 +117,16 @@ public class RawToArr
 							tags.add(tokens[i]);
 						}
 					}
-
+					
+					// creates a PagePost object with variables we just set
 					PagePost post = new PagePost(include, type, timestamp, year, month, dayOfMonth, dayOfWeek, weekOfYear, 
 													weekOfMonth, hour, hourOfDay, minute, second, id, postURL, sourceURL, notes, tags, calendar);
+					// adds PagePost object to ArrayList of PagePost objects (each object is 1 tumblr post)
 					page.add(post);
-					if(line==null)
+					if(line==null) // if end of .txt file
 						break;
 				}
-				if(line==null)
+				if(line==null)// if end of .txt file
 					break;
 			}
 			br.close();

@@ -1,8 +1,15 @@
+// Written by Peter Kennedy
+
+/*
+ * A lot of the code is repetitive (mostly just the if/else statements that walk through strings), earlier lines of code will have more detailed explanations
+ */
+
 import java.util.ArrayList;
 
 public class RootWords 
 {
-	public boolean isNumeric(String str)  
+	// return true if the string is of a numeric type (1st, 52nd, 3:30, etc)
+	public boolean isNumeric(String str) 
 	{  
 		str=str.replace("/", "");
 		str=str.replace(":", "");
@@ -21,6 +28,7 @@ public class RootWords
 		}  
 		return true;  
 	}
+	// fix user formatting (1st=1, 2nd=2, etc)
 	public int makeNumeric(String str)
 	{
 		str=str.replace("st", "");
@@ -30,6 +38,7 @@ public class RootWords
 		int n = Integer.parseInt(str);
 		return n;
 	}
+	// rebuilds "chunk" after one rootword + parameter chunk has been completed (usually delimited by "or")
 	public ArrayList<String> refillChunk(ArrayList<String> chunk, int start)
 	{
 		ArrayList<String> newChunk = new ArrayList<String>();
@@ -43,6 +52,7 @@ public class RootWords
 		}
 		return newChunk;
 	}
+	// root word = (between || from)
 	public ArrayList<PagePost> BetweenFrom(ArrayList<PagePost> page, ArrayList<String> chunk, boolean inverseFlag) throws BadFormatException, BadRootException
 	{
 		Parser parse = new Parser();
@@ -61,34 +71,35 @@ public class RootWords
 				String highTime=null;
 				boolean timeRange=false;
 				int i=4;
-				
+				// between 1/1/2010 and 1/1/2015 from 2:30 to 5:00
 				if(chunk.size()>6&&(chunk.get(4).equals("from")||chunk.get(4).equals("between"))&&chunk.get(5).contains(":")&&(chunk.get(6).contains("and")||chunk.get(6).contains("to"))
 						&&chunk.get(7).contains(":"))
 				{
 					lowTime=chunk.get(5);
 					highTime=chunk.get(7);
-					timeRange=true;
+					timeRange=true; // indicates this chunk also has a time of day range
 					i=8;
 				}
 				
-				page=apply.betweenFullDateXandY(page, inverseFlag, lowDate, highDate,lowTime,highTime,timeRange);
+				// sets PagePost includes based on the date/times the user input
+				page=apply.betweenFullDateXandY(page, inverseFlag, lowDate, highDate,lowTime,highTime,timeRange); // if timeRange==true then also check if the post is within the correct time of day window
 				
-				if(chunk.size()==i)
+				if(chunk.size()==i) // if no more input
 					return page;
-				if(chunk.get(i).equals("or"))
+				if(chunk.get(i).equals("or")) // if end of rootword chunk (a new root word is expected)
 				{
-					chunk=refillChunk(chunk,i+1);
+					chunk=refillChunk(chunk,i+1); // refill the chunk starting at the next expected root word
 					chunkRoot = parse.getChunkRoot(chunk);
-					page = parse.callRoot(page, chunk, inverseFlag, chunkRoot);
+					page = parse.callRoot(page, chunk, inverseFlag, chunkRoot); // do another set of filters with the new chunk
 				}
-				else if(chunk.get(i).equals("except"))
+				else if(chunk.get(i).equals("except")) // if next rootword chunk is an inverse (if a match, then set to false instead of true)
 				{
-					inverseFlag=true;
-					chunk=refillChunk(chunk,i+1);
+					inverseFlag=true; // set inverse flag to true)
+					chunk=refillChunk(chunk,i+1); // refill the chunk starting at the next expected rootword
 					chunkRoot = parse.getChunkRoot(chunk);
-					page = parse.callRoot(page, chunk, inverseFlag, chunkRoot);
+					page = parse.callRoot(page, chunk, inverseFlag, chunkRoot); // do another set of filters with the new chunk
 				}
-				else if(chunk.get(i).equals("and")&&(chunk.get(i+1).equals("between")||chunk.get(i).equals("from")))
+				else if(chunk.get(i).equals("and")&&(chunk.get(i+1).equals("between")||chunk.get(i).equals("from"))) // if a continuation of the same rootword
 				{
 					chunk=refillChunk(chunk,i+1);
 					chunkRoot = parse.getChunkRoot(chunk);
@@ -107,21 +118,21 @@ public class RootWords
 				
 				if(chunk.size()==4)
 					return page;
-				if(chunk.get(4).equals("or"))
+				if(chunk.get(4).equals("or")) // if end of rootword chunk (a new root word is expected)
 				{
 					chunk=refillChunk(chunk,5);
 					chunkRoot = parse.getChunkRoot(chunk);
 					page = parse.callRoot(page, chunk, inverseFlag, chunkRoot);
 				}
-				else if(chunk.get(4).equals("except"))
+				else if(chunk.get(4).equals("except")) // if next rootword chunk is an inverse (if a match, then set to false instead of true)
 				{
 					inverseFlag=true;
 					chunk=refillChunk(chunk,5);
 					chunkRoot = parse.getChunkRoot(chunk);
 					page = parse.callRoot(page, chunk, inverseFlag, chunkRoot);
 				}
-				else if(chunk.get(4).equals("and")&&(chunk.get(5).equals("between")||chunk.get(5).equals("from")))
-				{
+				else if(chunk.get(4).equals("and")&&(chunk.get(5).equals("between")||chunk.get(5).equals("from"))) // if a continuation of the same rootword
+				{ 
 					chunk=refillChunk(chunk,5);
 					chunkRoot = parse.getChunkRoot(chunk);
 					page = parse.callRoot(page, chunk, inverseFlag, chunkRoot);
@@ -144,6 +155,7 @@ public class RootWords
 			boolean timeRange=false;
 			int i=6;
 			
+			// between 13:30 1/1/2011 and 14:30 1/1/2012 from 3:30 to 6:30
 			if(chunk.size()>=8&&(chunk.get(6).equals("from")||chunk.get(6).equals("between"))&&chunk.get(7).contains(":")&&(chunk.get(8).contains("and")||chunk.get(8).contains("to"))
 					&&chunk.get(9).contains(":"))
 			{
@@ -157,20 +169,20 @@ public class RootWords
 			
 			if(chunk.size()==i)
 				return page;
-			if(chunk.get(i).equals("or"))
+			if(chunk.get(i).equals("or")) // end of rootword chunk
 			{
 				chunk=refillChunk(chunk,i+1);
 				chunkRoot = parse.getChunkRoot(chunk);
 				page = parse.callRoot(page, chunk, inverseFlag, chunkRoot);
 			}
-			else if(chunk.get(i).equals("except"))
+			else if(chunk.get(i).equals("except")) // next rootwork chunk is inverse
 			{
 				inverseFlag=true;
 				chunk=refillChunk(chunk,i+1);
 				chunkRoot = parse.getChunkRoot(chunk);
 				page = parse.callRoot(page, chunk, inverseFlag, chunkRoot);
 			}
-			else if(chunk.get(i).equals("and")&&(chunk.get(i+1).equals("between")||chunk.get(i+1).equals("from")))
+			else if(chunk.get(i).equals("and")&&(chunk.get(i+1).equals("between")||chunk.get(i+1).equals("from"))) // continuation of the same rootword
 			{
 				chunk=refillChunk(chunk,i+1);
 				chunkRoot = parse.getChunkRoot(chunk);
@@ -183,7 +195,7 @@ public class RootWords
 		else
 		{
 			String s = "";
-			for(int i=0;i<chunk.size();i++)
+			for(int i=0;i<chunk.size();i++) // build a string to show the approximate location of the user input error
 			{
 				if(chunk.get(i).equals("or"))
 					break;
@@ -207,7 +219,7 @@ public class RootWords
 			String highTime=null;
 			boolean timeRange=false;
 			int i=2;
-			//////////////////
+			// since 1/1/2013 from 3:30 to 4:30
 			if((chunk.get(2).equals("from")||chunk.get(2).equals("between"))&&chunk.get(3).contains(":")&&(chunk.get(4).contains("and")||chunk.get(4).contains("to"))
 					&&chunk.get(5).contains(":"))
 			{
@@ -216,6 +228,7 @@ public class RootWords
 				timeRange=true;
 				i=6;
 			}
+			
 			page=apply.sinceDate(page, inverseFlag, lowDate,lowTime,highTime,timeRange);
 			
 			if(chunk.size()==i)
@@ -245,7 +258,7 @@ public class RootWords
 			String highTime=null;
 			boolean timeRange=false;
 			int i=3;
-			//////////////////
+			// since 3:30 1/1/2013 from 2:30 to 6:30
 			if((chunk.get(3).equals("from")||chunk.get(3).equals("between"))&&chunk.get(4).contains(":")&&(chunk.get(5).contains("and")||chunk.get(5).contains("to"))
 					&&chunk.get(6).contains(":"))
 			{
@@ -301,7 +314,7 @@ public class RootWords
 			String highTime=null;
 			boolean timeRange=false;
 			int i=2;
-			//////////////////
+			// until 1/1/2013 from 3:30 to 4:30
 			if((chunk.get(2).equals("from")||chunk.get(2).equals("between"))&&chunk.get(3).contains(":")&&(chunk.get(4).contains("and")||chunk.get(4).contains("to"))
 					&&chunk.get(5).contains(":"))
 			{
@@ -339,7 +352,7 @@ public class RootWords
 			String rangeHighTime=null;
 			boolean timeRange=false;
 			int i=3;
-			//////////////////
+			// until 3:30 1/1/2013 from 5:50 to 2:20
 			if((chunk.get(3).equals("from")||chunk.get(3).equals("between"))&&chunk.get(4).contains(":")&&(chunk.get(5).contains("and")||chunk.get(5).contains("to"))
 					&&chunk.get(6).contains(":"))
 			{
@@ -386,6 +399,7 @@ public class RootWords
 		ApplyTimes apply = new ApplyTimes();
 		int z=0;
 		
+		// (all/every/only) even (days/months)
 		if(chunk.get(1).equals("even"))
 		{
 			if(chunk.get(2).equals("days"))
@@ -417,6 +431,7 @@ public class RootWords
 			}
 			z=3;
 		}
+		// (all/every/only) odd (days/months)
 		else if(chunk.get(1).equals("odd"))
 		{
 			if(chunk.get(2).equals("days"))
@@ -596,7 +611,6 @@ public class RootWords
 				}
 				else
 				{
-					//i++;
 					break;
 				}	
 			}
@@ -756,6 +770,7 @@ public class RootWords
 			throw new BadFormatException("invalid parameters in chunk: \n"+s);
 		}
 		
+		// all _______ from 3:30 to 4:40
 		if(chunk.size()>z+2&&(chunk.get(z).equals("from")||chunk.get(z).equals("between"))&&chunk.get(z+1).contains(":")&&(chunk.get(z+2).contains("and")||chunk.get(z+2).contains("to"))
 				&&chunk.get(z+3).contains(":"))
 		{
@@ -763,7 +778,7 @@ public class RootWords
 			String highTime=chunk.get(z+3);
 			page = apply.betweenTimeXandY(page, inverseFlag, lowTime, highTime);
 		}
-		else if(z<chunk.size()&&(chunk.get(z).equals("or")))
+		else if(z<chunk.size()&&(chunk.get(z).equals("or"))) // end of rootword chunk
 		{
 			page=apply.AllEveryOnly(page, inverseFlag);
 			chunk=refillChunk(chunk,z+1);
@@ -771,7 +786,7 @@ public class RootWords
 			String chunkRoot = parse.getChunkRoot(chunk);
 			page = parse.callRoot(page, chunk, inverseFlag, chunkRoot);
 		}
-		else if(z<chunk.size()&&(chunk.get(z).equals("except")&&(chunk.get(z+1).equals("all")||chunk.get(z+1).equals("every")||chunk.get(z+1).equals("only"))))
+		else if(z<chunk.size()&&(chunk.get(z).equals("except")&&(chunk.get(z+1).equals("all")||chunk.get(z+1).equals("every")||chunk.get(z+1).equals("only")))) // next rootword chunk is inverse
 		{
 			page=apply.AllEveryOnly(page, inverseFlag);
 			inverseFlag=true;
@@ -780,17 +795,20 @@ public class RootWords
 			String chunkRoot = parse.getChunkRoot(chunk);
 			page = parse.callRoot(page, chunk, inverseFlag, chunkRoot);
 		}
+		// all ______ except between ________ (this is continuation of the current chunk)
 		else if(z<chunk.size()&&chunk.get(z).equals("except")&&(chunk.get(z+1).equals("between")||chunk.get(z+1).equals("from")))
 		{
 			inverseFlag=true;
 			chunk=refillChunk(chunk,z+1);
 			page = BetweenFrom(page,chunk,inverseFlag);
 		}
+		// all _______ between _________ (this is a continuation of the current chunk)
 		else if(z<chunk.size()&&(chunk.get(z).equals("between")||chunk.get(z).equals("from")))
 		{
 			chunk=refillChunk(chunk,z);
 			page = BetweenFrom(page,chunk,inverseFlag);
 		}
+		// all _____ and all ______ (this is a continuation of the current chunk)
 		else if(z<chunk.size()&&(chunk.get(z).equals("and")))
 		{
 			if(chunk.get(z).equals("all")||chunk.get(z).equals("every")||chunk.get(z).equals("only"))
@@ -807,9 +825,9 @@ public class RootWords
 			}
 			
 		}
+		// done building the chunk to sent to ApplyTimes.java
 		else
 			page=apply.AllEveryOnly(page, inverseFlag);
 		return page;
 	}
 }
-

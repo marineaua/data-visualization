@@ -1,3 +1,5 @@
+// Written by Peter Kennedy
+
 public class BadRootException extends Exception 
 {
 	String message;
