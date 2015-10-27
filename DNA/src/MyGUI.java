@@ -2,7 +2,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -17,7 +16,6 @@ import java.awt.event.MouseEvent;
 import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.io.File;
 
 @SuppressWarnings("serial")
 public class MyGUI extends JFrame implements ActionListener
@@ -38,16 +36,12 @@ public class MyGUI extends JFrame implements ActionListener
 	private JPanel mainPanel;
 	
 	private JLabel titleLabel;
-	private JLabel sketchLabel;
 	
 	private JButton lineButton;
 	private JButton mosaicButton;
 	private JButton pieButton;
 	private JButton barButton;
-	private JButton maxButton;
-	private JButton	miniButton;
-	private JButton exitButton;
-	private JButton mosaic2;
+	private JButton mosaicButton2;
 	
 	private JMenuBar menuBar;
 	private JMenu mnFile;
@@ -66,14 +60,11 @@ public class MyGUI extends JFrame implements ActionListener
 	private Component horizontalStrut_6;
 	private Component horizontalStrut_7;
 	
-	//private Form1 form1;
 	
 	
 	public MyGUI()
 	{ 
-		//page=RawToArr.txtToArr(page,path);
 		setLocation(350,150);
-		//setUndecorated(true);
 		setSize(1200,900);
 		setMinimumSize(new Dimension(1200,600));
 		setPreferredSize(new Dimension(1300, 800));
@@ -81,10 +72,6 @@ public class MyGUI extends JFrame implements ActionListener
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
-		
-		//this.setTitle("Data Visualization");
-		//this.setForeground(Color.WHITE);
-		//this.setLayout(new BorderLayout());
 		
 		//-------------------------
 		// PANELS
@@ -103,7 +90,6 @@ public class MyGUI extends JFrame implements ActionListener
 		//mainPanel.setSize(1200, 700);
 		mainPanel.setBackground(new Color(45, 45, 48));
 	    mainPanel.setBorder(BorderFactory.createMatteBorder(5,5,5,5, new Color(20, 20, 40, 200)));
-		sketchLabel = new JLabel();
 		
 		//-------------------------
 		// BUTTONS
@@ -124,36 +110,16 @@ public class MyGUI extends JFrame implements ActionListener
 		barButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		barButton.setPreferredSize(new Dimension(220,40));
 		
-		mosaic2 = new JButton("Mosaic");
-		mosaic2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		mosaic2.setPreferredSize(new Dimension(220,40));
+		mosaicButton2 = new JButton("Mosaic");
+		mosaicButton2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		mosaicButton2.setPreferredSize(new Dimension(220,40));
 		
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		buttonPanel.add(mosaicButton);		
 		buttonPanel.add(lineButton);
 		buttonPanel.add(barButton);
 		buttonPanel.add(pieButton);
-		buttonPanel.add(mosaic2);
-		/*GridBagConstraints a = new GridBagConstraints();
-	    a.gridx 	= 0;
-	    a.gridy 	= 0;
-	    a.weightx 	= 1.0;
-	    buttonPanel.add(mosaicButton, a);
-	    GridBagConstraints a1 = new GridBagConstraints();
-	    a.gridx 	= 1;
-	    a.gridy 	= 0;
-	    a.weightx 	= 1.0;
-	    buttonPanel.add(lineButton, a1);
-	    GridBagConstraints a2 = new GridBagConstraints();
-	    a.gridx 	= 2;
-	    a.gridy 	= 0;
-	    a.weightx	= 1.0;
-	    buttonPanel.add(pieButton, a2);
-	    GridBagConstraints a3 = new GridBagConstraints();
-	    a.gridx 	= 3;
-	    a.gridy 	= 0;
-	    a.weightx	= 1.0; */
-	    //buttonPanel.add(otherButton, a3);
+		buttonPanel.add(mosaicButton2);
 		
 		//-------------------------
 		//SKETCH
@@ -206,9 +172,6 @@ public class MyGUI extends JFrame implements ActionListener
 	    		JLabel pathlabell = new JLabel("Enter the URL of the tumbler page in the area below");
 	    		final JTextField  riptf = new JTextField("",30);
 	    		
-	    		
-	    		//String pathlabel = "Enter the URL of the tumbler page in the area below";
-	    		//pathlabell.setText(pathlabel);
 	    		JButton oK = new JButton("Proceed");	
 	    		oK.addActionListener(new ActionListener() {
 	    	    	public void actionPerformed(ActionEvent arg0) { 
@@ -272,7 +235,6 @@ public class MyGUI extends JFrame implements ActionListener
 	    		final JFrame addf = new JFrame();
 	    		JPanel addp = new JPanel();
 	    		addf.setLocation(700,300);
-	    		//addf.setUndecorated(true);
 	    		addf.setResizable(false);
 	    		JPanel maincont = new JPanel(new FlowLayout(FlowLayout.LEFT));//main container
 	    		FlowLayout flow = new FlowLayout();
@@ -297,7 +259,6 @@ public class MyGUI extends JFrame implements ActionListener
 	            
 	            addp.add(Text);
 	            addp.add(Photo);
-	           // addp.add(horizontalStrut);
 	            addp.add(Quotes);
 	            addp.add(Video);
 	            addp.add(Audio);
@@ -307,7 +268,6 @@ public class MyGUI extends JFrame implements ActionListener
 	            
 	            
 	            
-	           // JPanel radioPanel = new JPanel(new GridLayout(0, 1));
 	            JPanel radioPanel = new JPanel();
 	            radioPanel.setLayout(grid);
 	            radioPanel.add(Text);
@@ -320,8 +280,6 @@ public class MyGUI extends JFrame implements ActionListener
 	            radioPanel.add(Answer);
 	            
 	            maincont.add(radioPanel, BorderLayout.LINE_START);
-	           // addp.add(radioPanel);
-	           // addp.add(new JSeparator());
 	    		
 	    		addf.getContentPane().add(new JSeparator(),
 	    		          BorderLayout.LINE_START);
@@ -329,15 +287,12 @@ public class MyGUI extends JFrame implements ActionListener
 	    		addf.setResizable(false);
 	    		
 	    		JPanel typep =new JPanel();
-	    		//typep.setBackground(Color.WHITE);
 	    		
 	    		JPanel notep = new JPanel();
-	    		//notep.setBackground(Color.RED);
 	    		
 	    		JPanel timep = new JPanel();
 	    		
 	    		JPanel sourcep = new JPanel();
-	    		//sourcep.setBackground(Color.BLUE);
 	    		JPanel buttonp = new JPanel();
 	    		JPanel labelp = new JPanel();
 	    		
@@ -385,9 +340,7 @@ public class MyGUI extends JFrame implements ActionListener
 	    		
 	    		timep.add(Time);
 	    		timep.add(horizontalStrut_6);
-	    		//timep.add(noteslabel);
 	    		timep.add(timef);
-	    		//timep.add(notestail);
 	    		
 	    		sourcep.add(Source);
 	    		sourcep.add(horizontalStrut_5);
@@ -397,7 +350,6 @@ public class MyGUI extends JFrame implements ActionListener
 	    		sourcep.add(sourcetail);
 	    		
 	    		JButton Filter = new JButton("Filter");
-	    		//Filter.addActionListener(this);
 
 	    		Filter.addActionListener(new ActionListener(){
 	    			   public void actionPerformed(ActionEvent ae){
@@ -478,7 +430,6 @@ public class MyGUI extends JFrame implements ActionListener
 	    				  addf.dispose();
 	    			   }}
 	    			});
-//Stuck here
 	    		
 	    		horizontalStrut_6 = Box.createHorizontalStrut(145);
 	    		buttonp.add(horizontalStrut_6);
@@ -529,19 +480,12 @@ public class MyGUI extends JFrame implements ActionListener
 	    		about.setResizable(false);
 	    		about.setPreferredSize(new Dimension(300,75));
 	    		about.setLocation(850,450);
-	    		//about.setUndecorated(true);
 	    		JPanel aboutp = new JPanel();
 	    		
-	    		String[] blurb = {"asd,asd,asd","fart much?"};
 	    		JScrollPane scroll = new JScrollPane(aboutp);
 	    		JLabel aboutmes = new JLabel("Read the Read me");
 	    		about.getContentPane().add(scroll);
-	    		String Verbage;
-	    		Verbage = "blah blah\n" + "bleh bleh\n" + "Bluh bluh";
-	    		//fluff.add(Verbage);
 	    		aboutp.add(aboutmes);
-	    		//aboutp.add(scroll);
-	    		//aboutp.setPreferredSize(new Dimension(300,500));
 	    		about.pack();
 	    		about.setVisible(true);
 	    		
@@ -593,85 +537,6 @@ public class MyGUI extends JFrame implements ActionListener
 	    tc.gridy = 0;
 	    tc.gridx = 5;
 	    tc.gridy = 0;
-	    /*
-	    Icon icon = new ImageIcon(getClass().getResource("min-icon34.png"));
-	    Icon icon2 = new ImageIcon(getClass().getResource("min-icon34H.png"));
-	    //JButton button = new JButton(icon);
-	    miniButton 		= new JButton(icon);
-	    miniButton.setHorizontalAlignment(SwingConstants.RIGHT);
-	    //miniButton.setIcon(new ImageIcon("media/min-icon34.png"));
-	    miniButton.setRolloverIcon(icon2);
-	    miniButton.setBorder(null);
-	    miniButton.setBorderPainted(false);
-	    miniButton.setContentAreaFilled(false);
-	    miniButton.setRolloverEnabled(true);
-	    GridBagConstraints tc2 = new GridBagConstraints();
-	    tc2.gridheight = 2;
-	    tc2.anchor = GridBagConstraints.SOUTHWEST;
-	    tc2.insets = new Insets(0, 0, 5, 5);
-	    tc2.gridx = 7;
-	    tc2.gridy = 0;
-	    GridBagConstraints gbc_miniButton = new GridBagConstraints();
-	    gbc_miniButton.anchor = GridBagConstraints.EAST;
-	    gbc_miniButton.gridx = 5;
-	    gbc_miniButton.insets = new Insets(0, 0, 0, 5);
-	    gbc_miniButton.gridheight = 2;
-	    gbc_miniButton.gridy = 0;
-	    titlePanel.add(miniButton, gbc_miniButton);
-	    
-	    Icon icon3 = new ImageIcon(getClass().getResource("max-icon34.png"));
-	    Icon icon4 = new ImageIcon(getClass().getResource("max-icon34H.png"));
-	    maxButton = new JButton(icon3);
-	    maxButton.setHorizontalAlignment(SwingConstants.RIGHT);
-	    //maxButton.setIcon(new ImageIcon("media/max-icon34.PNG"));
-	    maxButton.setRolloverIcon(icon4);
-	    maxButton.setBorder(null);
-	    maxButton.setBorderPainted(false);
-	    maxButton.setContentAreaFilled(false);
-	    maxButton.setRolloverEnabled(true);
-	    GridBagConstraints tc3 = new GridBagConstraints();
-	    tc3.anchor = GridBagConstraints.SOUTHWEST;
-	    tc3.insets = new Insets(0, 0, 5, 5);
-	    tc3.gridx = 8;
-	    tc3.gridy = 0;
-	    GridBagConstraints gbc_maxButton = new GridBagConstraints();
-	    gbc_maxButton.anchor = GridBagConstraints.EAST;
-	    gbc_maxButton.gridx = 6;
-	    gbc_maxButton.insets = new Insets(0, 0, 0, 5);
-	    gbc_maxButton.gridheight = 2;
-	    gbc_maxButton.gridy = 0;
-	    titlePanel.add(maxButton, gbc_maxButton);
-	    
-	    
-	    Icon icon5 = new ImageIcon(getClass().getResource("exit-icon34.png"));
-	    Icon icon6 = new ImageIcon(getClass().getResource("exit-icon34H.png"));
-	    exitButton 		= new JButton(icon5);
-	    exitButton.setHorizontalAlignment(SwingConstants.RIGHT);
-	   // exitButton.setIcon(new ImageIcon("media/exit-icon34.png"));
-	    exitButton.setRolloverIcon(icon6);
-	    exitButton.setBorder(null);
-	    exitButton.setBorderPainted(false);
-	    exitButton.setContentAreaFilled(false);
-	    exitButton.setRolloverEnabled(true);
-	    GridBagConstraints tc4 = new GridBagConstraints();
-	    tc4.anchor = GridBagConstraints.EAST;
-	    tc4.insets = new Insets(0, 0, 5, 0);
-	    tc4.gridx = 5;
-	    tc4.gridy = 0;
-	    GridBagConstraints gbc_exitButton = new GridBagConstraints();
-	    gbc_exitButton.anchor = GridBagConstraints.EAST;
-	    gbc_exitButton.gridx = 7;
-	    gbc_exitButton.gridheight = 2;
-	    gbc_exitButton.gridy = 0;
-	    titlePanel.add(exitButton, gbc_exitButton);
-	    
-	    exitButton.addMouseListener(new MouseAdapter() {
-	    	@Override
-	    	public void mouseClicked(MouseEvent arg0) {
-	    		System.exit(0);
-	    	}
-	    });
-		*/
 		//--------------------------
 		// MOUSE LISTENERS
 		//--------------------------
@@ -717,7 +582,7 @@ public class MyGUI extends JFrame implements ActionListener
 			}
 		});
 		
-		mosaic2.addMouseListener(new MouseAdapter() {
+		mosaicButton2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {//Add methods for mouse events to trigger loading graphics
 				drawingType = 4;
@@ -728,27 +593,7 @@ public class MyGUI extends JFrame implements ActionListener
 		});
 			
 		//Adding other things to Frame
-		
-		/*GridBagConstraints c = new GridBagConstraints();
-	    c.gridx 	= 0;
-	    c.gridy 	= 0;
-	    c.weightx 	= 1.0;
-	    c.fill  	= GridBagConstraints.BOTH;
-	    mainPanel.add(titlePanel, c);
-	    GridBagConstraints c1 = new GridBagConstraints();
-	    c1.gridx 	= 0;
-	    c1.gridy 	= 1;
-	    c1.weightx 	= 1.0;
-	    c1.fill  	= GridBagConstraints.BOTH;
-	    mainPanel.add(sketchPanel, c1);
-	    GridBagConstraints c2 = new GridBagConstraints();
-	    c2.anchor = GridBagConstraints.SOUTH;
-	    c2.gridx 	= 0;
-	    c2.gridy 	= 2;
-	    c2.weightx	= 1.0;
-	    c2.weighty  = 2.0;
-	    c2.fill  	= GridBagConstraints.HORIZONTAL;
-	    */mainPanel.setLayout(new BorderLayout(0, 0));
+		mainPanel.setLayout(new BorderLayout(0, 0));
 	    mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 	    mainPanel.add(titlePanel, BorderLayout.NORTH);
 	    GridBagConstraints tc1 = new GridBagConstraints();
@@ -756,12 +601,9 @@ public class MyGUI extends JFrame implements ActionListener
 	    tc1.insets = new Insets(0, 0, 0, 5);
 	    tc1.gridx = 6;
 	    tc1.gridy = 1;
+	    
+	    //Adding Sketch to the Frame
 	    mainPanel.add(sketchPanel, BorderLayout.CENTER);
-		//Adding Sketch to the Frame
-		
-		//this.add(sketchPanel);
-		/*sketch.init();
-		sketch.frame = this;*/
 		
 		this.setContentPane(mainPanel);
 		pack();
@@ -779,8 +621,7 @@ public class MyGUI extends JFrame implements ActionListener
 	{
 		if(event.getSource()==lineButton)
 		{
-			//sketch.init();
-			//sketchPanel.add(sketch);
+			//Not sure what Anthony had this here for?
 		}
 	}
 
